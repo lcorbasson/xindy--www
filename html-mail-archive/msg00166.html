@@ -1,0 +1,120 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: new tex2xindy -->
+<!--X-From-R13: Fubznf Vrayvpu <urayvpuNzzref1.zj.gh&#45;qerfqra.qr> -->
+<!--X-Date: Wed, 1 Mar 2000 17:35:17 +0100 -->
+<!--X-Message-Id: 20000301172149.A17398@mmepc14.mw.tu&#45;dresden.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>new tex2xindy</TITLE>
+<LINK REV="made" HREF="mailto:henlich@mmers1.mw.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00163.html">Date Prev</A>][<A HREF="msg00164.html">Date Next</A>][<A HREF="msg00169.html">Thread Prev</A>][<A HREF="msg00163.html">Thread Next</A>][<A HREF="maillist.html#00166">Date Index</A>][<A HREF="threads.html#00166">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>new tex2xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: new tex2xindy</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:henlich@mmers1.mw.tu-dresden.de">henlich@mmers1.mw.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 1 Mar 2000 17:21:49 +0100</LI>
+<LI><em>Mail-Followup-To</em>: xindy@iti.informatik.tu-darmstadt.de</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+I'm pleased to announce a new version of tex2xindy.
+
+Tex2xindy is a converter from TeX's .idx file to the raw index file format
+needed by xindy.
+
+New:
+- converts characters in ^^xx hex notation into 8-bit characters. I
+implemented this because old versions of TeX (TeX 3.14159/Web2C 7.0 and
+before) would output this notation to the .idx file (if the index.sty
+package is used) whereas new TeX (Version 3.14159 (Web2C 7.3.1)) already
+outputs the 8-bit characters.
+- converts ^^^^xxxx and ^^^^^^^^xxxxxxxx hex notation into UTF-8 byte
+sequences. Useful for Omega (hopefully). Has no effect for TeX users.
+- handles multi-line index entries properly.
+- you can now redefine all the definitions, e.g.
+ENCAP    \|
+ACTUAL   @
+ESCAPE   \\
+LEVEL    !
+IS       :
+QUOTE    \"
+to contain other rules than just one character (also QUOTE). For example, if
+you mix input files from different authors which use different characters
+to denote a sublevel (let's say, ',' and '!') you can define
+LEVEL    [,!]
+in the tex2xindy.l source to recognize any of those characters as the
+'level' character.
+
+The source and a precompiled Windows 32-bit executable is available here:
+
+<A  HREF="http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/tex2xindy/">http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/tex2xindy/</A>
+
+Have fun!
+-- 
+Thomas Henlich
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00163.html">ANNOUNCEMENT: makeglos package for LaTeX</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00164.html">xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00169.html">Re: xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00163.html">ANNOUNCEMENT: makeglos package for LaTeX</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00166"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00166"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

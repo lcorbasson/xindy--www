@@ -1,0 +1,157 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: where does the raw&#45;file come from ?? -->
+<!--X-From-R13: Dnys Vbryyre <Dnys.VbryyreNqnezfgnqg.argfhes.qr> -->
+<!--X-Date: Tue, 26 Aug 1997 03:22:35 +0200 -->
+<!--X-Message-Id: XFMail.970826032111.Ralf.Hoeller@darmstadt.netsurf.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>where does the raw-file come from ??</TITLE>
+<LINK REV="made" HREF="mailto:Ralf.Hoeller@darmstadt.netsurf.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00054.html">Date Prev</A>][<A HREF="msg00056.html">Date Next</A>][<A HREF="msg00057.html">Thread Prev</A>][<A HREF="msg00056.html">Thread Next</A>][<A HREF="maillist.html#00055">Date Index</A>][<A HREF="threads.html#00055">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>where does the raw-file come from ??</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: where does the raw-file come from ??</LI>
+<LI><em>From</em>: Ralf Hoeller &lt;<A HREF="mailto:Ralf.Hoeller@darmstadt.netsurf.de">Ralf.Hoeller@darmstadt.netsurf.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 26 Aug 1997 02:51:14 +0200 (MET DST)</LI>
+<LI><em>Organization</em>: Architekt</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+hi,
+
+i'm missing something in the docs. 
+(i'm probably too blind to see, but ...)
+
+i haven't found something about how to produce the *.raw
+file. there is nothing about how to work with multiple
+indexes using the style files.
+
+i think there should be a "real-world" example, not only
+these empty *.tex and well prepared *.raw 
+files in the Doc/tutorial directory.
+
+also the tutorial or manual or xindy-by-topics they talk
+a lot about the lisp-programming, about the superiority
+of xindy (compared to makeindex), but no hints how to
+start with a "real-world" tex-file.
+
+my situation:
+i used index.sty to produce multiple indexes in combination
+with makeindex. it works fine, but i miss 8-bit characters
+like umlauts.
+i know the real TeX people love to type \"{a} all the time
+and would never go beyond "a, but i prefer ä (yes, i'm a very
+lazy person and i use my computer just for work).
+so i was looking for a maketex-version that could handle 
+umlauts. xindy seems to do the job. i installed xindy,
+nearly everything worked fine (the directories should be 
+created first before they can be a target:
+cp xindy.run xindy.mem /usr/local/lib/xindy/binaries/`cat PLATFORM`
+cp: when copying multiple files, last argument must be a directory)
+after running latex i have two files concerning index-preparation:
+*.ndx *.idx
+running xindy in the way:
+
+wald1:[diss] &gt;xindy -l xindy.xlg ralf.xdy  diss.ndx
+This is `xindy' version 1.2 (i386-linux-elf binary version 1.2).
+
+Opening logfile "xindy.xlg" (done)
+Reading indexstyle...
+Loading module "ralf.xdy"...
+Finished loading module "ralf.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "diss.ndx"...
+ERROR: EVAL: Die Variable |iNDEXENTRY| hat keinen Wert.
+wald1:[diss] &gt;
+
+is not very satisfying.
+if i use an empty file called diss.raw verything works fine, 
+.. on the default index-file *.idx, but there is no possibility 
+to do both indexes (and the umlauts are in the other one ;-)).
+
+lots and lots of questions
+
+Gruss              Regards
+
+
+                                   
+r a l f  h ö l l e r                          darmstadt
+diplomingenieur+architekt                  osannstr. 36
+                                    fax: +49.6151.43659
+                                    fon: +49.6151.43658
+                      Ralf.Hoeller@darmstadt.netsurf.de
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00058" HREF="msg00058.html">Re: where does the raw-file come from ??</A></STRONG>
+<UL><LI><EM>From:</EM> Joachim Schrod &lt;jschrod@acm.org&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00056" HREF="msg00056.html">Re: where does the raw-file come from ??</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00054.html">Re: problem mit tex2xindy unter os/2</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00056.html">Re: where does the raw-file come from ??</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00057.html">8-bit confusion</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00056.html">Re: where does the raw-file come from ??</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00055"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00055"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

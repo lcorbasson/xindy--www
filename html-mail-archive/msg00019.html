@@ -1,0 +1,208 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: \indexindy and sorting rules -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Tue, 18 Mar 1997 15:25:04 +0100 -->
+<!--X-Message-Id: 199703181424.PAA13053@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703171537.QAA26461@mexico.mib.harz.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: \indexindy and sorting rules</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00018.html">Date Prev</A>][<A HREF="msg00020.html">Date Next</A>][<A HREF="msg00018.html">Thread Prev</A>][<A HREF="msg00020.html">Thread Next</A>][<A HREF="maillist.html#00019">Date Index</A>][<A HREF="threads.html#00019">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: \indexindy and sorting rules</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: \indexindy and sorting rules</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 18 Mar 1997 15:24:40 +0100 (MEZ)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00018.html">199703171537.QAA26461@mexico.mib.harz.de</A>&gt; from "inas@mib.harz.de" at Mar 17, 97 04:37:22 pm</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hi,
+
+&gt; &gt; 1. A mapping is based on string or regexp-transformations (such as the
+&gt; &gt;    current sort-rules) but extended with mapping rules.
+&gt;
+&gt; &gt;    Informally we could say that "\index" must be written as
+&gt; &gt;    "\cmd{index}" and there is a mapping rule that says
+&gt;
+&gt; Well, I think the user shouldn't have to write such special things.
+&gt; This may cause errors and confusion. Imagine, a user want's
+&gt; to index the sequence \cmd{text}.
+&gt;
+&gt; &gt; 	(define-mapping "\cmd{(.*)}" "\1"
+&gt; &gt; 		:with-property (:markup cmd))
+&gt;
+&gt; So this will convert the above example to &lt;text markup-cmd&gt; but he
+&gt; wanted &lt;\cmd{text&gt; markup-cmd&gt;.
+
+Not necessarily. Mappings are intended to map characters to letters.
+The above mapping says that all characters matching `\1' should be
+recursively mapped onto letters but these new letters should have the
+additional property (:markup cmd).
+
+Thus it would be possible to map with the following declarations
+
+ 	(define-mapping "\cmd{(.*)}" "\1"
+ 		:with-property (:markup cmd))
+ 	(define-mapping "\foo{(.*)}" "\1"
+ 		:with-property (:markup foo))
+
+the string
+
+		"\cmd{bar\foo{baz}fasel"
+
+into the letter sequence
+
+	&lt;b (:markup cmd)&gt;&lt;a (:markup cmd)&gt;&lt;r (:markup cmd)&gt;
+
+	&lt;b (:markup foo)&gt;&lt;a (:markup foo)&gt;&lt;z (:markup foo)&gt; (*)
+
+	&lt;f (:markup cmd)&gt;&lt;a (:markup cmd)&gt;&lt;s (:markup cmd)&gt;
+			 &lt;e (:markup cmd)&gt;&lt;l (:markup cmd)&gt;
+
+(*) here it depends if the inner property overrides the outer one,
+which seems to be most useful in most cases.
+
+We would be able to assign markup not only to the whole keyword as in
+the example below, but rather for arbitrary subsequences.
+
+&gt; &gt; 2. We try to tackle the problem the other way around. This concerns
+&gt; &gt;    the discussion about \indexindy command. Something like
+&gt;
+&gt; &gt; 	\indexindy[markup=texttt,...]{foo}
+&gt;
+&gt; &gt;    instead of
+&gt;
+&gt; &gt; 	\indexindy[...]{\texttt{foo}}
+&gt;
+&gt; &gt;    could solve the problem.
+&gt;
+&gt; This one sounds much handier to me. The user hasn't to worry about
+&gt; nested \cmds AND the key is totally independant of the markup.
+
+I generally agree. My intention was to ask if such a scheme would
+suffice in most cases. We actually discuss *only* the TeX-specific
+frontend and I think that your approach following a keyword-value pair
+of specifications seems to be the most appropriate one.
+
+Follwing this style we must be able to parse *all* keyword-value pairs
+in the [...] notation of the \indexindy command.
+
+	\indexindy[markup=foo,...]
+
+could then be written to the indexentry
+
+	(indexentry :markup "foo" ... )
+
+and I would extend the markup scheme to be able to dispatch on this
+argument as well.
+
+But to make the system acceptable for most users it is really
+necessary to allow the defintion of macros that can be used as
+shortcuts, which you already mentioned some mails ago.
+
+&gt; &gt;    Markup is not embedded in the plain keyword. A scanner is not
+&gt; &gt;    necessary anymore. Markup can be done in the markup-backend with
+&gt; &gt;    something like
+&gt;
+&gt; &gt; 	(markup-keyword :markup "texttt" :open "\texttt{" :close "}")
+&gt;
+&gt; &gt;    This would effectively yield the same results. It suffers from the
+&gt; &gt;    fact that not more than one markup can be associated with a
+&gt; &gt;    keyword, which seems be the case rarely.
+&gt;
+&gt; Wouldn't this (not more than one markup) also last for the first version?
+&gt; AND, is it really necessary to allow different markup for the SAME
+&gt; key?
+
+See above. I'm currently not sure if its really necessary. For this
+reason I wanted to ask all others out there if they were satisfied
+with such a solution. We *must* offer one. But which one?
+
+
+Bye.
+
+--
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00020" HREF="msg00020.html">Xindy and Allegro Common-Lisp</A></STRONG>
+<UL><LI><EM>From:</EM> Bernd Raichle &lt;raichle@Informatik.Uni-Stuttgart.DE&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00018" HREF="msg00018.html">Re: \indexindy and sorting rules</A></STRONG>
+<UL><LI><EM>From:</EM> inas@mib.harz.de</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00018.html">Re: \indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00020.html">Xindy and Allegro Common-Lisp</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00018.html">Re: \indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00020.html">Xindy and Allegro Common-Lisp</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00019"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00019"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

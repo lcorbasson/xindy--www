@@ -1,0 +1,185 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Indexing bibleverses -->
+<!--X-From-R13: "[naserq Yvefpuubpx" <fm3335Nfghq.hav&#45;reynatra.qr> -->
+<!--X-Date: Fri, 18 Feb 2000 17:36:45 +0100 -->
+<!--X-Message-Id: iss.1897.38ad744c.1e5b7.1@max5.rrze.uni&#45;erlangen.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Indexing bibleverses</TITLE>
+<LINK REV="made" HREF="mailto:sz3335@stud.uni-erlangen.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00159.html">Date Prev</A>][<A HREF="msg00155.html">Date Next</A>][<A HREF="msg00157.html">Thread Prev</A>][<A HREF="msg00155.html">Thread Next</A>][<A HREF="maillist.html#00154">Date Index</A>][<A HREF="threads.html#00154">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Indexing bibleverses</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Indexing bibleverses</LI>
+<LI><em>From</em>: "Manfred Kirschhock" &lt;<A HREF="mailto:sz3335@stud.uni-erlangen.de">sz3335@stud.uni-erlangen.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 18 Feb 2000 17:32:25 +0100</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hello!
+
+I'm trying XINDYDOS for indexing a biblevers index but it doesn´t 
+run. Here a example of the idx-file created with LaTeX:
+
+\indexentry{EH1.20|hyperpage}{3}
+\indexentry{EH1.1|hyperpage}{3}
+\indexentry{K1.2|hyperpage}{3}
+\indexentry{EH1.4,11|hyperpage}{3}
+\indexentry{EH1.1|hyperpage}{3}
+\indexentry{EH1.20|hyperpage}{3}
+\indexentry{EH10.7|hyperpage}{3}
+\indexentry{K2.2|hyperpage}{3}
+\indexentry{EH17.7|hyperpage}{3}
+\indexentry{EH1.1|hyperpage}{4}
+\indexentry{EH1.19|hyperpage}{4}
+\indexentry{EH1.19|hyperpage}{4}
+\indexentry{EH1.19|hyperpage}{4}
+\indexentry{JJ11.2|hyperpage}{4}
+\indexentry{EH2.11|hyperpage}{4}
+\indexentry{M13.1--23|hyperpage}{5}
+\indexentry{M13.24--30|hyperpage}{5}
+\indexentry{M13.31--32|hyperpage}{5}
+\indexentry{M13.33|hyperpage}{5}
+\indexentry{M13.44|hyperpage}{5}
+\indexentry{M13.45--46|hyperpage}{5}
+\indexentry{M13.47--50|hyperpage}{5}
+
+I have a special biblevers abbreviation and sequence that I wrote in 
+a xdy-file:
+
+(define-alphabet "bible-chapters" ("1M" "2M" "3M" "4M" "5M" "JS" "RC" 
+"1S" "2S" "1R" "2R" "JJ" "JR" "JC" "HO" "JL" "AM" "OB" "JN" "MH" "NA" 
+"CB" "Z" "CG" "S" "MA" "LB" "VG" "IB" "LL" "RU" "EJ" "ST" "ÄT" "D" 
+"ÄR" "N" "1W" "2W" "M" "MK" "L" "J" "R" "1K" "2K" "G" "E" "P" "K" 
+"1TH" "2TH" "H" "1T" "2T" "T" "PM" "A" "JK" "1P" "2P" "1J" "2J" "3J" 
+"JD" "EH"))
+
+(define-location-class "bible-verses"
+("bible-chapters" :sep ""
+"arabic-numbers" :sep "." "arabic-numbers"))
+
+With this file I start Xindy but it reports only errors like this:
+
+This is `xindy' version 2.0 (OS2  binary version 2.0).
+Reading indexstyle...
+Loading module "bs.xdy"...
+Loading module "tex/makeidx4.xdy"...
+Finished loading module "tex/makeidx4.xdy".
+Finished loading module "bs.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "bs.raw"...
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "3" did not match any location-class! 
+(ignored)
+WARNING: location-reference "4" did not match any location-class! 
+(ignored)
+WARNING: location-reference "4" did not match any location-class! 
+(ignored)
+WARNING: location-reference "4" did not match any location-class! 
+(ignored)
+WARNING: location-reference "4" did not match any location-class! 
+(ignored)
+WARNING: location-reference "4" did not match any location-class! 
+(ignored)
+.
+.
+.
+Can anyone help me to fix the error?
+
+Thank you!
+
+
+___________________________________
+Manfred Kirschhock
+Mailto: sz3335@stud.uni-erlangen.de
+--PGP-Key auf Anfrage/on request---
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00156" HREF="msg00156.html">Re: Indexing bibleverses</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00155" HREF="msg00155.html">Re: Indexing bibleverses</A></STRONG>
+<UL><LI><EM>From:</EM> Thomas Henlich &lt;Thomas.Henlich@mailbox.tu-dresden.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00159.html">Languages and encodings</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00155.html">Re: Indexing bibleverses</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00157.html">new version of xindy binary for Linux</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00155.html">Re: Indexing bibleverses</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00154"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00154"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

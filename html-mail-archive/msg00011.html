@@ -1,0 +1,156 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Package for writing raw&#45;indices -->
+<!--X-From-R13: vanfNzvo.unem.qr -->
+<!--X-Date: Fri, 14 Mar 1997 15:49:47 +0100 -->
+<!--X-Message-Id: 199703141438.PAA09690@mexico.mib.harz.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703141408.PAA21538@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Package for writing raw-indices</TITLE>
+<LINK REV="made" HREF="mailto:inas@mib.harz.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00010.html">Date Prev</A>][<A HREF="msg00012.html">Date Next</A>][<A HREF="msg00009.html">Thread Prev</A>][<A HREF="msg00013.html">Thread Next</A>][<A HREF="maillist.html#00011">Date Index</A>][<A HREF="threads.html#00011">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Package for writing raw-indices</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Package for writing raw-indices</LI>
+<LI><em>From</em>: <A HREF="mailto:inas@mib.harz.de">inas@mib.harz.de</A></LI>
+<LI><em>Date</em>: Fri, 14 Mar 1997 15:38:43 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00009.html">199703141408.PAA21538@spock.iti.informatik.th-darmstadt.de</A>&gt; from Roger Kehr at "Mar 14, 97 03:08:41 pm"</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+&gt; &gt; \newindexstyle{chapter}{\thechapter-\thepage}
+
+&gt; LaTeX crashes on this line, if \documentstyle is `article'. It seems
+&gt; that \thechapter is not known then (with `book' it works fine) and the
+&gt; above definition fails. Maybe this definition must be included
+&gt; depending on the current document style.
+
+Yes, indeed. I only tested with book.cls, so I didn't see this one :)
+
+&gt; Another problem I found is that the quoting of the backslash does not
+&gt; work as expected in the following case:
+
+&gt; \newcommand{\foo}[1]{\indexindy[attr=see]{\texttt{#1}}}
+
+&gt; \foo{fasel}
+
+&gt; which yields
+
+&gt; (indexentry :tkey ( ( "\texttt  {fasel}" ) ) :attr "see"  :locref "0-1")
+&gt; ---
+
+&gt; Here, the backslashes are *not* quoted. Missed I something?
+
+Well, this is a bit of pure TeX-knowledge :). 
+It depends on the catcodes of TeX. In the normal way (\indexentry inside the
+document), a backslash is treated as a character of categorie code other.
+This is done, by redefining the catcode BEFORE reading the arguments. When
+you use \foo, the catcode of backslashs is 0 (introduce command). 
+Since catcodes can never be changed, once they are applied (remeber
+Joachim tutorial at DANTE'97), the redefinition of the catcodes inside 
+\indexindy doesn't cover the arguments of foo. Thus, there is only one backslash.
+AND, you also must write \foo{\\textsc{A}}
+
+If you wish \foo to work right, you should define it like this:
+
+     \newcommand{\foo}[1]{\indexindy[attr=see]{\\texttt{#1}}}
+     
+I don't know another way to do it work.
+
+&gt; Next question: Why are the location references in the form &lt;x&gt;-&lt;y&gt;. In
+&gt; the style file there is explicitly set
+&gt; \indexstyle{page}
+&gt; ^^^^^^^^^^^^^^^^^
+&gt; though it doesn't produce page numbers as expected.
+
+Yes, indeed. I initialize &lt;page&gt;, since the style should produce standard-references.
+But have a sharp look at your input:
+
+   \indexindy{Layer 0;Layer 1,\textsc{Layer 1};Layer 2}
+=&gt; \indexstyle{chapter}
+   \indexindy{Index the comma{,} too}
+
+Thus, you select \thechapter-\thepage for :locref. And, if you look closely
+at the output, you will detect that there a both types of :locrefs.
+
+Regards,
+ Andi
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00013" HREF="msg00013.html">Re: Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00009" HREF="msg00009.html">Re: Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00010.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00012.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00009.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00013.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00011"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00011"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

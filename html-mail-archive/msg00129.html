@@ -1,0 +1,127 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: tex2xindy -->
+<!--X-From-R13: Fubznf Vrayvpu <urayvpuNzzref1.zj.gh&#45;qerfqra.qr> -->
+<!--X-Date: Thu, 20 May 1999 18:54:48 +0200 -->
+<!--X-Message-Id: 19990520184932.A7937@mmepc14.mw.tu&#45;dresden.de -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>tex2xindy</TITLE>
+<LINK REV="made" HREF="mailto:henlich@mmers1.mw.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00128.html">Date Prev</A>][<A HREF="msg00130.html">Date Next</A>][<A HREF="msg00140.html">Thread Prev</A>][<A HREF="msg00127.html">Thread Next</A>][<A HREF="maillist.html#00129">Date Index</A>][<A HREF="threads.html#00129">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>tex2xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: tex2xindy</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:henlich@mmers1.mw.tu-dresden.de">henlich@mmers1.mw.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 20 May 1999 18:49:32 +0200</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+After compiling tex2xindy for glibc2 it didn't work anymore.
+Here's a patch to fix it.
+-- 
+Thomas Henlich
+</PRE>
+<PRE>
+--- tex2xindy.l.fix	Tue Mar  2 18:04:49 1999
++++ tex2xindy.l	Thu May 20 18:39:16 1999
+@@ -94,7 +94,7 @@
+                            {
+                              printf("\")) :attr \"is\" :xref (\"");
+                              range = NO_RANGE;
+-			     fprintf(stat, "\txref\n");
++			     if (stat) fprintf(stat, "\txref\n");
+ 		           BEGIN(is);
+ 			   }
+                          else
+@@ -120,7 +120,7 @@
+ &lt;encap&gt;{RCLOSE}        { range = CLOSE_RANGE; }
+ &lt;encap&gt;{ARGOPEN}       { /* close :attr "... */
+                          printf("\" :xref (\"");
+-			 fprintf(stat, "\txref\n");
++			 if (stat) fprintf(stat, "\txref\n");
+ 		         braces++;
+ 		         BEGIN(xref);
+                        }
+@@ -128,7 +128,7 @@
+                            {ECHO; braces--;}
+                          else {
+ 			   putchar('"');
+-			   fprintf(stat, "\tlocref\n");
++			   if (stat) fprintf(stat, "\tlocref\n");
+ 			   switch (range) {
+ 			     case OPEN_RANGE : printf(" :open-range");
+ 			       break;
+@@ -198,7 +198,7 @@
+     stat = fopen(argv[1], "w");
+   }
+   yylex();
+-  fclose(stat);
++  if (stat) fclose(stat);
+ }
+ 
+ /*
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00128.html">Re: xindy, omega and Unicode</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00130.html">xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00140.html">Re: xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00127.html">xindy, omega and Unicode</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00129"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00129"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

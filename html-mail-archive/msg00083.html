@@ -1,0 +1,121 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy on alpha&#45;dec&#45;osf4.0 -->
+<!--X-From-R13: "Dnycu X. Vnatyrvgre" <unatyrvgNzngu.hav&#45;tbrggvatra.qr> -->
+<!--X-Date: Tue, 10 Feb 1998 17:01:38 +0100 -->
+<!--X-Message-Id: 34E079D9.41C6@math.uni&#45;goettingen.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy on alpha-dec-osf4.0</TITLE>
+<LINK REV="made" HREF="mailto:hangleit@math.uni-goettingen.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00082.html">Date Prev</A>][<A HREF="msg00084.html">Date Next</A>][<A HREF="msg00090.html">Thread Prev</A>][<A HREF="msg00084.html">Thread Next</A>][<A HREF="maillist.html#00083">Date Index</A>][<A HREF="threads.html#00083">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy on alpha-dec-osf4.0</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: xindy on alpha-dec-osf4.0</LI>
+<LI><em>From</em>: "Ralph J. Hangleiter" &lt;<A HREF="mailto:hangleit@math.uni-goettingen.de">hangleit@math.uni-goettingen.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 10 Feb 1998 17:01:29 +0100</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hello all,
+
+after a short pause I'm back on my task trying to port xindy to
+DEC ALPHA, running OSF4.0.
+
+Clisp and rx compiled fine, links are set.
+
+now doing make in $TOP/xindy/rx gives:
+
+u38&gt; make
+gcc -ansi -O2 -funsigned-char -I. -c ordrules.c
+In file included from rc/portable.h:30,
+                 from ordrules.h:13,
+                 from ordrules.c:9:
+rc/config.h:59: #error Sorry, no default configuration available for
+this system.
+In file included from ordrules.h:13,
+                 from ordrules.c:9:
+rc/portable.h:128: warning: `_POSIX_C_SOURCE' redefined
+/usr/include/standards.h:158: warning: this is the location of the
+previous definition
+gmake: *** [ordrules.o] Error 1
+
+Now where do I get a file rc/osf40.cnf from, which is obviously what
+I need?
+
+Thanks
+Ralph
+________________________________________________________________________
+ Ralph J. Hangleiter               PGP-key        Brueder-Grimm-Allee 57 
+ hangleit@math.uni-goettingen.de  available  D-37075 Goettingen, Germany
+ <A  HREF="http://www.math.uni-goettingen.de/hangleit/">http://www.math.uni-goettingen.de/hangleit/</A>      (+49) 551 54 16 09
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00084" HREF="msg00084.html">Re: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00082.html">[xindy] Release of xindy version 2.0</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00084.html">Re: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00090.html">Re: Xindy as BibTeX</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00084.html">Re: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00083"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00083"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,190 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: problem with \ -->
+<!--X-From-R13: "Rravf P. Dbrtry" <Rravf.DbrtryNybevn.se> -->
+<!--X-Date: Tue, 6 Apr 1999 22:10:02 +0200 -->
+<!--X-Message-Id: 199904062001.WAA21294@craffe.loria.fr -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>problem with \</TITLE>
+<LINK REV="made" HREF="mailto:Denis.Roegel@loria.fr">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00121.html">Date Prev</A>][<A HREF="msg00123.html">Date Next</A>][<A HREF="msg00126.html">Thread Prev</A>][<A HREF="msg00123.html">Thread Next</A>][<A HREF="maillist.html#00122">Date Index</A>][<A HREF="threads.html#00122">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>problem with \</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: problem with \</LI>
+<LI><em>From</em>: "Denis B. Roegel" &lt;<A HREF="mailto:Denis.Roegel@loria.fr">Denis.Roegel@loria.fr</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 6 Apr 1999 22:01:20 +0200 (MET DST)</LI>
+<LI><em>Cc</em>: <A HREF="mailto:roegel@lorraine.loria.fr">roegel@lorraine.loria.fr</A></LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hello,
+
+I want to start using xindy and I am running into basic alphabet
+problems. I am using xindy with xindy.sty and the example style makeidx.sty
+where I added (require "tex/isolatin1m.xdy"). I have also set the variable
+XINDY_SEARCHPATH to .:/usr/local/tex/texmf/xindy.
+ 
+Now, with the input file
+ 
+\documentclass[12pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{makeidx}
+\usepackage{xindy}
+ 
+\makeindex
+ 
+\begin{document}
+ 
+xx
+ 
+\indexindy{avion}
+\indexindy{bâteau}
+\indexindy{barre}
+\indexindy{camelot}
+\indexindy{éthiopien}
+\indexindy{envie}
+\indexindy{exact}
+\indexindy{métrique}
+ 
+\printindex
+ 
+\end{document}
+ 
+I get an .idx file looking like
+ 
+(indexentry :tkey (("avion"))
+            :locref "1")
+(indexentry :tkey (("b\^ateau"))
+            :locref "1")
+(indexentry :tkey (("barre"))
+            :locref "1")
+(indexentry :tkey (("camelot"))
+            :locref "1")
+(indexentry :tkey (("\'ethiopien"))
+            :locref "1")
+(indexentry :tkey (("envie"))
+            :locref "1")
+(indexentry :tkey (("exact"))
+            :locref "1")
+(indexentry :tkey (("m\'etrique"))
+            :locref "1")
+ 
+ 
+which when processed with fmakeidx.xdy (makeidx.xdy + (require "tex/isolatin1m.xd
+y"))
+gives
+ 
+ 
+\begin{theindex}
+ 
+  \item 'ethiopien, 1
+ 
+  \indexspace
+ 
+  \item avion, 1
+ 
+  \indexspace
+ 
+  \item b^ateau, 1
+  \item barre, 1
+ 
+  \indexspace
+ 
+  \item camelot, 1
+ 
+  \indexspace
+ 
+  \item envie, 1
+  \item exact, 1
+ 
+  \indexspace
+ 
+  \item m'etrique, 1
+ 
+\end{theindex}
+ 
+ 
+and this is not good, since I want at least to have \'ethiopien, b\^ateau, etc.,
+not to speak about the sorting order which I have not yet included.
+ 
+There are no errors when processing the file with xindy.
+ 
+What did I do wrong or forget?
+ 
+Thanks,
+ 
+Denis Roegel
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00124" HREF="msg00124.html">Re: problem with \</A></STRONG>
+<UL><LI><EM>From:</EM> Stefan Husmann &lt;Stefan.Husmann@stud.uni-hannover.de&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00123" HREF="msg00123.html">Re: problem with \</A></STRONG>
+<UL><LI><EM>From:</EM> Joerg Diederich &lt;joerg_diederich@lycosmail.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00121.html">bug in tex2xindy</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00123.html">Re: problem with \</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00126.html">Re: xindy and linux-libc6</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00123.html">Re: problem with \</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00122"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00122"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

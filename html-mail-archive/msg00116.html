@@ -1,0 +1,198 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: merge rule question -->
+<!--X-From-R13: "[banuna, Urbetr" <tzbanunaNhvhp.rqh> -->
+<!--X-Date: Mon, 28 Dec 1998 23:20:17 +0100 -->
+<!--X-Message-Id: 701DC8F4F0E6D1118B3100104B93807BE384C9@cbamail.cba.uiuc.edu -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>merge rule question</TITLE>
+<LINK REV="made" HREF="mailto:gmonahan@uiuc.edu">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00115.html">Date Prev</A>][<A HREF="msg00117.html">Date Next</A>][<A HREF="msg00120.html">Thread Prev</A>][<A HREF="msg00117.html">Thread Next</A>][<A HREF="maillist.html#00116">Date Index</A>][<A HREF="threads.html#00116">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>merge rule question</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: "'Xindy'" &lt;<A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Subject</em>: merge rule question</LI>
+<LI><em>From</em>: "Monahan, George" &lt;<A HREF="mailto:gmonahan@uiuc.edu">gmonahan@uiuc.edu</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 28 Dec 1998 16:19:57 -0600</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+A merge-rule expression that incorporates regular expressions that is
+analogous to the example in Section 1.9 of the "How to..." Xindy
+documentation is not working as expected.  I am not too familiar with
+regular expressions and don't know where the problem is.  The merge-rule
+command I'm using is:  (merge-rule "\textsf{\(.*\)}" "\1" :again :bregexp)
+
+In the example that follows, I would expect both SUMPRODUCT entries to
+appear in the "S" letter group.  The marked-up version appears in the
+"default" group, however.
+
+The xdy file and LaTeX example file I'm using follow:
+
+**************xdy file****************
+(define-attributes ("default"))
+
+(define-location-class "arabic-page-numbers" ("arabic-numbers"))
+(define-location-class "roman-page-numbers"  ("roman-numbers-lowercase"))
+(define-location-class "Roman-page-numbers"  ("roman-numbers-uppercase"))
+(define-location-class "alpha-page-numbers"  ("alpha"))
+(define-location-class "Alpha-page-numbers"  ("ALPHA"))
+
+(merge-rule "\textsf{\(.*\)}" "\1" :again :bregexp)
+
+(define-location-class-order ("roman-page-numbers"
+                  "arabic-page-numbers"
+                  "alpha-page-numbers"
+                  "Roman-page-numbers"
+                  "Alpha-page-numbers"))
+
+
+(markup-index :open  "\begin{theindex}~n"
+          :close "~n~n\end{theindex}~n"
+          :tree)
+
+(markup-letter-group-list :sep "~n~n  \indexspace~n")
+
+(markup-letter-group :open-head "~n \textsf{" :close-head "}")
+
+(markup-indexentry :open "~n  \item "           :depth 0)
+(markup-indexentry :open "~n    \subitem "      :depth 1)
+(markup-indexentry :open "~n      \subsubitem " :depth 2)
+
+(markup-locclass-list :open ", " :sep ", ")
+
+(markup-locref-list   :sep ", ")
+
+(markup-range :sep "--")
+
+(define-letter-groups
+    ("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
+     "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+
+(sort-rule "A" "a")
+(sort-rule "B" "b")
+(sort-rule "C" "c")
+(sort-rule "D" "d")
+(sort-rule "E" "e")
+(sort-rule "F" "f")
+(sort-rule "G" "g")
+(sort-rule "H" "h")
+(sort-rule "I" "i")
+(sort-rule "J" "j")
+(sort-rule "K" "k")
+(sort-rule "L" "l")
+(sort-rule "M" "m")
+(sort-rule "N" "n")
+(sort-rule "O" "o")
+(sort-rule "P" "p")
+(sort-rule "Q" "q")
+(sort-rule "R" "r")
+(sort-rule "S" "s")
+(sort-rule "T" "t")
+(sort-rule "U" "u")
+(sort-rule "V" "v")
+(sort-rule "W" "w")
+(sort-rule "X" "x")
+(sort-rule "Y" "y")
+(sort-rule "Z" "z")
+
+**********The LaTeX file**********
+\documentclass{article}
+
+\usepackage{index}
+\makeindex
+
+\begin{document}
+This is page 1.
+
+\index*{\textsf{SUMPRODUCT}}
+
+\newpage
+This is page 2.
+\index{SUMPRODUCT}
+
+\printindex
+
+\end{document}
+**************************
+
+Thanks for your advice.
+
+George
+
+__________________________
+George E. Monahan                         
+Professor of Business Adm.
+University of Illinois
+gmonahan@uiuc.edu
+                           
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00117" HREF="msg00117.html">Re: merge rule question</A></STRONG>
+<UL><LI><EM>From:</EM> Joerg Diederich &lt;joerg_diederich@lycosmail.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00115.html">Re: [Re: module library for MSDOS]</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00117.html">Re: merge rule question</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00120.html">Re: Problems while building xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00117.html">Re: merge rule question</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00116"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00116"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

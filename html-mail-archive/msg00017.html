@@ -1,0 +1,162 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Package for writing raw&#45;indices -->
+<!--X-From-R13: vanfNzvo.unem.qr -->
+<!--X-Date: Mon, 17 Mar 1997 12:19:06 +0100 -->
+<!--X-Message-Id: 199703171108.MAA20664@mexico.mib.harz.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703170944.KAA24382@isle.informatik.uni&#45;stuttgart.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Package for writing raw-indices</TITLE>
+<LINK REV="made" HREF="mailto:inas@mib.harz.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00016.html">Date Prev</A>][<A HREF="msg00015.html">Date Next</A>][<A HREF="msg00016.html">Thread Prev</A>][<A HREF="msg00015.html">Thread Next</A>][<A HREF="maillist.html#00017">Date Index</A>][<A HREF="threads.html#00017">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Package for writing raw-indices</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Package for writing raw-indices</LI>
+<LI><em>From</em>: <A HREF="mailto:inas@mib.harz.de">inas@mib.harz.de</A></LI>
+<LI><em>Date</em>: Mon, 17 Mar 1997 12:08:13 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00016.html">199703170944.KAA24382@isle.informatik.uni-stuttgart.de</A>&gt; from Bernd Raichle at "Mar 17, 97 10:44:14 am"</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+&gt; inas@mib.harz.de (Andreas Schlechte) wrote on Fri, 14 Mar 1997 15:50:13 +0100 (MET):
+&gt; : &gt;    \usepackage{german}
+&gt; : &gt; results in something like
+&gt; : &gt;    (indexentry :tkey ( ( \active@dq \dq@prtct{E}uler\errhelp {Use `` for
+&gt; : &gt;    a simple double quote character.}\errmessage {german: The command ")
+
+&gt; German-Style makes the " an active character which expands to a
+&gt; serious of unexpandable tokens...  if in expand-only mode.  I.e., the
+&gt; active " is a `fragile' command (to use LaTeX's words).
+
+Indeed. This caused me to insert an extra handling for german.sty.
+But as you mentioned the use of \@santize is a better way to solve
+the problem.
+
+&gt; No, Andi, what should be done in your xindy.sty is to ensure that all
+&gt; punctuation characters (think of `french.sty' for an active colon ":"
+&gt; or `spanish.sty/.ldf' for activated single quotes), which are used as
+&gt; part of the generated xindy raw index file, should be read using
+&gt; category code `other' ...or should be prefixed by \string.
+
+Well, I thought of this already, but didn't know which chars I had
+to regard. I didn't know that \@sanitize is the macro I was looking
+for.
+
+&gt; Mmmmh, you should look at the code of \index ("ltidxglo.dtx"), which
+&gt; uses \@sanitize before reading its arguments to ensure that all
+&gt; characters will have the expected category codes (and which fails each
+&gt; time \index{...} is used inside a user-defined macro).
+
+Is there a way, to write a macro which can be used inside user-defined
+macros, too? Perhaps, one could support a macro inside xindy.sty,
+which can be used to define user-defined macros using \indexindy?
+
+&gt; If the same is done in \indexindy, the currently used \mdqoff and
+&gt; \ifx\@undefined\germanTeX switch isn't needed anymore (because
+&gt; `german.sty' adds " to the list of characters to be \@sanitize'd).
+&gt; I.e., \indexindy should be defined as
+
+&gt; \newcommand{\indexindy}{%
+&gt;   \@bsphack        %% to handle `space factor' etc.
+&gt;   \begingroup
+&gt;     \toks@{}%
+&gt;     \@sanitize \catcode`\\=\active
+&gt;     \indexindy@
+&gt; }
+
+&gt; and after the "\endgroup" of \indexindy@ a "\@esphack" should be added
+&gt; for completion, read "ltspace.dtx" for comments about spacing and
+&gt; \@bsphack/\@esphack.
+
+Well thanks a lot for this help. I implemented this version in the style
+and it's doing fine. BTW: I often search various commands and infos in
+the lt*.dtx-files. But there are too much to find the required information
+in a tolerant time. Do you now, if there is a overview of the contents
+of the dtx-file, somewhere in the net?
+
+I won't post the new version right now, cause I'm currently doing
+some minor changes on spacing and the .idx-output. I will post it
+as soon as possible.
+
+
+Best Regards,
+
+ Andi
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00015" HREF="msg00015.html">\indexindy and sorting rules</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00016" HREF="msg00016.html">Re: Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> Bernd Raichle &lt;raichle@Informatik.Uni-Stuttgart.DE&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00016.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00015.html">\indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00016.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00015.html">\indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00017"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00017"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

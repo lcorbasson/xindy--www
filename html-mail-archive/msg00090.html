@@ -1,0 +1,142 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Xindy as BibTeX -->
+<!--X-From-R13: Xbnpuvz Epuebq <wfpuebqNnpz.bet> -->
+<!--X-Date: Fri, 27 Feb 1998 06:10:17 +0100 -->
+<!--X-Message-Id: 199802262030.VAA28668@puma.npc.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 34F4C4DD.5E4C34B4@ieee.org -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Xindy as BibTeX</TITLE>
+<LINK REV="made" HREF="mailto:jschrod@acm.org">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00089.html">Date Prev</A>][<A HREF="msg00091.html">Date Next</A>][<A HREF="msg00089.html">Thread Prev</A>][<A HREF="msg00083.html">Thread Next</A>][<A HREF="maillist.html#00090">Date Index</A>][<A HREF="threads.html#00090">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Xindy as BibTeX</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Xindy as BibTeX</LI>
+<LI><em>From</em>: Joachim Schrod &lt;<A HREF="mailto:jschrod@acm.org">jschrod@acm.org</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 26 Feb 1998 21:30:52 +0100</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00089.html">34F4C4DD.5E4C34B4@ieee.org</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00089.html">34F4C4DD.5E4C34B4@ieee.org</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+&gt;&gt;&gt;&gt;&gt; "CC" == Cesar Augusto Rorato Crusius &lt;c.crusius@ieee.org&gt; writes:
+
+CC&gt; Hi. I recently started using Xindy as the main tool for TeX
+CC&gt; indexing. I liked it very much, and I have a suggestion: I think
+CC&gt; that with a little tweaking on the code or something we should be
+CC&gt; able to use Xindy as a replacement of BiBTeX. If we can do that,
+CC&gt; then we could use Xindy capabilities to format entries, citations
+CC&gt; and so on using the same framework (instead of having to learn
+CC&gt; bibtex syntax).
+
+You are completely right that an event-based scheme as implemented in
+xindy would be a Good Way to go for a bibliography support tool. In
+fact, the sorting parts of xindy is sufficiently modular to be usable
+in lots of other circumstances, too.
+
+Open problems remain in the tagging of the bibliography entries. It
+seems to be that the language must be a part of the entry information.
+How does it interfer with the language of the document? Btw, I think,
+Frank's and Chris' latest article in TUGboat is a must-read in that
+context.
+
+Another problem is that one might want more information about the
+_expected_ set of information in a bibliographic category. That may be
+modelled by classes, but one soon ends with inheritence relations to
+sets of classes, if one starts to model all structures. (Modelling
+common structure part is necessary to provide the events for
+structured representations of bibliographies.)
+
+CC&gt; Are there any efforts on the subject?
+
+Not any more, to my knowledge. A few years ago, we made a study and an
+incomplete prototype (that used Tcl for event action formulations,
+actually). The experiences were incorporated into xindy, as were the
+results of the STIL (a prototype of an OO-event-based SGML backend)
+study. They weren't followed up yet, as the main focus is making xindy
+more popular, currently.
+
+This doesn't mean that one shouldn't go forward; take the xindy code,
+experiment and add interesting and necessary changes. Send them back,
+we want to include them in the distribution! Hey, that's what free
+software is about, isn't it -- share and enjoy! :-)
+
+Cheers,
+	Joachim
+
+--
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Joachim Schrod					Email: jschrod@acm.org
+Net &amp; Publication Consultance GmbH		Tel.:  +49-6074-861530
+Roedermark, Germany				Fax:   +49-6074-861531
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00089" HREF="msg00089.html">Xindy as BibTeX</A></STRONG>
+<UL><LI><EM>From:</EM> Cesar Augusto Rorato Crusius &lt;c.crusius@ieee.org&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00089.html">Xindy as BibTeX</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00091.html">Announce: xindy release 2.0 for OS/2 available</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00089.html">Xindy as BibTeX</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00083.html">xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00090"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00090"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,218 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Languages and encodings -->
+<!--X-From-R13: Fubznf Vrayvpu <Fubznf.VrayvpuNznvyobk.gh&#45;qerfqra.qr> -->
+<!--X-Date: Sun, 2 Jan 2000 18:54:07 +0100 -->
+<!--X-Message-Id: 20000102170134.A703@rdial23.urz.tu&#45;dresden.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Languages and encodings</TITLE>
+<LINK REV="made" HREF="mailto:Thomas.Henlich@mailbox.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00162.html">Date Prev</A>][<A HREF="msg00154.html">Date Next</A>][<A HREF="msg00156.html">Thread Prev</A>][<A HREF="msg00162.html">Thread Next</A>][<A HREF="maillist.html#00159">Date Index</A>][<A HREF="threads.html#00159">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Languages and encodings</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Languages and encodings</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:Thomas.Henlich@mailbox.tu-dresden.de">Thomas.Henlich@mailbox.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Sun, 2 Jan 2000 17:01:34 +0100</LI>
+<LI><em>Mail-Followup-To</em>: xindy@iti.informatik.tu-darmstadt.de</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+I would like to start a discussion about the usage of languages and
+character set encodings in xindy:
+
+Current situation:
+
+1. Currently the language-specific information (sort rules) is tied to a
+specific encoding. Example: The sort rules for German assume that one uses
+the Latin-1 encoding. If I have a raw index file in German in MS-DOS
+encoding, I can't use these sort rules (without having to rewrite them in
+MS-DOS encoding).
+
+2. The encoding of the raw index file is not known to xindy and has to be
+specified in the index style. The sorting process will fail if these two
+informations do not coincide.
+
+3. The mixing of different languages in one index is problematic. Example:
+an index of names of persons of different nationality.
+
+My proposal:
+
+1. Separate the encoding of the raw index file from the language-specific
+stuff with a 2 step process:
+
+                        (a)                                   (b)
+input in encoding "XY"  --&gt;  input-encoding-independent form  --&gt;  sorted index
+
+where (b) is the language-dependent sorting process
+
+For (a) I propose to use merge-rules (without :again), since those are used
+by xindy in the *beginning* of the sorting process.
+
+The "front-end" (a) can easily be changed for different input encodings
+without affecting the rest of the whole thing.
+
+For the intermediate, input-encoding-independent form, I propose to use
+Unicode, since it contains all characters of all languages of the world.
+(See also 4.)
+
+2. The encoding of the raw index file should be specified in the file
+itself. Since this is a normal Lisp source file, it can contain any Lisp
+command. Example:
+----
+(input-encoding "latin-1")
+(indexentry :tkey (("Kunstform") ("Gesang")) :locref "1")
+(indexentry :tkey (("Kunstform") ("Tanz")) :locref "1")
+----
+
+Implementing this requires only a small patch to one of the Lisp sources of
+xindy, markup.lsp (see end of this message), and a useful definition of the
+command "input-encoding".
+
+With this scheme, any other information can be put into the raw file as
+well, language maybe, or even the whole index style.
+
+3. The sorting rules should be written in such a way as to allow for
+different languages to be mixed. It might not work if there are rules which
+contradict each other, of course. I'm not quite sure about the right way to
+do it; maybe there is no universal solution. I have the following
+ideas:
+
+For each language, there should be 2 sets of sort rules,
+called for example &lt;language&gt;-basic and &lt;language&gt;-other.
+
+*-basic rule-sets describes everything that is *really* needed for
+processing this language (like Umlaute and sharp s in German)
+
+*-other describes everything that occasionally appears from time to time in
+a text and is not so important (like "à" and "é" in German).
+
+An index with languages mixed is then processed by first applying all
+*-basic rule-sets of all languages, and then applying all *-other rules.
+This should yield the best sorting result (I hope).
+
+I'd like to demonstrate the actual mixing of rules with an example:
+
+Language "AA" has this alphabet: a c e.
+Language "BB" has this alphabet: a b d.
+
+Sorting rules for "AA":     a-&gt;1  c-&gt;3  e-&gt;5
+Sorting rules for "BB":     a-&gt;1  b-&gt;2  d-&gt;4
+
+Sorting order: AA  BB combined
+            1  a   a   a
+            2      b   b
+            3  c       c
+            4      d   d
+            5  e       e
+
+4. About Unicode: The best solution seems to be to use the
+8-bit Unicode transfer form (UTF-8) for file input and sorting rules. UTF-8
+has several properties which make it useful here:
+
+- It consists of 8 bit characters.
+- Characters 0-127 are the same as in ASCII.
+- Most characters consist of no more than 2 bytes.
+- No valid byte sequence is part of any other valid byte sequence.
+
+One consequence of this: The LISP core does not need to know anything about
+Unicode (even though the free CLISP does!), all it needs to know is how to
+process strings of 8-bit characters.
+
+I hope all of this makes some sense and I really like to hear your ideas!!
+
+Appendix:
+Proposed patch to markup.lsp:
+----
+diff -ur xindy.orig/xindy-2.0d/src/markup.lsp xindy/xindy-2.0d/src/markup.lsp
+--- xindy.orig/xindy-2.0d/src/markup.lsp	Sun Jan 25 18:10:11 1998
++++ xindy/xindy-2.0d/src/markup.lsp	Sat Jan  1 20:14:01 2000
+@@ -1208,13 +1208,14 @@
+   (let ((*readtable* idxstyle:*indexstyle-readtable*))
+     (idxstyle:do-require idxstyle))
+   (info "~&amp;Finished reading indexstyle.")
+-  (info "~&amp;Finalizing indexstyle... ")
+-  (idxstyle:make-ready idxstyle:*indexstyle*)
+-  (info "(done)~%~%")
+-
++  
+   (info "~&amp;Reading raw-index ~S..." raw-index)
+   (load raw-index :verbose nil)
+   (info "~&amp;Finished reading raw-index.~%~%")
++
++  (info "~&amp;Finalizing indexstyle... ")
++  (idxstyle:make-ready idxstyle:*indexstyle*)
++  (info "(done)~%~%")
+ 
+   (handler-case
+       (setq *markup-output-stream*
+----
+
+
+-- 
+Thomas Henlich
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00162.html">xindy for linux (glibc-2.1)</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00154.html">Indexing bibleverses</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00156.html">Re: Indexing bibleverses</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00162.html">xindy for linux (glibc-2.1)</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00159"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00159"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,214 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: making a glossary with XINDY -->
+<!--X-From-R13: Fubznf Vrayvpu <gurayvpuNDpf1.hem.gh&#45;qerfqra.qr> -->
+<!--X-Date: Wed, 29 Apr 1998 22:19:50 +0200 -->
+<!--X-Message-Id: 35478B4B.592D007B@rcs.urz.tu&#45;dresden.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>making a glossary with XINDY</TITLE>
+<LINK REV="made" HREF="mailto:thenlich@Rcs1.urz.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00104.html">Date Prev</A>][<A HREF="msg00106.html">Date Next</A>][<A HREF="msg00107.html">Thread Prev</A>][<A HREF="msg00106.html">Thread Next</A>][<A HREF="maillist.html#00105">Date Index</A>][<A HREF="threads.html#00105">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>making a glossary with XINDY</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: making a glossary with XINDY</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:thenlich@Rcs1.urz.tu-dresden.de">thenlich@Rcs1.urz.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 29 Apr 1998 22:19:23 +0200</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+How to make a glossary with XINDY
+---------------------------------
+
+Here are my experiences. It is not a perfect solution (some might call
+it a hack) but it does work. After all, we don't live in a perfect
+world...
+
+
+1. Generate a suitable parser
+
+- Edit the file src/tex2xindy.l
+Change the line
+KEYWORD  \\indexentry       to     KEYWORD  \\glossaryentry
+and the line
+LEVEL    !                  to     LEVEL    :
+
+Alternatively, apply the following patch:
+---------------------
+--- tex2xindy-orig.l	Tue Mar 31 20:45:22 1998
++++ tex2xindy.l	Tue Mar 31 21:03:32 1998
+@@ -58,11 +58,11 @@
+ 
+ %}
+ 
+-KEYWORD  \\indexentry
++KEYWORD  \\glossaryentry
+ ENCAP    \|
+ ACTUAL   @
+ ESCAPE   \\
+-LEVEL    !
++LEVEL    :
+ QUOTE    \"
+ ROPEN    \(
+ RCLOSE   \)
+---------------------
+
+- Next, "make tex2xindy".
+- Install tex2xindy as "/usr/local/bin/glos2xindy" or similar.
+
+
+2. Write a XINDY style file (name it glossary.xdy)
+
+- It should contain *at least* the following:
+---------------------
+(require "tex/makeidx.xdy")
+(markup-index :open  "\begin{description}"
+              :close "~n\end{description}~n"
+              :tree)
+(markup-letter-group-list :sep "")
+(markup-indexentry :open "~n  \item[" :depth 0)
+(markup-indexentry :open "] "      :depth 1)
+(markup-locclass-list :open " % " :sep ", ")
+---------------------
+
+Instead of "description" you may want to use another list environment.
+I prefer the "labeling" environment from the KOMA-Script classes (by
+Markus Kohm and Frank Neukam).
+
+
+3. Write your document(s)
+
+- For example (German text, but you get the picture):
+---------------------
+...
+\makeglossary
+\begin{document}
+
+... etwas über Sepulken\glossary{Sepulken:wichtiges Element in
+der Zivilisation der Ardriten (s.\,d.) auf dem Planeten Enteropia
+(s.\,d.); s.\,Sepulkaria.}.
+...
+\glossary{Sepulkaria:zum Sepulieren (s.\,d.) dienende Objekte.}
+...nachschlagen\glossary{Sepulieren:Tätigkeit der Ardriten
+(s.\,d.) auf dem Planeten Enteropia (s.\,d.); s.\,a.\,Sepulken.}
+...
+\end{document}
+---------------------
+
+- LaTeX will make a .glo file which might look like this:
+---------------------
+\glossaryentry{Sepulken:wichtiges Element in der Zivilisation der
+Ardriten (s.\,d.) auf dem Planeten Enteropia (s.\,d.);
+s.\,Sepulkaria.}{1}
+\glossaryentry{Sepulkaria:zum Sepulieren (s.\,d.) dienende Objekte.}{2}
+\glossaryentry{Sepulieren:T\"atigkeit der Ardriten (s.\,d.) auf dem
+Planeten Enteropia (s.\,d.); s.\,a.\,Sepulken.}{3}
+---------------------
+
+
+4. Prepare the glossary
+
+- run "xindy -f glos2xindy -o MY_FILE.gls glossary.xdy MY_FILE.glo"
+
+or do the same thing in 2 steps:
+- "glos2xindy &lt;MY_FILE.glo &gt;MY_FILE.raw"
+- "xindy -o MY_FILE.gls glossary.xdy MY_FILE.raw"
+
+- You'll get the file MY_FILE.gls which contains the complete glossary
+environment. In our example:
+---------------------
+\begin{description}
+  \item[Sepulieren] T\"atigkeit der Ardriten (s.\,d.) auf dem Planeten
+Enteropia (s.\,d.); s.\,a.\,Sepulken. % 3
+  \item[Sepulkaria] zum Sepulieren (s.\,d.) dienende Objekte. % 2
+  \item[Sepulken] wichtiges Element in der Zivilisation der Ardriten
+(s.\,d.) auf dem Planeten Enteropia (s.\,d.); s.\,Sepulkaria. % 1
+\end{description}
+---------------------
+
+
+5. Insert the glossary into your document
+
+(You can probably figure it out yourself, but anyway, here's how:)
+---------------------
+\addcontentsline{toc}{chapter}{Glossary}
+\chapter*{Glossary}
+\input{MY_FILE.gls}
+---------------------
+
+- If you like, define a command \printglossary to do this.
+
+ - The End -
+
+--
+Thomas Henlich
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00106" HREF="msg00106.html">Re: making a glossary with XINDY</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00104.html">Cyrillic language support available</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00106.html">Re: making a glossary with XINDY</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00107.html">HP-UX 10 port available</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00106.html">Re: making a glossary with XINDY</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00105"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00105"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

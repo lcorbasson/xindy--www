@@ -1,0 +1,155 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Problems with isolatin1m&#45;tex.xdy -->
+<!--X-From-R13: =?vfb&#45;8859&#45;1?C?Othfg=SRa=20[neg=SRa?= <ntznegvaNnd.hcz.rf> -->
+<!--X-Date: Wed, 23 Jun 1999 17:07:16 +0200 -->
+<!--X-Message-Id: 377102BD.F1006AB9@aq.upm.es -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Problems with isolatin1m-tex.xdy</TITLE>
+<LINK REV="made" HREF="mailto:agmartin@aq.upm.es">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00130.html">Date Prev</A>][<A HREF="msg00132.html">Date Next</A>][<A HREF="msg00147.html">Thread Prev</A>][<A HREF="msg00130.html">Thread Next</A>][<A HREF="maillist.html#00131">Date Index</A>][<A HREF="threads.html#00131">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Problems with isolatin1m-tex.xdy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Problems with isolatin1m-tex.xdy</LI>
+<LI><em>From</em>: Agustín Martín &lt;<A HREF="mailto:agmartin@aq.upm.es">agmartin@aq.upm.es</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 23 Jun 1999 17:52:29 +0200</LI>
+<LI><em>Organization</em>: Depto Física, ETSAM-UPM</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi all, 
+
+I am writing a xindy style for use in spanish, and found a couple of
+problems in isolatin1m-tex.xdy. The merging rule for í (and similars) is
+
+(merge-rule "\'\i" "í" :string :again)
+
+
+However í is written by LaTeX to file.idx as one of
+
+{\'\i }
+{\'\i}
+
+and is not correctly indexed. I think the merging rules for í should
+also include
+
+(merge-rule "{\'\i}" "í" :string :again)
+(merge-rule "{\'\i }" "í" :string :again)
+
+I think this other form
+
+(merge-rule "\'{\i}" "í" :string :again)
+
+is only present if manually entered that way in \index{}, but it
+probably worths to add it just in case.
+
+This avoid sortings like
+
+índice
+aberración
+
+This problem is presumably present in the other accented i characters.
+
+There is also a problem when LaTeX writes an accented i in file.idx as
+in límites,
+
+l\IeC {\'\i }mites
+
+since the command \IeC is not ignored during the sorting, giving
+undesired orderings like
+
+límite
+lámina
+
+
+This is the set of rules I added to cope with that problems
+
+
+(merge-rule "{\'\i}" "í" :string :again)
+(merge-rule "{\'\i }" "í" :string :again)
+(merge-rule "\'{\i}" "í" :string :again)
+(merge-rule "{\`\i}" "ì" :string :again)
+(merge-rule "{\`\i }" "ì" :string :again)
+(merge-rule "\`{\i}" "ì" :string :again)
+(merge-rule "{\~"\i}" "ï" :string :again)
+(merge-rule "{\~"\i }" "ï" :string :again)
+(merge-rule "\~"{\i}" "ï" :string :again)
+(merge-rule "{\^\i}" "î" :string :again)
+(merge-rule "{\^\i }" "î" :string :again)
+(merge-rule "\^{\i}" "î" :string :again)
+(merge-rule "\IeC " "" :string :again)
+
+Regards,
+
+
+-- 
+=====================================================================
+Agustín Martín Domingo, Dpto. de Física, ETS Arquitectura Madrid, 
+(U. Politécnica de Madrid)  tel: +34 91-336-6536, Fax: +34 91-336-6554, 
+email:agmartin@aq.upm.es, <A  HREF="http://corbu.aq.upm.es/~agmartin/welcome.html">http://corbu.aq.upm.es/~agmartin/welcome.html</A>
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00130.html">xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00132.html">Re: xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00147.html">New version: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00130.html">xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00131"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00131"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

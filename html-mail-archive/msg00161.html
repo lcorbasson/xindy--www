@@ -1,0 +1,198 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Prposals for xindy documentation -->
+<!--X-From-R13: Ybafgnagva [nynxunabi <xbfgnNvjjag.vjjy.ejgu&#45;nnpura.qr> -->
+<!--X-Date: Tue, 21 Dec 1999 14:30:31 +0100 -->
+<!--X-Message-Id: B0000058574@iwwnt.iwwl.RWTH&#45;Aachen.DE -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Prposals for xindy documentation</TITLE>
+<LINK REV="made" HREF="mailto:kosta@iwwnt.iwwl.rwth-aachen.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00152.html">Date Prev</A>][<A HREF="msg00160.html">Date Next</A>][<A HREF="msg00160.html">Thread Prev</A>][<A HREF="msg00153.html">Thread Next</A>][<A HREF="maillist.html#00161">Date Index</A>][<A HREF="threads.html#00161">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Prposals for xindy documentation</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Prposals for xindy documentation</LI>
+<LI><em>From</em>: Konstantin Malakhanov &lt;<A HREF="mailto:kosta@iwwnt.iwwl.rwth-aachen.de">kosta@iwwnt.iwwl.rwth-aachen.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 21 Dec 1999 14:26:22 +0100</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Today we have installed xindy (latest version from CTAN) and managed
+to use it with LaTeX (teTeX installation 1.0). During the installation
+we've got a lot of proposals for xindy. Here they are:
+
+1) a lot of CVS directories are created during the installation. They
+are probably of no interest for normal xindy user and could be removed
+from installation process. Also there are some directories, which are
+either empty or contain CVS directories only. They could probably
+removed, too.
+
+2) I'm a bit unhappy with the names of documentation files, as
+"tutorial" and "manual" are too general. With teTeX, documentation can
+be looked at through file name only, like "texdoc dvips", independing
+of location and type of documenation file. It would be nice to have
+"xindy-manual" and "xindy-tutorial" for that purpose. And, BTW,
+"xindy-by-topic" should be called "xindy-FAQ" really ;-)
+
+3) What we ware missing badly was a short and clear explanation how to
+use xindy with LaTeX (esp. with german styles). The example in the
+tutorial is rather a joke, as one get all files pre-assembled and all
+changes are going to style file. This is probably not the way a new
+user of xindy should start. First thing one will try is to get the old
+functionality of makeindex back and not to make an index look nice.
+Anyway, if one tries to imply the example to real life LaTeX, some
+questions arise immediatly: how do I get .raw file? Where can I get
+xdy-files for german without considering xindy internals first? At the
+end of the mail you will find a proposal (in German) for
+xindy+LaTeX+german combination.
+
+4) xindy-by-topic explains under
+
+"1.10 I want to process an index for my native language. What must I do?"
+
+rather detailed how to use sort-rules and merge-rules and all those
+things. At least for german this is not necessary at all, as all rules 
+are already defined. Why don't you write something like:
+
+"Look first if there are style files for your language defined (under
+modules/lang in the xindy installation directory). For the version
+&lt;whatever it is&gt; of xindy, there are rules defined for german. If have 
+to create rules for your language, proceed as follows:..."
+
+And there are spanish rules in contrib directory, why they are not under
+modules/lang?
+
+5) an overview about existing xdy files is missing. There is a README
+in the modules directory, but it explains only categories of modules.
+One had to read READMEs in subdirectories and xdy files itself, to
+find out which files are used by which files. It would be nice to know 
+what is already there directly and do not compose this information
+from manual, tutorial and READMEs.
+
+6) Executable xindy has no option to show the built-in search path.
+
+7) XINDY IS GREAT! MAKE MORE ADVERTISMENTS! 
+
+xindy is not mentioned in de-tex-faq. Why?
+xindy is not part of teTeX. Why?
+
+One more time, we like xindy very much, but it needs some manual
+polishing. 
+
+-- 
+Konstantin Malakhanov
+---------------------
+Institut for Hydraulic Engineering &amp; Groundwater Mgmt., RWTH Aachen, Germany
+E-Mail: malakhanov@iww.rwth-aachen.de          Tel. +49/(0)241/807343
+
+============================== cut here 8&lt; ====================
+
+Kurze Einleitung zur Benuztung von xindy für deutschsprachige
+                           LaTeX-Dokumenten
+
+Man benutzt Paket makeindex oder index[1] und macht Einträge wie
+üblich mit \index{}. Nach dem LaTeX-Lauf wird xindy wie folgt benutzt:
+
+xindy -f tex2xindy german.xdy &lt;Name der idx-Datei&gt;
+
+german.xdy kann so aussehen
+------------------------------ cut here 8&lt; --------------------
+(require "tex/makeidx.xdy")
+(require "lang/german/tex.xdy")
+;;(require "lang/german/din5007m.xdy")
+(require "lang/german/duden.xdy")
+------------------------------ cut here 8&lt; --------------------
+
+Nach dem xindy-Lauf wird LaTeX nochmal aufgerufen.
+
+Eklärungen zum xindy Aufruf und german.xdy:
+
+-f tex2xindy bewirkt, daß Indexeinträge aus der LaTeX-Form in die von
+xindy lesbare Form konvertiert werden (Syntaxkonvertierung)
+
+tex/makeidx.xdy - damit xindy den Inhalt der Indexeinträgen von LaTeX
+verstehen kann (semantische Konvertierung)
+
+lang/german/tex.xdy - bewirkt richtige Einbindung der TeX-Umlaute.
+Auch wenn Umlaute mit inputenc direkt eingegeben werden, werden sie
+beim Rausschreiben von Index nach TeX-Umlaute umgewandelt.
+
+lang/german/duden.xdy - Sortieren nach Duden (ö wie o)
+
+Sollte man Sortierung nach DIN benötigen (ö wie oe), muß man
+Kommentarzeichen ;; vor  (require "lang/german/din5007m.xdy")
+entfernen und (require "lang/german/duden.xdy") entsprechend
+auskommentieren.
+
+
+Footnotes: 
+[1]  Benuztung von index wird im xindy-Manual vorgeschlagen. Ich weiß 
+nicht, ob index auch mit KOMA-Skru]ipten funktioniert. In der
+Dokumentation von index ist von umdefinierten LaTeX-Interna die Rede.
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00152.html">Re: define location rule used for Xindy online manual</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00160.html">RE: Proposals for xindy documentation</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00160.html">RE: Proposals for xindy documentation</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00153.html">define location rule used for Xindy online manual</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00161"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00161"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,122 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: msdos/win port -->
+<!--X-From-R13: Fnpb Vbrxjngre <gnpb.ubrxjngreNjxnc.ay> -->
+<!--X-Date: Wed, 8 Apr 1998 15:32:14 +0200 -->
+<!--X-Message-Id: SIMEON.9804081517.D@PC377.wkap.nl -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199804080841.KAA30079@puma.npc.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: msdos/win port</TITLE>
+<LINK REV="made" HREF="mailto:taco.hoekwater@wkap.nl">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00100.html">Date Prev</A>][<A HREF="msg00098.html">Date Next</A>][<A HREF="msg00100.html">Thread Prev</A>][<A HREF="msg00098.html">Thread Next</A>][<A HREF="maillist.html#00099">Date Index</A>][<A HREF="threads.html#00099">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: msdos/win port</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: msdos/win port</LI>
+<LI><em>From</em>: Taco Hoekwater &lt;<A HREF="mailto:taco.hoekwater@wkap.nl">taco.hoekwater@wkap.nl</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 08 Apr 1998 15:33:17 +0200 (Romance Daylight Time)</LI>
+<LI><em>In-reply-to</em>: &lt;<A HREF="msg00100.html">199804080841.KAA30079@puma.npc.de</A>&gt;</LI>
+<LI><em>Priority</em>: NORMAL</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+&gt; TH&gt; Report:
+&gt; TH&gt; I just tried the dos/win version of the os/2 port under Win95, and 
+&gt; TH&gt; it works ok (the only problem I had is probably related to virtual 
+&gt; TH&gt; memory and/or RSX: sorting 15000 entries gave me "Kernel32 has 
+&gt; TH&gt; performed an illegal instruction" after a lot of disk activity. 
+&gt; TH&gt; Then again, this is more or less expected behaviour for Win95). 
+&gt; 
+&gt; Really? 15000 entries are not so much.
+&gt; 
+&gt; In your experience, is it a general problem with Win95 and memory
+&gt; extenders that happens in other circumstances as well?
+
+Yes. Especially RSX is very vulnerable, but it also happens with other 
+programs (not only extenders, also "real" win32 applications like the 
+cygnus gcc. strangely enough, all are commandline/console apps). The 
+Win95 box crashes about once every two hours if I try to do 'real' work.
+
+The only thing that never crashes is tex, and that's probably because 
+tex starts with malloc(8Mb) or something similar instead of fetching 
+memory as needed. Final point I can think of: memory from malloc() is
+_not_ zeroed by Win95.
+
+Greetings,  Taco
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00098" HREF="msg00098.html">Re: msdos/win port</A></STRONG>
+<UL><LI><EM>From:</EM> Joerg Diederich &lt;J_Diederich@herlab.ruhr.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00100" HREF="msg00100.html">Re: msdos/win port</A></STRONG>
+<UL><LI><EM>From:</EM> Joachim Schrod &lt;jschrod@acm.org&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00100.html">Re: msdos/win port</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00098.html">Re: msdos/win port</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00100.html">Re: msdos/win port</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00098.html">Re: msdos/win port</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00099"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00099"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

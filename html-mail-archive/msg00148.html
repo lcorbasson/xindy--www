@@ -1,0 +1,114 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Bugs in xindy 2.0b for linux i386 -->
+<!--X-From-R13: Brgre [rfmnebf <czrfmnebfNrssvpr.uh> -->
+<!--X-Date: Mon, 12 Jul 1999 16:12:34 +0200 -->
+<!--X-Message-Id: 01BECC80.974F2820@red -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Bugs in xindy 2.0b for linux i386</TITLE>
+<LINK REV="made" HREF="mailto:pmeszaros@effice.hu">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00141.html">Date Prev</A>][<A HREF="msg00147.html">Date Next</A>][<A HREF="msg00145.html">Thread Prev</A>][<A HREF="msg00146.html">Thread Next</A>][<A HREF="maillist.html#00148">Date Index</A>][<A HREF="threads.html#00148">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Bugs in xindy 2.0b for linux i386</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: "'xindy'" &lt;<A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Subject</em>: Bugs in xindy 2.0b for linux i386</LI>
+<LI><em>From</em>: Peter Meszaros &lt;<A HREF="mailto:pmeszaros@effice.hu">pmeszaros@effice.hu</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 12 Jul 1999 16:07:01 +0200</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Dear Roger,
+
+I found the following bugs in the indicated version of xindy (see subject).
+
+1. Xindy cannot find its preprocessed input.
+ 
+In the xindy file (perl) line 218 should be
+ $Rawidx = &amp;quote_string($tmpfile);
+instead of:
+ $rawindex = &amp;quote_string($tmpfile);
+
+2. Xindy stops the makefile.
+
+The return value is 9 if sig_catch is called at line 248 (sig_catch calls exit(9);).
+The line should be
+  unlink $tmpfile;  # do cleanup 
+instead of:
+  &amp;sig_catch; # do cleanup
+
+3. If -t (trace) option is given for Xindy then the trace messages will br printed into the *.ind file instead of the log file.
+Forget if it is intentional.
+
+Thanks for working on Xindy.
+
+Peter
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00146" HREF="msg00146.html">Re: Bugs in xindy 2.0b for linux i386</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00141.html">Has anyone tried Xindy with MBCS languages?</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00147.html">New version: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00145.html">[xindy] fatal typo in latin-exchange.xdy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00146.html">Re: Bugs in xindy 2.0b for linux i386</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00148"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00148"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

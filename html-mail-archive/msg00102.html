@@ -1,0 +1,187 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Xindy newby intro. -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Tue, 21 Apr 98 11:37:52 MET DST -->
+<!--X-Message-Id: 22445.966259393.7@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: m0yQLPm&#45;0002dZC@electra2 -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Xindy newby intro.</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00101.html">Date Prev</A>][<A HREF="msg00103.html">Date Next</A>][<A HREF="msg00101.html">Thread Prev</A>][<A HREF="msg00097.html">Thread Next</A>][<A HREF="maillist.html#00102">Date Index</A>][<A HREF="threads.html#00102">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Xindy newby intro.</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Xindy newby intro.</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 21 Apr 98 11:37:52 MET DST</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00101.html">m0yQLPm-0002dZC@electra2</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00101.html">m0yQLPm-0002dZC@electra2</A>&gt;</LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Alan Eugene Davis writes:
+ &gt; 
+ &gt; First an introduction.  I have been using latex to typeset a lexicon
+ &gt; of animal names in Chuukese.  I wanted to be able to specify an
+ &gt; arbitrary collating sequence.  With a good bit of help, and over
+ &gt; several years of time, I wrote an emacs lisp sort function to sort
+ &gt; accoring to a more or less arbitrary sequence.  Xindy now proposes to
+ &gt; do what I have had to kludge to do.
+ &gt; 
+ &gt; I would like to inquire whether the sort functions themselves are
+ &gt; accessible and useable outside xindy.  This could be useful as a
+ &gt; generalized sort function.  In fact, it would seem more useful in that
+ &gt; context.  Xindy would use the same routine as anyone was using to sort
+ &gt; this language.  I think it would be a service to native speakers to
+ &gt; enable native linguists in Chuuk to tinker, and come up with what
+ &gt; looked right.  Or just teachers.  I like my collating sequence for me,
+ &gt; but I am not a native speaker.  I did what xindy is doing---make  "a
+ &gt; and a equivalent.  (Rather make "a look to the sort program like an
+ &gt; a).  I think that gnu sort may be amenable to rewriting, but I am not
+ &gt; a C programmer, so I gave up.
+
+Currently the implementation of the sort routines consists of two
+parts.
+
+a) C-written stuff, basically implements tables of sort rules for
+   efficient lookup. The interface allows 
+
+   - to insert rules (character, string, and regexp) to a table (each
+     run is realized with one such table),
+
+   - take a a character sequence and apply all rules stored in a
+     particular table and return the rewritten character sequence.
+
+   This is the core part which is specified in the following CLISP
+   Foreign Function Interface Definition Language:
+     
+     (def-c-call-out add-keyword-sort-rule
+         (:name "add_sort_rule")
+         (:arguments (run int)
+     		(left c-string)		
+     		(right c-string)	
+     		(isreject int)
+     		(ruletype int))
+         (:return-type int))
+     
+     (def-c-call-out gen-keyword-sortkey
+         (:name "gen_sortkey")
+         (:arguments (key c-string)
+     		(run int))
+         (:return-type c-string :malloc-free))
+     
+   This part exists as a separate C library (libordrules) with include
+   files and all necessary stuff to use it in another environment.
+   This should not be a problem at all. Additionally, you need the GNU
+   Rx library for the regexp-stuff.
+
+b) The Common Lisp part essentially handles the
+   not-so-performance-critical stuff needed to do all other
+   management.
+
+Coming back to your question. It should be easy to implement a new
+frontend to that library that reads the rules from a file, then a
+stream of words from another file and returns all the words in the
+rewritten form, just bypassing xindy totally. And adopting GNU sort to
+just sort according to this scheme could be worth a try. I haven't
+looked at the implementation, yet. 
+
+ &gt; I wrote routines to sort the index in that order then had to
+ &gt; reassemble the index.  So I like the potential to do it another way,
+ &gt; with xindy, with a few keystrokes of initial set up.  
+
+This heavily depends on the complexity of your rules. As long as the
+rules of the Chuukeese language (BTW: where is it spoken?) are
+expressible in the current scheme, this shouldn't be a problem. If you
+need any help to write rules, contact us. 
+ 
+ &gt; Also I would like to ask about possibility for several indices: I'd
+ &gt; like to have a scientific name index as well as a headword index.
+ &gt; Excuse me if this is in the manual, as I have only quickly looked it
+ &gt; over.
+
+We are working on this and especially on LaTeX interfaces for this
+purpose. For the moment I'd suggest to filter the relevant data with
+something like sed/awk/perl and run xindy for each index separately.
+
+Give it a try and tell us and share your experiences with us.
+
+Cheers,
+Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00101" HREF="msg00101.html">Xindy newby intro.</A></STRONG>
+<UL><LI><EM>From:</EM> Alan Eugene Davis &lt;adavis@netpci.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00101.html">Xindy newby intro.</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00103.html">xindy presentation at EuroTeX'98</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00101.html">Xindy newby intro.</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00097.html">msdos/win port</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00102"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00102"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

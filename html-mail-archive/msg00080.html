@@ -1,0 +1,178 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: [xindy] alpha version 2.0b available -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Sun, 18 Jan 1998 01:44:01 +0100 -->
+<!--X-Message-Id: 199801180043.BAA14051@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>[xindy] alpha version 2.0b available</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00079.html">Date Prev</A>][<A HREF="msg00081.html">Date Next</A>][<A HREF="msg00081.html">Thread Prev</A>][<A HREF="msg00079.html">Thread Next</A>][<A HREF="maillist.html#00080">Date Index</A>][<A HREF="threads.html#00080">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>[xindy] alpha version 2.0b available</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: xindy (Mailing List) &lt;<A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Subject</em>: [xindy] alpha version 2.0b available </LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Sun, 18 Jan 1998 01:43:47 +0100 (MET)</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hello out there,
+
+I've just pu a new alpha release on the Web-Server. It's available at
+
+   <A  HREF="http://www.iti.informatik.tu-darmstadt.de/xindy/alpha/">http://www.iti.informatik.tu-darmstadt.de/xindy/alpha/</A>
+
+This release adds the capability of defining rule sets as discussed
+some days ago.
+
+The command 
+
+  (define-rule-set "name"
+	[ :inherit-from ("rule-set" "rule-set-2") ]
+	:rules (&lt;rule&gt;...)
+  )
+
+where each of the rules defined as follows:
+
+  &lt;rule&gt; ::= ("pattern" "replacement" 
+	      [:string|:bregexp|:egegexp] [:again])
+
+It is similiar to a SORT-RULE command. A rule must not include the
+:run parameter (this is supplied at instantiation time) and the
+identifier SORT-RULE, since this scheme does only work for sort rules,
+so we can omit it.
+		
+As an example :
+
+   (define-rule-set "isolatin1-tolower"
+   
+     :inherit-from ("latin-tolower")
+   
+     :rules (("À" "à" :string :again)
+             ("Á" "á" :string :again)
+             ("Â" "â" :string :again)
+             ("Ã" "ã" :string :again)
+             ("Ä" "ä" :string :again)
+             ("Å" "å" :string :again)
+             ("Æ" "æ" :string :again)
+   	  ...
+            )
+   ...) 
+
+Rule sets inherit rules from another rule set, if they do not have the
+same pattern already. A list of parents is inherited successively, one
+by one, preserving the order. Thus, in the resulting list of patterns
+the ones that have been inherited the last appear at the end of the
+list.
+
+At instantiation time we use
+
+  (use-rule-set :run &lt;phase&gt;
+		:rule-set (&lt;rule-set&gt;...)
+  )
+
+such as 
+
+  (use-rule-set :run 0
+                :rule-set ("din5007" "isolatin1-tolower"))
+
+  (use-rule-set :run 1
+                :rule-set ("resolve-umlauts"
+                           "resolve-sharp-s"
+                           "isolatin1-tolower"
+                           ))
+
+In the test phase I've implemented a full scheme for German, which is
+now part of the library. Have a look at the modules
+
+    <A  HREF="http://www.iti.informatik.tu-darmstadt.de/xindy/modules/">http://www.iti.informatik.tu-darmstadt.de/xindy/modules/</A>
+      
+      lang/german/rules.xdy 
+		  din5007m.xdy
+      rules/isolatin1-tolower.xdy
+	    latin-tolower.xdy
+
+Which contains the complete rule sets and their instantiation. The
+rule sets from rules/* may be valuable for the specification of a
+complete rule set for French or other languages.
+
+The changes implemented in the program affected the binary kits as
+well.
+
+Any comments are welcome.
+
+Cheers,
+--Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00079.html">Rulesets</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00081.html">[xindy] Source developers kit available</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00081.html">[xindy] Source developers kit available</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00079.html">Rulesets</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00080"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00080"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

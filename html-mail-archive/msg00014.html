@@ -1,0 +1,225 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: New Version of xindy.sty -->
+<!--X-From-R13: vanfNzvo.unem.qr -->
+<!--X-Date: Fri, 14 Mar 1997 18:28:34 +0100 -->
+<!--X-Message-Id: 199703141535.QAA32220@mexico.mib.harz.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>New Version of xindy.sty</TITLE>
+<LINK REV="made" HREF="mailto:inas@mib.harz.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00012.html">Date Prev</A>][<A HREF="msg00013.html">Date Next</A>][<A HREF="msg00022.html">Thread Prev</A>][<A HREF="msg00025.html">Thread Next</A>][<A HREF="maillist.html#00014">Date Index</A>][<A HREF="threads.html#00014">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>New Version of xindy.sty</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A> (xindy (Mailing List))</LI>
+<LI><em>Subject</em>: New Version of xindy.sty</LI>
+<LI><em>From</em>: <A HREF="mailto:inas@mib.harz.de">inas@mib.harz.de</A></LI>
+<LI><em>Date</em>: Fri, 14 Mar 1997 16:35:36 +0100 (MET)</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+ I've fixed some minor bugs in xindy.sty:
+   
+   - indexstyles chapter and section are only defined, if
+     the corresponding \chapter / \section is defined
+   - \ wasn't doubled in all cases when german.sty wasn't loaded.
+   - \newindexstyle, \indexstyle now check if the indexstyle is
+     existing
+   - \renewindexstyle can be used to redefine a indexstyle.
+   
+ All other mentioned problems aren't solved yet.
+ 
+CU, Andi
+   
+-----xindy.sty-----
+\RequirePackage{keyval}
+%
+%%
+%% various Indexstyles
+%%
+%
+\def\newindexstyle#1#2{%
+    \@ifundefined{xindy@style@#1}%
+    {\expandafter\gdef\csname xindy@style@#1\endcsname{#2}}
+    {\typeout{xindy: indexstyle #1 already defined}}}
+\def\renewindexstyle#1#2{%
+    \expandafter\let\csname xindy@style@#1\endcsname=\undefined%
+    \newindexstyle{#1}{#2}}
+\newindexstyle{page}{\thepage}
+\ifx\@undefined\chapter\else
+    \newindexstyle{chapter}{\thechapter-\thepage}
+\fi
+\ifx\@undefined\section\else
+    \newindexstyle{section}{\thesection-\thepage}
+\fi
+%
+%%
+%% select style
+%%
+%
+\def\indexstyle#1{%
+    \@ifundefined{xindy@style@#1}
+       {\typeout{xindy: indexstyle #1 not defined}}
+       {\def\xindy@style{\csname xindy@style@#1\endcsname}}}
+\indexstyle{page}
+%
+%%
+%% The keys for the index
+%%
+%
+\define@key{xindy}{attr}{%
+   \def\xindy@attr{#1}%
+   \ifx\@empty\xindy@attr%
+   \else%
+      \def\xindy@attr{:attr "#1"}%
+   \fi}
+\def\xindy@attr{}
+\define@key{xindy}{open-range}[:open-range]{\def\xindy@range{:open-range}}
+\define@key{xindy}{close-range}[:close-range]{\def\xindy@range{:close-range}}
+\def\xindy@range{}
+\define@key{xindy}{xref}{\def\xindy@xref{#1}}
+\def\xindy@xref{}
+%
+%%
+%% The Backslash should be doubled
+%%
+%
+\begingroup
+ \catcode`\|=0
+ \catcode`|\=12
+ |gdef|xindy@bsps{\\}
+ |catcode`|\=|active
+ |global|let\|xindy@bsps
+|endgroup
+%
+%%
+%% The indexing command
+%%
+%
+\def\indexindy{%
+    \begingroup
+    \toks@{}
+    \ifx\@undefined\germanTeX%
+        \catcode`\\=\active
+        \expandafter\indexindy@%
+    \else%
+        \mdqoff\catcode`\\=\active
+        \expandafter\indexindy@%
+    \fi}
+\newcommand{\indexindy@}[2][]{%
+ \xindy@checksyntax{#2}%
+ \expandafter\def\expandafter\xindy@tmp\expandafter{\the\toks@}%
+ \setkeys{xindy}{#1}%
+  \index{(indexentry :tkey (\xindy@tmp)%
+   \space\xindy@attr\space\xindy@range\space%
+   \ifx\@empty\xindy@xref%
+       :locref "\xindy@style"%
+   \else%
+       :xref (\xindy@xref)%
+   \fi%
+   )}
+ \endgroup
+}
+\def\xindy@checksyntax#1{%
+    \def\xindy@tmp{#1}%
+    \xindy@for\xindy@@tmp:=\xindy@tmp\do{\xindy@@checksyntax}}
+\def\xindy@@checksyntax{%
+    \addto@hook\toks@{ ( }%
+    \@for\xindy@@@tmp:=\xindy@@tmp\do{%
+         \expandafter\addto@hook\expandafter\toks@\expandafter{\expandafter"\xindy@@@tmp" }}%
+    \addto@hook\toks@{) }}
+%
+%%
+%% We need a special for-command
+%%
+%
+\def\xindy@fornoop#1\@@#2#3{}
+\long\def\xindy@for#1:=#2\do#3{%
+  \expandafter\def\expandafter\xindy@fortmp\expandafter{#2}%
+  \ifx\xindy@fortmp\@empty \else
+    \expandafter\xindy@forloop#2;\@nil;\@nil\@@#1{#3}\fi}
+\long\def\xindy@forloop#1;#2;#3\@@#4#5{\def#4{#1}\ifx #4\@nnil \else
+       #5\def#4{#2}\ifx #4\@nnil \else#5\xindy@iforloop #3\@@#4{#5}\fi\fi}
+\long\def\xindy@iforloop#1;#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \expandafter\xindy@fornoop \else
+      #4\relax\expandafter\xindy@iforloop\fi#2\@@#3{#4}}
+\def\xindy@tfor#1:={\xindy@tf@r#1 }
+\long\def\xindy@tf@r#1#2\do#3{\def\xindy@fortmp{#2}\ifx\xindy@fortmp\space\else
+    \xindy@tforloop#2\@nil\@nil\@@#1{#3}\fi}
+\long\def\xindy@tforloop#1#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \expandafter\xindy@fornoop \else
+      #4\relax\expandafter\xindy@tforloop\fi#2\@@#3{#4}}
+\long\def\@breakxindy@tfor#1\@@#2#3{\fi\fi}
+
+\def\@wrindex#1{%
+   \protected@write\@indexfile{}%
+      {#1}%
+ \endgroup
+ \@esphack}
+-----------------------------
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00012.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00013.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00022.html">Release of xindy-1.2.1 and xindy-dk</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00025.html">new version of xindy.sty</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00014"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00014"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

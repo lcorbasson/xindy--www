@@ -1,0 +1,305 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Package for writing raw&#45;indices -->
+<!--X-From-R13: vanfNzvo.unem.qr -->
+<!--X-Date: Thu, 13 Mar 1997 20:36:37 +0100 -->
+<!--X-Message-Id: 199703131925.UAA29644@mexico.mib.harz.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Package for writing raw-indices</TITLE>
+<LINK REV="made" HREF="mailto:inas@mib.harz.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00007.html">Date Prev</A>][<A HREF="msg00009.html">Date Next</A>][<A HREF="msg00034.html">Thread Prev</A>][<A HREF="msg00009.html">Thread Next</A>][<A HREF="maillist.html#00008">Date Index</A>][<A HREF="threads.html#00008">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Package for writing raw-indices</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A> (xindy (Mailing List))</LI>
+<LI><em>Subject</em>: Package for writing raw-indices</LI>
+<LI><em>From</em>: <A HREF="mailto:inas@mib.harz.de">inas@mib.harz.de</A></LI>
+<LI><em>Date</em>: Thu, 13 Mar 1997 20:25:46 +0100 (MET)</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+ In order to trash the need of tex2xindy, I wrote a small package,
+ which provides a new indexing-behavior. By using this package,
+ the index file (.idx) will contain the raw index. 
+ 
+ The package provides the command
+   
+     \indexindy[&lt;options&gt;]{&lt;Layers&gt;}
+  
+ &lt;options&gt; is a list of one (or more) of the following:
+ 
+     attr=&lt;attribute&gt;    key is indexed with :attr "&lt;attribute&gt;"
+     open-range           "   "   "       "  :open-range
+     close-range          "   "   "       "  :close-range
+     xref=&lt;string-list&gt;   "   "   "       "  :xref (&lt;string-list")
+   
+ &lt;Layers&gt; is the string-list for the layers in the following syntax
+ 
+     &lt;layer0&gt;,&lt;print-key&gt;;&lt;layer1&gt;,&lt;print-key&gt;
+
+
+ There are another two commands to generate different location-refs:
+
+  \newindexstyle{&lt;name&gt;}{&lt;reference&gt;} : define a style
+  \indexstyle{&lt;name&gt;} : select a style
+
+  Thus, 
+
+    \newindexstyle{chapter}{\thechapter-\thepage}
+    \indexstyle{chapter}
+
+  will generate a different location reference for the following
+  indices (e.g. 1-5, 2-7, A-6)
+  
+  
+ Examples.
+ --------
+ 
+ The input
+ 
+     \indexindy[attr=definition]{Euler}
+     \indexindy[open-range,attr=definition]{Euler,\textsc{Euler}}
+     \indexindy[attr=see,xref="Euler"]{Personen;Mathematiker}
+     \indexindy[close-range,attr=definition]{Euler,\textsc{Euler}}
+     \indexindy{Layer 0;Layer 1,\textsc{Layer 1};Layer 2}
+     \indexstyle{chapter}
+     \indexindy{Index the comma{,} too}
+
+  leads to the output (assuming random locrefs :)
+  
+     (indexentry :tkey ( ( "Euler" ) ) :attr "definition"   :locref "11")
+     (indexentry :tkey ( ( "Euler" "\\textsc{Euler}" ) ) :attr "definition"
+                 :open-range :locref "12")
+     (indexentry :tkey ( ( "Personen" )  ( "Mathematiker" ) ) :attr "see"
+                 :xref ("Euler"))
+     (indexentry :tkey ( ( "Euler" "\\textsc{Euler}" ) ) :attr "definition"
+                 :close-range :locref "17")
+     (indexentry :tkey ( ( "Layer 0" )  ( "Layer 1" "\\textsc{Layer 1}" )  ( "Layer 2" ) )
+                 :locref "11")
+     (indexentry :tkey ( ( "Index the comma{,} too" ) )   :locref "1-11")
+  
+  You should note, that the backslash \ in the input is converted to \\ automatically.
+  But as you see, there are some problems left, which I couldn't solve yet. 
+
+    1. The input {,} leads to an raw-entry containing {,}.
+       I'd like to convert this to , without the brackets.
+    2. There is a minor problem on the spacing. I'd like a output
+       like :tkey (("Layer 0") ("Layer 1" "\\textsc{Layer 1}"))
+    3. The xref-tag is specified in another form than the key-tag.
+       I'd like to use the same syntax, but don't know how to
+       combine keyval.sty with this syntax.
+    4. Currently the style interferes with LaTeX-\index, since
+       I redefine some internal commands. Anyone there, who think
+       this might cover errors?
+
+  Thus, the above example leads (using a special .xdy-file for \textsc{}, ...)
+
+     \begin{theindex}
+         \item \textsc{Euler}, \textbf{11}--\textbf{17}
+       \indexspace
+         \item Index the comma{,} too, 11
+       \indexspace
+         \item Layer 0
+          \subitem \textsc{Layer 1}
+            \subsubitem Layer 2, 11
+       \indexspace
+         \item Personen
+           \subitem Mathematiker, \see{Euler}
+     \end{theindex}
+
+
+  Since I am not to deep into TeX, I would be glad if a wizard could
+  check the code, which I will append to this message. So would I,
+  if someone would help me solving the mentioned "problems".
+
+  Sorry, that the code isn't documented, nor a .dtx-file. But cause
+  this is only a first attemp, I spend the time on the code instead
+  of a documention. 
+  
+Best Regards,
+
+ Andi
+
+----xindy.sty----
+\RequirePackage{keyval}
+%
+%%
+%% various Indexstyles
+%%
+%
+\def\newindexstyle#1#2{\expandafter\gdef\csname xindy@style@#1\endcsname{#2}}
+\newindexstyle{page}{\thepage}
+\newindexstyle{chapter}{\thechapter-\thepage}
+\newindexstyle{section}{\thesection-\thepage}
+%
+%%
+%% select style
+%%
+%
+\def\indexstyle#1{\def\xindy@style{\csname xindy@style@#1\endcsname}}
+\indexstyle{page}
+%
+%%
+%% Definining the optionl keys
+%%
+%
+\define@key{xindy}{attr}{%
+   \def\xindy@attr{#1}%
+   \ifx\@empty\xindy@attr%
+   \else%
+      \def\xindy@attr{:attr "#1"}%
+   \fi}
+\def\xindy@attr{}
+\define@key{xindy}{open-range}[:open-range]{\def\xindy@range{:open-range}}
+\define@key{xindy}{close-range}[:close-range]{\def\xindy@range{:close-range}}
+\def\xindy@range{}
+\define@key{xindy}{xref}{\def\xindy@xref{#1}}
+\def\xindy@xref{}
+%
+%%
+%% The Backslash should be doubled
+%%
+%
+\begingroup
+ \catcode`\|=0
+ \catcode`|\=12
+ |gdef|xindy@bsps{\\}
+ |catcode`|\=|active
+ |global|let\|xindy@bsps
+|endgroup
+%
+%%
+%% The indexing command
+%%
+%
+\def\indexindy{%
+    \begingroup
+    \toks@{}
+    \ifx\@undefined\germanTeX%
+        \expandafter\indexindy@%
+    \else%
+        \mdqoff\catcode`\\=\active
+        \expandafter\indexindy@%
+    \fi}
+\newcommand{\indexindy@}[2][]{%
+ \xindy@checksyntax{#2}%
+ \expandafter\def\expandafter\xindy@tmp\expandafter{\the\toks@}%
+ \setkeys{xindy}{#1}%
+  \index{(indexentry :tkey (\xindy@tmp)%
+   \space\xindy@attr\space\xindy@range\space%
+   \ifx\@empty\xindy@xref%
+       :locref "\xindy@style"%
+   \else%
+       :xref (\xindy@xref)%
+   \fi%
+   )}
+ \endgroup
+}
+\def\xindy@checksyntax#1{%
+    \def\xindy@tmp{#1}%
+    \xindy@for\xindy@@tmp:=\xindy@tmp\do{\xindy@@checksyntax}}
+\def\xindy@@checksyntax{%
+    \addto@hook\toks@{ ( }%
+    \@for\xindy@@@tmp:=\xindy@@tmp\do{%
+         \expandafter\addto@hook\expandafter\toks@\expandafter{\expandafter"\xindy@@@tmp" }}%
+    \addto@hook\toks@{) }}
+%
+%%
+%% We need a special for-command
+%%
+%
+\def\xindy@fornoop#1\@@#2#3{}
+\long\def\xindy@for#1:=#2\do#3{%
+  \expandafter\def\expandafter\xindy@fortmp\expandafter{#2}%
+  \ifx\xindy@fortmp\@empty \else
+    \expandafter\xindy@forloop#2;\@nil;\@nil\@@#1{#3}\fi}
+\long\def\xindy@forloop#1;#2;#3\@@#4#5{\def#4{#1}\ifx #4\@nnil \else
+       #5\def#4{#2}\ifx #4\@nnil \else#5\xindy@iforloop #3\@@#4{#5}\fi\fi}
+\long\def\xindy@iforloop#1;#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \expandafter\xindy@fornoop \else
+      #4\relax\expandafter\xindy@iforloop\fi#2\@@#3{#4}}
+\def\xindy@tfor#1:={\xindy@tf@r#1 }
+\long\def\xindy@tf@r#1#2\do#3{\def\xindy@fortmp{#2}\ifx\xindy@fortmp\space\else
+    \xindy@tforloop#2\@nil\@nil\@@#1{#3}\fi}
+\long\def\xindy@tforloop#1#2\@@#3#4{\def#3{#1}\ifx #3\@nnil
+       \expandafter\xindy@fornoop \else
+      #4\relax\expandafter\xindy@tforloop\fi#2\@@#3{#4}}
+\long\def\@breakxindy@tfor#1\@@#2#3{\fi\fi}
+
+\def\@wrindex#1{%
+   \protected@write\@indexfile{}%
+      {#1}%
+ \endgroup
+ \@esphack}
+---------------
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00009" HREF="msg00009.html">Re: Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00007.html">xindy styles in LaTeX documents</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00009.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00034.html">Re: new version of xindy.sty</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00009.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00008"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00008"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

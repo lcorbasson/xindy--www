@@ -1,0 +1,144 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: CFP: Source distribution of xindy -->
+<!--X-From-R13: Ureq @rhtronhre <treqNhav&#45;xboyram.qr> -->
+<!--X-Date: Wed, 19 Nov 1997 17:14:02 +0100 -->
+<!--X-Message-Id: 199711191612.RAA13388@informatik.uni&#45;koblenz.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199711181838.TAA15539@sponsor.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: CFP: Source distribution of xindy</TITLE>
+<LINK REV="made" HREF="mailto:gerd@uni-koblenz.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00063.html">Date Prev</A>][<A HREF="msg00064.html">Date Next</A>][<A HREF="msg00063.html">Thread Prev</A>][<A HREF="msg00062.html">Thread Next</A>][<A HREF="maillist.html#00065">Date Index</A>][<A HREF="threads.html#00065">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: CFP: Source distribution of xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: CFP: Source distribution of xindy</LI>
+<LI><em>From</em>: Gerd Neugebauer &lt;<A HREF="mailto:gerd@uni-koblenz.de">gerd@uni-koblenz.de</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 19 Nov 1997 17:12:50 +0100</LI>
+<LI><em>In-reply-to</em>: &lt;199711181838.TAA15539@sponsor.iti.informatik.tu-darmstadt.de&gt;(message from Roger Kehr on Tue, 18 Nov 1997 19:38:31 +0100 (MET))</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+
+Hello,
+
+I have tried to follow the instructions for compiling xindy. Here
+are my experiences after one afternoon:
+
+My configuration:
+
+	Sun 4/75
+	SunOS 4.1.3_U1
+	X11R6.3
+
+- I got the files recommended in the WWW-page
+  packages/xp.clisp.tar.gz seems not to be used anywhere.
+
+- I have configured clisp to be made in a subdirectory.
+  
+  --with-dynamic-ffi seems to be added automatically. Maybe I should
+  try it again without this configure option. I would guess that it
+  works as well.
+
+  The installation instructions indicate that -DIMMUTABLE is a good
+  idea. This does not work for SunOS 4.*.
+
+  make failed because libX11.a was not found. This is not contained in
+  the X11R6.3 release where only the shared object is present. I have
+  taken libX11.a from an X11R5 tree which I have also at hand.
+
+  It takes really long to compile, test and install everything
+  (serveral hours, even if everything works well) :-(
+
+- I have compiled (once again) GNU Rx from the sources.
+
+- The link recommended in the Web page does not work. rx is located in
+  the directory rx-1.5.
+
+- The link recommended in the Web page does not work because clisp.h
+  is located in a subdirectory of CLISP and not of src -- because I
+  have made clisp in a subdir.
+
+- make -- even with fingerd crossed -- succeeded immediately. The
+  Makefile triggers the target all which simply does nothing:-(
+  the target `install' is unknown.
+
+  I tried make in the rx subdirectory. This failed immediatly because
+  the clisp script located there could not find the clisp
+  interpreter???
+
+OK. That's it for today.
+
+Maybe I need further instructions by mail as indicated on the Web
+page.
+
+
+Ciao
+
+	Gerd
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00063.html">CFP: Source distribution of xindy</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00064.html">Looking for Style-files</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00063.html">CFP: Source distribution of xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00062.html">[xindy] New alpha version for Linux available</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00065"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00065"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,238 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Xindy and Allegro Common&#45;Lisp -->
+<!--X-From-R13: Preaq Dnvpuyr <envpuyrNWasbezngvx.Gav&#45;Eghggtneg.RS> -->
+<!--X-Date: Tue, 18 Mar 1997 17:07:15 +0100 -->
+<!--X-Message-Id: 199703181605.RAA25915@isle.informatik.uni&#45;stuttgart.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703181424.PAA13053@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Xindy and Allegro Common-Lisp</TITLE>
+<LINK REV="made" HREF="mailto:raichle@Informatik.Uni-Stuttgart.DE">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00019.html">Date Prev</A>][<A HREF="msg00021.html">Date Next</A>][<A HREF="msg00019.html">Thread Prev</A>][<A HREF="msg00021.html">Thread Next</A>][<A HREF="maillist.html#00020">Date Index</A>][<A HREF="threads.html#00020">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Xindy and Allegro Common-Lisp</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Xindy and Allegro Common-Lisp</LI>
+<LI><em>From</em>: Bernd Raichle &lt;<A HREF="mailto:raichle@Informatik.Uni-Stuttgart.DE">raichle@Informatik.Uni-Stuttgart.DE</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 18 Mar 1997 17:05:49 +0100 (MET)</LI>
+<LI><em>In-reply-to</em>: &lt;<A HREF="msg00019.html">199703181424.PAA13053@spock.iti.informatik.th-darmstadt.de</A>&gt;(message from Roger Kehr on Tue, 18 Mar 1997 15:24:40 +0100 (MEZ))</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Continuing the work to port Xindy to Allegro Common-Lisp I have found
+the following "bugs":
+
+- "markup.lsp"
+ 
+        (defvar       lisp::*xindy-bin-version*)
+        (defparameter *xindy-bin-version*  lisp::*xindy-bin-version*)
+ 
+  is wrong, because Allegro CL has ``locked'' the symbol table of the
+  "lisp" package to avoid user redefinitions of important functions.
+ 
+  Incomplete fix:  changed the above lines to
+        ;;(defvar       lisp::*xindy-bin-version*)
+        (defparameter *xindy-bin-version*  *xindy-version*)
+ 
+ 
+- "markup.lsp", "base.lsp", shell script "xindy"
+ 
+  (exit &lt;opt-arg&gt;) is non standard,
+  Allegro CL has an (excl:exit ...) function.
+ 
+  Incomplete fix: changed all
+        (exit &lt;opt-arg&gt;)
+  to
+        (#+ALLEGRO excl:exit #-ALLEGRO exit &lt;opt-arg&gt;)
+ 
+ 
+- "idxstyle.lsp", "markup.lsp"
+ 
+  Function (simple-condition-format-string ...) undefined.
+ 
+  The Allegro CL manuals says in Appendix A "Allegro Cl and the CL
+  standard":
+ 
+  X3J13 clarified that [...blablabla ...].  The [...]
+  \symbol{simple-condition-format-string} accessor is renamed
+  \symbol{simple-condition-format-control}, and both may be either a
+  format string or a format function.  Allegro CL conforms to these
+  changes.
+ 
+  Incomplete Fix: changed
+        (simple-condition-format-string ...)
+  to
+        (#+ALLEGRO simple-condition-format-control
+         #-ALLEGRO simple-condition-format-string
+         ...)
+ 
+- "idxstyle.lsp"
+ 
+  (open ... :direction :input-immutable ...)
+ 
+  is non-standard, only :input, :output, :io, and :probe are allowed.
+ 
+  Fix: changed :input-immutable to :input.
+ 
+ 
+- "idxstyle.lsp"
+ 
+  (open ... :element-type 'string-char ...)
+ 
+  The type \symbol{string-char} (and predicate \symbol{string-char-p})
+  of CLtL1 is replaced by the new types \symbol{base-char} and
+  \symbol{extended-char}.
+  Allegro CL moved \symbol{string-char} to the package \symbol{cltl1}.
+ 
+  Fix: changed 'string-char to 'base-char
+
+
+
+Additionally I have rewritten the shell script "xindy" to call Allegro
+CL instead of CLISP.  "xindy -v" works, and the first test with
+"attr1.xdy/.raw" gives the following result:
+
+
+This is `xindy' version 1.2 (sun4-solaris binary version 1.2).
+
+Opening logfile "attr1.xlg" (done)
+Reading indexstyle...
+Loading module "attr1.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+
+Error in line 11:
+
+;;;;;;;;;;;;
+;;
+;; The rest
+
+(require "class/pagenums.xdy")
+
+ERROR: Could not find file "class/pagenums.xdy" !
+
+
+If I have time to do further tests I will try to find this one
+remaining, I hope.
+
+Testing with
+
+USER(23): IDXSTYLE::*LOAD-PATHS*
+(#p"/" #p"/home/raichle/xindy/lib/modules/")
+USER(24): (idxstyle::find-file "class/pagenums.xdy")
+#p"/home/raichle/xindy/lib/modules/class/pagenums.xdy"
+
+which is the correct file.  The other files which are found are linked
+to my local test directory.
+
+Mmmh, if I trace
+
+USER(3): (trace idxstyle::find-file idxstyle::append-pathnames probe-file)
+(PROBE-FILE IDXSTYLE::APPEND-PATHNAMES IDXSTYLE::FIND-FILE)
+USER(4):    (searchpath ".:/home/raichle/xindy/lib/modules")
+(#p"/" #p"/home/raichle/xindy/lib/modules/")
+USER(5): USER(5):    (xindy:startup :idxstyle "attr1.xdy"
+                  :rawindex "attr1.raw"
+                  :output   "attr1.ind"
+                  :logfile "attr1.xlg"   :trace-level 1)
+
+T
+
+This is `xindy' version 1.2 (sun4-solaris binary version 1.2).
+[... blablabla ...]
+Finished loading module "testbed.xdy".
+ 0: (IDXSTYLE::FIND-FILE "class/pagenums.xdy")
+   1: (IDXSTYLE::APPEND-PATHNAMES #p"/" #p"class/pagenums.xdy")
+   1: returned #p"/class/pagenums.xdy"
+   1: (PROBE-FILE #p"/class/pagenums.xdy")
+   1: returned NIL
+   1: (IDXSTYLE::APPEND-PATHNAMES #p"../modules/" #p"class/pagenums.xdy")
+   1: returned #p"../modules/class/pagenums.xdy"
+   1: (PROBE-FILE #p"../modules/class/pagenums.xdy")
+   1: returned NIL
+
+Error in line 11:
+[... error message above ...]
+
+
+*load-paths* seems to be set to a different value.  Grmbl.
+
+
+Roger, any hints?
+
+-bernd
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00021" HREF="msg00021.html">Re: Xindy and Allegro Common-Lisp</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00019" HREF="msg00019.html">Re: \indexindy and sorting rules</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00019.html">Re: \indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00021.html">Re: Xindy and Allegro Common-Lisp</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00019.html">Re: \indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00021.html">Re: Xindy and Allegro Common-Lisp</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00020"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00020"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

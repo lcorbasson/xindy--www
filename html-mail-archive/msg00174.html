@@ -1,0 +1,146 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: markup rules question -->
+<!--X-From-R13: Hynqvzve Hbybivpu <iiiNiii.ifh.eh> -->
+<!--X-Date: Fri, 24 Mar 2000 08:52:06 +0100 (MET) -->
+<!--X-Message-Id: 200003212320.CAA04928@vvv.vsu.ru -->
+<!--X-Content-Type: text -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>markup rules question</TITLE>
+<LINK REV="made" HREF="mailto:vvv@vvv.vsu.ru">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00173.html">Date Prev</A>][<A HREF="msg00175.html">Date Next</A>][<A HREF="msg00180.html">Thread Prev</A>][<A HREF="msg00171.html">Thread Next</A>][<A HREF="maillist.html#00174">Date Index</A>][<A HREF="threads.html#00174">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>markup rules question</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: markup rules question</LI>
+<LI><em>From</em>: Vladimir Volovich &lt;<A HREF="mailto:vvv@vvv.vsu.ru">vvv@vvv.vsu.ru</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 22 Mar 2000 02:20:05 +0300</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+First, a minor bug: xindy refuses to accept filenames starting
+with a dot, as filenames with raw index. E.g.:
+
+$ xindy -o .qq2 somefile.xdy .qq1
+This is `xindy' version 2.0 (i386-linux-glibc2 binary version 2.0).
+
+Reading indexstyle...
+Loading module "somefile.xdy"...
+...
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index ".qq1"...
+ERROR: no file name given: #P"/tmp/0/.qq1"
+=========================================================
+
+Second, could you please help with the following question.
+Is it possible to set up markup rules in such a way that
+the markup of an index entry of depth n will depend on
+whether there are entries of depth n+1?
+
+For example, the texindex program (which is part of texinfo)
+supports the following (following is a comment from texinfo.tex):
+
+% The index entry written in the file actually looks like
+%  \entry {sortstring}{page}{topic}
+% or
+%  \entry {sortstring}{page}{topic}{subtopic}
+% The texindex program reads in these files and writes files
+% containing these kinds of lines:
+%  \initial {c}
+%     before the first topic whose initial is c
+%  \entry {topic}{pagelist}
+%     for a topic that is used without subtopics
+%  \primary {topic}
+%     for the beginning of a topic that is used with subtopics
+%  \secondary {subtopic}{pagelist}
+%     for each subtopic.
+
+Could this behavior be emulated with xindy?
+
+I.e., if there is only an entry with depth 0, xindy should generate
+a markup of the form
+\entry {topic}{pagelist}
+
+But if there are also entries with depth 1, xindy should generate
+a markup of the form
+
+\primary {topic}
+\secondary {subtopic}{pagelist}
+\secondary {subtopic}{pagelist}
+...
+
+Best,
+v.
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00171" HREF="msg00171.html">Re: markup rules question</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00173.html">Re: some questions</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00175.html">Re: some questions</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00180.html">Re: strange segfault in xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00171.html">Re: markup rules question</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00174"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00174"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

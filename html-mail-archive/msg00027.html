@@ -1,0 +1,385 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Xindy 1.2.1 and Allegro Common&#45;Lisp (was: Xindy and Allegro Common&#45;Lisp) -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Thu, 20 Mar 1997 17:24:42 +0100 -->
+<!--X-Message-Id: 199703201624.RAA13334@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703201529.QAA27562@isle.informatik.uni&#45;stuttgart.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-L</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00026.html">Date Prev</A>][<A HREF="msg00028.html">Date Next</A>][<A HREF="msg00026.html">Thread Prev</A>][<A HREF="msg00028.html">Thread Next</A>][<A HREF="maillist.html#00027">Date Index</A>][<A HREF="threads.html#00027">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 20 Mar 1997 17:24:31 +0100 (MEZ)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00026.html">199703201529.QAA27562@isle.informatik.uni-stuttgart.de</A>&gt; from "Bernd Raichle" at Mar 20, 97 04:29:09 pm</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Bernd Raichle wrote:
+
+&gt; : (defmacro simple-condition-format-string (&amp;rest)
+&gt; : 	`(simple-condition-format-control ,@rest))
+&gt; :
+&gt; : is my current solution. It seems that CLISP doesn't understand this.
+&gt; : Maybe I should ask on the mailing-list, why not.
+&gt;
+&gt; CLISP doesn't have implemented the last X3J13 changes?
+
+Not all of them as you can see. I think it would be a good idea to
+make Allegro the Lisp version of my choice from now on :)
+
+&gt; : &gt; - "idxstyle.lsp"
+&gt; : &gt;   (open ... :direction :input-immutable ...)
+&gt; : &gt;   is non-standard, only :input, :output, :io, and :probe are allowed.
+&gt; : &gt;   Fix: changed :input-immutable to :input.
+&gt; : Ok. This is new to me. Wonder why I didn't find it?
+&gt;
+&gt; Can you explain what the differences beetwen ``:input'' and
+&gt; ``:input-immutable'' are?
+
+I borrowed this from the implementation of function `load' int the
+CLISP-source :) I never asked if it is standard.
+
+&gt; [...]
+&gt; : &gt; Additionally I have rewritten the shell script "xindy" to call Allegro
+&gt; : &gt; CL instead of CLISP.  "xindy -v" works, and the first test with
+&gt; : &gt; "attr1.xdy/.raw" gives the following result:
+&gt; [...]
+&gt; : &gt; Mmmh, if I trace
+&gt; : &gt;
+&gt; : &gt; USER(3): (trace idxstyle::find-file idxstyle::append-pathnames probe-file)
+&gt; : &gt; (PROBE-FILE IDXSTYLE::APPEND-PATHNAMES IDXSTYLE::FIND-FILE)
+&gt; : &gt; USER(4):    (searchpath ".:/home/raichle/xindy/lib/modules")
+&gt; : &gt; (#p"/" #p"/home/raichle/xindy/lib/modules/")
+&gt; :      ^^^
+&gt; : This should be #"./". At least this is not as expected.
+&gt;
+&gt; I have found this "bug" ... it was the new (searchpath ...) call in
+&gt; file "testbed.xdy".  To make the test I have copied this file without
+&gt; changing it appropriately :-(
+
+Ok. That helps a lot.
+
+&gt; I have got Xindy 1.2.1 and now these are the "bugs" and necessary
+&gt; changes I have found so far:
+&gt;
+&gt;
+&gt; - ".../binaries/.../defaults.xdy", "idxstyle.lsp", "markup.lsp"
+&gt;
+&gt;   *load-paths*                is not external
+&gt;                               (and not imported to the USER package).
+&gt;
+&gt;   Fix: in "idxstyle.lsp"
+&gt;         (export 'idxstyle:*load-paths*)
+&gt;   and either change ".../binaries/.../Makefile" to access
+&gt;   idxstyle:*load-paths* instead of *load-paths* or import this symbols
+&gt;   to the USER package.
+&gt;
+&gt;   (I have missed to report this bug last time.)
+
+Ok.
+
+&gt; - "markup.lsp"
+&gt;
+&gt;   When opening the `logfile' in function `do-startup' add the
+&gt;   keyword/value
+&gt;         :if-exists :overwrite
+&gt;   to the `open' function call.  The default for :if-exists is :error,
+&gt;   i.e. signal an error if file to be written exists.
+&gt;
+&gt;   Same change needed when opening the `output' file in this function.
+
+CLISP did never report an error :)
+
+&gt; With these changes, I was able to startup Allegro CL, load all
+&gt; necessary files (without warnings), and start a first test (after
+&gt; adding ":last" to the search path in my copy of "testbed.xdy") with
+&gt;
+&gt;    (xindy:startup :idxstyle "attr1.xdy"
+&gt;                   :rawindex "attr1.raw"
+&gt;                   :output   "attr1.ind"
+&gt;                   :logfile "attr1.xlg"   :trace-level 1)
+&gt;
+&gt; which returns with the following error:
+&gt;
+&gt;
+&gt; [...]
+&gt; Loading module "testbed.xdy"...
+&gt; Finished loading module "testbed.xdy".
+&gt; Loading module "class/pagenums.xdy"...
+&gt;
+&gt; Error in line 6:
+&gt; ;; $Id$
+&gt; ;;
+&gt; ;; This module defines the location-class "page-numbers"
+&gt;
+&gt; (define-location-class "page-numbers" ("arabic-numbers"))
+&gt;
+&gt;
+&gt; Error in line 11:
+&gt;
+&gt; ;;;;;;;;;;;;
+&gt; ;;
+&gt; ;; The rest
+&gt;
+&gt; (require "class/pagenums.xdy")
+&gt;
+&gt; Error: No methods applicable for generic function
+&gt;        #&lt;STANDARD-GENERIC-FUNCTION SIMPLE-CONDITION-FORMAT-CONTROL&gt; with args
+&gt;        (#&lt;PROGRAM-ERROR @ #x90335a&gt;) of classes (PROGRAM-ERROR)
+&gt;   [condition type: PROGRAM-ERROR]
+&gt;
+&gt;
+&gt; There seems to be a bug w.r.t. Allegro CL in
+&gt;         (define-location-class ...)
+&gt; which I'm unable to find :-((((
+&gt;
+&gt; For more, see below.
+&gt;
+&gt;
+&gt; %%%%%%%%%%%%%%%%%%%% Compiling the source files:
+&gt;
+&gt; I get warnings for all top level forms (use-package, export, ...):
+&gt; ; While compiling (:TOP-LEVEL-FORM "base.lsp" 124):
+&gt; Warning: compile-file found "USE-PACKAGE" at the top-level --  see the
+&gt;          documentation for comp:*cltl1-compile-file-toplevel-compatibility-p*
+
+When I played aroung with Allegro I did a
+
+   (setq comp:*cltl1-compile-file-toplevel-compatibility-p* t)
+
+to overcome these messages.
+
+
+&gt; base.lsp:
+&gt; =========
+&gt;
+&gt; USER(12): (compile-file "xindy:src;base.lsp")
+&gt; ;;; Compiling file xindy:src;base.lsp
+&gt; [...]
+&gt; ; Compiling SPLIT-LIST
+&gt; Error: Attempt to take the cdr of "split-list" which is not listp.
+&gt;   [condition type: SIMPLE-ERROR]
+&gt;
+&gt; [...]
+&gt; [changing package from "COMMON-LISP-USER" to "BASE"]
+&gt; [1] BASE(13): :zo
+&gt; Evaluation stack:
+&gt;
+&gt;    (ERROR SIMPLE-ERROR :FORMAT-CONTROL ...)
+&gt;  -&gt;(ASSERT (ASSERT # "split-list") (:COMPILATION-ENVIRONMENT NIL))
+&gt;    (COMP::TRANS (ASSERT # "split-list"))
+&gt;    (COMP::PA-COMPILE (ASSERT # "split-list") NIL)
+&gt;    (COMP::PA-PROGN (# #))
+&gt;    (COMP::PA-BLOCK (# #))
+&gt;    (COMP::PA-COMPILE (BLOCK SPLIT-LIST # ...) COMP::TAIL)
+&gt;    (COMP::PA-COMPILE (PROGN #) COMP::TAIL)
+&gt;    (COMP::PA-COMPILE-LAMBDA (LAMBDA # #) SPLIT-LIST)
+&gt;
+&gt; ... more older frames ...
+&gt; [1] BASE(14): :cur
+&gt; (ASSERT (ASSERT (NOT (AND SORTFUNC HEADFUNC)) "split-list")
+&gt;         (:COMPILATION-ENVIRONMENT NIL))
+&gt;
+&gt;
+&gt; Seems to be a bug, CLtL2 has (assert &lt;test-fun&gt; [ ( &lt;place&gt;* )
+&gt; &lt;string&gt; &lt;arg&gt;* ]), i.e. if more than one argument is given, the
+&gt; second is a list of places and the third is a string.
+&gt;
+&gt; Fix: added a second argument () before the former second argument
+&gt; "split-list".
+
+I see. CLISP didn't complain.
+
+
+&gt; Compiling again:
+&gt;
+&gt; [...]
+&gt; ;  Note: Closure (:INTERNAL SPLIT-LIST 1) will be stack allocated.
+&gt; ;  Note: Closure (:INTERNAL SPLIT-LIST 0) will be stack allocated.
+&gt; [...]
+
+Are these messages something important or can they be ignored?
+
+
+&gt; Ok, here is a bug:
+&gt;
+&gt; ;;; Fasl write complete
+&gt; Warning: While compiling these undefined functions were referenced:
+&gt;          SYSTEM::PRINT-CONDITION.
+&gt;
+&gt; Ahhh, you are using atleast this system-dependent function which isn't
+&gt; available in Allegro Common-Lisp!  (If `system::print-condition' is
+&gt; used to get the printed representation of a condition, why not using a
+&gt; `print-object' method for instances of the class `condition'?)
+
+Hm. Good question.
+
+What about the (system::getenv "XINDY_SEARCHPATH") call in
+set-searchpath-by-environment? Does it work on Allegro?
+
+&gt; %%%%%%%%%%%%%%%%%%%%
+&gt;
+&gt; After compiling all files and fixed these two remaining bugs, I tried
+&gt; the test again:
+&gt;
+&gt; [...]
+&gt; USER(3): (xindy:startup :idxstyle "attr1.xdy"
+&gt;                   :rawindex "attr1.raw"
+&gt;                   :output   "attr1.ind"
+&gt;                   :logfile "attr1.xlg"   :trace-level 1)
+&gt;
+&gt; This is `xindy' version 1.2 (Running on "Allegro CL").
+&gt;
+&gt; Opening logfile "attr1.xlg" (done)
+&gt; Reading indexstyle...
+&gt; Loading module "attr1.xdy"...
+&gt; Loading module "testbed.xdy"...
+&gt; Finished loading module "testbed.xdy".
+&gt; Loading module "class/pagenums.xdy"...
+&gt; Finished loading module "class/pagenums.xdy".
+&gt;
+&gt; Error in line 29:
+&gt;
+&gt; (markup-range :class "follows" :open "\folone{" :close "}f."
+&gt; 	      :length 1 :ignore-end)
+&gt;
+&gt; ERROR:
+&gt; Syntax Error in
+&gt;        (MARKUP-RANGE :CLASS "follows" :OPEN "\\folone{" :CLOSE "}f." :LENGTH 1
+&gt;                      :IGNORE-END).; killing "Editor Server"
+&gt; ; Exiting Lisp
+&gt;
+&gt;
+&gt; Any hints?  Any hints how to trace/debug Xindy to find this bug?
+
+Hm. Best would be to directly trace the (markup-trace)-macro.
+
+This error message is generated by the
+(desctructuring-swith-bind)-macro in idxstyle.lsp (intface.nw). It
+preprocesses a macro-call and removes any switches (&amp;switch) form the
+lambda-list. The remaining-list is simply passed to a
+(destructuring-bind) that for some reason has failed.
+
+Try the following:
+
+(LET
+    ((&lt;DESTRUCTURING-SWITCH-FORM&gt;
+      '(:CLASS "follows" :OPEN "folone{" :CLOSE "}f." :LENGTH 1
+	:IGNORE-END
+	))   )
+  (LET ((IGNORE-END (FIND :IGNORE-END &lt;DESTRUCTURING-SWITCH-FORM&gt;)))
+    (DESTRUCTURING-BIND (&amp;KEY OPEN CLOSE SEP CLASS LENGTH)
+	(SET-DIFFERENCE &lt;DESTRUCTURING-SWITCH-FORM&gt; '(:IGNORE-END))
+      (LIST OPEN CLOSE SEP CLASS LENGTH
+	    IGNORE-END))))
+
+if it returns
+
+-&gt; ("folone{" "}f." NIL "follows" 1 :IGNORE-END)
+
+Then you can try interactively
+
+(macroexpand
+ '(intface:destructuring-switch-bind (&amp;key
+				      open close sep class length
+				      &amp;switch ignore-end)
+   '(:class "follows" :open "\folone{" :close "}f."
+     :length 1 :ignore-end)
+   (list open close sep class length ignore-end)))
+
+if it returns the above expansion.
+
+If so, the macro-expansion mechanism seems to work. If not, contact
+me. The best will be that I install Allegro for Linux here in the
+university to find this error. But I'll not be able to do this before
+wednesday ;-(
+
+Thanx for your help.
+
+--
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00028" HREF="msg00028.html">Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+<UL><LI><EM>From:</EM> Bernd Raichle &lt;raichle@Informatik.Uni-Stuttgart.DE&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00026" HREF="msg00026.html">Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+<UL><LI><EM>From:</EM> Bernd Raichle &lt;raichle@Informatik.Uni-Stuttgart.DE&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00026.html">Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00028.html">Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00026.html">Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00028.html">Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00027"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00027"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,114 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy for linux compilation troubles -->
+<!--X-From-R13: Okry Fuvzz <Okry.FuvzzNculfvx.sh&#45;oreyva.qr> -->
+<!--X-Date: Fri, 10 Mar 2000 17:33:53 +0100 -->
+<!--X-Message-Id: 20000310173229.A6906@oberon.physik.fu&#45;berlin.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy for linux compilation troubles</TITLE>
+<LINK REV="made" HREF="mailto:Axel.Thimm@physik.fu-berlin.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00166.html">Date Prev</A>][<A HREF="msg00165.html">Date Next</A>][<A HREF="msg00167.html">Thread Prev</A>][<A HREF="msg00165.html">Thread Next</A>][<A HREF="maillist.html#00164">Date Index</A>][<A HREF="threads.html#00164">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy for linux compilation troubles</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: xindy for linux compilation troubles</LI>
+<LI><em>From</em>: Axel Thimm &lt;<A HREF="mailto:Axel.Thimm@physik.fu-berlin.de">Axel.Thimm@physik.fu-berlin.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 10 Mar 2000 17:32:29 +0100</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+I just gave xindy &amp; clisp-2000-03-06 a try up to a non go (I had previously
+installed some linux binary and confirmed the non-working examples)
+
+It seems that the newer clisp gives xindy some trouble, especially:
+&gt; The following functions were used but are deprecated:
+&gt;  GENTEMP
+&gt; [...]
+&gt; *** - A foreign variable "ordrules_string_buffer" does not exist
+&gt; Bye.
+
+other than that I had to (trivially) patch the Makefiles a bit, as the newer
+clisp seems to have been restructured. Copying the object/library files and
+remaking lisp.run in xindy, seems to be an overkill anyhow. (And I wonded why
+the clisp guys decided to call their libs lisp.a and not liblisp.a to enable
+-l switches. Perhaps some clisp people are listening?)
+
+I guess that perhaps some people are working on porting xindy to the newer
+clisp, is this so? I just entered the list, perhaps stepping on an active
+thread?
+
+Regards, Axel.
+-- 
+Axel.Thimm@physik.fu-berlin.de
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00165" HREF="msg00165.html">Re: xindy for linux compilation troubles</A></STRONG>
+<UL><LI><EM>From:</EM> Thomas Henlich &lt;henlich@mmers1.mw.tu-dresden.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00166.html">new tex2xindy</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00165.html">Re: xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00167.html">Re: xindy homepage? Reversal of time flow?</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00165.html">Re: xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00164"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00164"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

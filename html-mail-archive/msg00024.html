@@ -1,0 +1,279 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Discussion about international sorting order -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Thu, 20 Mar 1997 15:01:20 +0100 -->
+<!--X-Message-Id: 199703201401.PAA14119@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703191803.SAA05071@fell.open.ac.uk -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Discussion about international sorting order</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00023.html">Date Prev</A>][<A HREF="msg00025.html">Date Next</A>][<A HREF="msg00023.html">Thread Prev</A>][Thread Next][<A HREF="maillist.html#00024">Date Index</A>][<A HREF="threads.html#00024">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Discussion about international sorting order</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Discussion about international sorting order</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 20 Mar 1997 15:01:11 +0100 (MEZ)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00023.html">199703191803.SAA05071@fell.open.ac.uk</A>&gt; from "Chris Rowley" at Mar 19, 97 07:04:44 pm</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Chris wrote
+
+&gt; 1.  This concept of attaching properties to letters (or rather defining
+&gt; letters to be such objects) seems to me a good solution to the
+&gt; following common (in many senses) requirement of sorting real
+&gt; languages:
+&gt;
+&gt;   a multi-level sort in which levels are defined by such things as:
+&gt;
+&gt;     case; accents; other diacritics
+&gt;
+&gt; One small point about the name used: `partial-order' implies a
+&gt; different structure.  These orders are total orders on different sets,
+&gt; so I would call them sub-orders.
+
+That's correct. I already noticed this yesterday.
+
+&gt; One practical point about the example:  I think that the :accent
+&gt; property and "sub-ordering" needs to include the value `none'.
+
+Yes. I have not given a completely correct specification. I just
+wanted to present the main ideas in a few paragraph.
+
+&gt; One question:  you put this into your define-total-order example:
+&gt;
+&gt;    (:accent backwards)
+&gt;
+&gt; but you did not specify what values are allowed instead of backwards
+&gt; (or what it means, but I think I can work that out:-).
+
+The ISO standard specifies `forward', `backward' and `position'.
+`forward' simply says that we we sort according to a lexicographic
+order from left to right, `backwards' resp. from right to left
+(necessary for the French sorting rules for example). `position' is
+something that deals with ignorable letters in a lexicographic
+comparison phase. The ISO standard allows to ignore letters in a run,
+for example to remove special characters (the `-' in the following
+example) from the keyword.
+
+--- snip
+4. The fourth decomposition breaks the final tie that does not
+correspond to any tradition, the tie due to quasi-homographs that
+differ only because they contain special characters. Breaking this tie
+is essential to ensure the absolute predictibility of sorts and also
+to be able to sort strings composed only of special characters. Since
+the traces of special characters were removed from the original data
+to form the three first orders of decomposition, simply putting them
+in row in the fourth order of decomposition would mean that their
+position would be lost. These positions are quite important to solve
+remaining ties and in consequence we must retain here the original
+positions of these special characters: two quasi-homographs could each
+contain a common special character in different positions and thus be
+strictly different (ex.:"ab*cd" is still different from "a*bcd"
+despite they share one and only one common special character).
+
+Example: to have the following order: "coop", "co-op", "coop-" numbers
+could be assigned respectively according to the following pattern:
+"d", "d3-" and "d5-", where "d" is an always-present delimiter that
+separates this decomposition from the first three in case all four
+decompositions are to be concatenated to form a single sorting key
+based on numeric values (see discussion in the next paragraph). "3-"
+means a dash in position 3 of the original string. "5-" means a dash
+in position 5, and so on.
+--- snap
+
+This essentially says to make "coop", "co-op", "coop-" `equal' in the
+first runs but `position' allows to break the tie in the next phase.
+
+I don't know of enough other languages that need further processing
+rules for a sub-order. But it seems that at least for all European
+languages this scheme is enough.
+
+
+&gt; 2.  It is not clear to me that this approach will directly support
+&gt; other common requirements, such as the sub-orders required in sorting
+&gt; German, so that if  u-umlaut  and  ue  have been merged at the top-level,
+&gt; the order is defined for two words that are identical except that one
+&gt; has  u-umlaut  whereas the other has  ue .
+&gt;
+&gt; This could be done with yet another property of the letter class, called
+&gt;
+&gt;   :umlaut-oder-e
+&gt;
+&gt; having values:
+&gt;
+&gt;   umlaut  e  none  irrelevant
+&gt;
+&gt; (the last being used for all letters that never take umlauts) but such
+&gt; an approach begins to get messy.
+
+This is still an open problem for which I have not found a satisfying
+solution, yet. One would be to map
+
+	\"u  -&gt;  &lt;u&gt; &lt;e (:umlaut-oder-e umlaut)&gt;
+	u    -&gt;  &lt;u&gt;
+
+and comparison of
+
+	&lt;u&gt; &lt;e&gt;
+	&lt;u&gt; &lt;e (:umlaut-oder-e umlaut)&gt;
+
+would yield the correct order. But as you say, this is really messy.
+But the problem is, that this does not really fit into the
+letter-by-letter comparision approach.
+
+
+&gt; 3.  You probably expect me to come up with a general solution...well I
+&gt; guess the counter to that is some questions:
+&gt;
+&gt;   is there a special collection of merge-rules that come from
+&gt;   real-world multi-level sorting rules?
+&gt;
+&gt;   do these lead to a reasonable collection of letter-properties that
+&gt;   need to be added to support specification of these rules?
+
+Good questions. I'll think about it. Actually, I have not enough
+experience with other languages to be able to discover a more general
+approach.
+
+
+&gt; 4.
+&gt; &gt; Still missing is a appropriate mapping that transforms a string (a
+&gt; &gt; sequence of chars) into a sequence of letters (which have become real
+&gt; &gt; objects now).
+&gt; &gt;
+&gt; &gt; This could look like:
+&gt; &gt;
+&gt; &gt; 	(define-mapping "umlaut-u" ("\~"u" "=FC"))
+&gt; &gt; 	(define-mapping "umlaut-A" ("\~"A" "=C4"))
+&gt; &gt;
+&gt; &gt; [I hope you can see the ISO-Latin chars as well]
+&gt; Well, I can see \374 in my emacs, will that do?:-)
+&gt;
+&gt; But I do not understand the syntax you are using here.
+
+It defines a mapping from
+
+	\~"u			-&gt;  "umlaut-u"
+	ü (ISO Lat. char)	-&gt;  "umlaut-u"
+
+&gt; 5.
+&gt; &gt; What I was just discussing with Gabor is the problem of markup (once
+&gt; &gt; more). Often indexes contain commands such as "\index" (see for
+&gt; &gt; example the LaTeX Companion) for with different index entries must be
+&gt; &gt; specified for the command "\index" and the word "index" sorted as
+&gt; &gt;
+&gt;
+&gt; This is a very ad hoc solution to what is probably an example of a
+&gt; more general class of sorting rules, in which words (ie the things to
+&gt; be indexed) have "types".
+
+Indeed, it seems that this requires for objects of type `word'.
+composed of a sequence of letters. As well this is still an open
+question.
+
+&gt; This one could be done by a merge-rule that "ignores the \" and a
+&gt; sub-order that reinserts it (at the beginning or the end).
+&gt;
+&gt; Or it could be done by a letter property ":backslash-before"
+&gt; with values:  yes  no
+
+It could, but in my opinion this scheme is not flexibe and general
+enough. I was actually looking for a more general scheme, that allows
+to define arbitrary specifications of this kind.
+
+&gt; I hope this helps, there are certainly still a lot of things to
+&gt; discover and to discuss here, I suspect that the ISO document does not
+&gt; cover all the sorting requirements of complex documents.
+
+That was one of my observations, too. The standard deals much with
+implementation details and may serve as a good solution for many
+purposes, but in the document-processing domain it is not flexible
+enough and if you have ever read a such an ISO specification table,
+you'll soon get lost. I think viewing letters (and probably words) as
+objects with properties is a better approach how the sorting problem
+can be formally specified.
+
+Unfortunately, I'm currently short of time. Next week I have an exam
+and I think I'll continue to work on this problem afterwards.
+
+Thanks for you helpful comments.
+
+CU
+
+--
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00023" HREF="msg00023.html">Re: Discussion about international sorting order</A></STRONG>
+<UL><LI><EM>From:</EM> Chris Rowley &lt;C.A.Rowley@open.ac.uk&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00023.html">Re: Discussion about international sorting order</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00025.html">new version of xindy.sty</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00023.html">Re: Discussion about international sorting order</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00024"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00024"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,248 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Announce: Alpha versions available -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Fri, 9 Jan 1998 19:26:30 +0100 -->
+<!--X-Message-Id: 199801091826.TAA03131@sponsor.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 19980107164033.15738@pauillac.inria.fr -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Announce: Alpha versions available</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00072.html">Date Prev</A>][<A HREF="msg00075.html">Date Next</A>][<A HREF="msg00072.html">Thread Prev</A>][<A HREF="msg00075.html">Thread Next</A>][<A HREF="maillist.html#00074">Date Index</A>][<A HREF="threads.html#00074">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Announce: Alpha versions available</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Announce: Alpha versions available</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 9 Jan 1998 19:26:09 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00072.html">19980107164033.15738@pauillac.inria.fr</A>&gt; from "Francois Pottier" at Jan 7, 98 04:40:33 pm</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hello,
+
+&gt; &gt; I've just put alpha versions of the 2.0 release at
+&gt; &gt;
+&gt; &gt;    <A  HREF="http://www.iti.informatik.tu-darmstadt.de/xindy/alpha/">http://www.iti.informatik.tu-darmstadt.de/xindy/alpha/</A>
+&gt;
+&gt; It seems that isolatin1[ms]-tex.xdy lack entries. At least the acute-
+&gt; and grave- accented characters are missing, e.g.
+&gt;
+&gt;   (merge-rule "\'e" "é" :string :again)
+
+Yup, there was one grep rule too much. Fixed it.
+
+&gt; Which original file did you use to auto-generate the file?
+
+  $TEXMF/tex/latex/base/latin[12].def
+
+&gt; Is there some file that describes the differences between 1.2.3
+&gt; and 2.0?
+
+Not yet. The only visible change is that SORT-RULE now accepts the
+option :RUN &lt;phase-num&gt;. Hence, it contains the implementation of the
+sort phases as described in my memo about the new sorting scheme.
+
+For an example see the file
+
+  $XINDY/xindy-2.0/tests/french.xdy
+
+which is now part of the testsuite that comes with the distribution.
+It contains some of the French sort-rules as outlined in my memo.
+
+Here is part of the file:
+
+----------------------------------------------------------------------
+;; This style-file tests the mapping scheme with several runs. We use
+;; some examples in French and German to test these new features.
+;;
+
+[stuff deleted]
+
+;; The sorting rules in our example are a mixture of German and French
+;; sorting rules.
+
+(define-sort-rule-orientations (forward forward backward))
+
+;; RUN 0
+
+;; Case-insensitive run 0
+(sort-rule "A" "a" :run 0)
+(sort-rule "R" "r" :run 0)
+(sort-rule "M" "m" :run 0)
+
+;; Ignore accents in first run
+(sort-rule "é" "e" :run 0)
+(sort-rule "ô" "o" :run 0)
+
+
+;; RUN 1
+
+;; The previous rules leave the keyword groups
+;; {arm,Arm,ARM}, {cote,côte,côté,coté}.
+
+;; The next run decides that uppercase follows lowercase. This is done
+;; by the following rules. We have only defined the rules necessary in
+;; our concrete example.
+
+(sort-rule "a" "a0" :run 1)
+(sort-rule "A" "a1" :run 1)
+(sort-rule "r" "r0" :run 1)
+(sort-rule "R" "r1" :run 1)
+(sort-rule "m" "m0" :run 1)
+(sort-rule "M" "m1" :run 1)
+
+;; Ignore accents in this run, too.
+(sort-rule "é" "e" :run 1)
+(sort-rule "ô" "o" :run 1)
+
+;; RUN 1
+
+;; The previous rules leave the keyword group. {cote,côte,côté,coté}.
+;; The other group is now sorted. This run must now sort backwards,
+;; due to the French sorting rules.
+
+;; Now define an order on the accents. Since the comparison now is
+;; from right to left (backwards) the tokens must define their order
+;; number *before* the character.
+
+(sort-rule "e" "0e" :run 2)
+(sort-rule "é" "1e" :run 2)
+(sort-rule "o" "0o" :run 2)
+(sort-rule "ô" "1o" :run 2)
+----------------------------------------------------------------------
+
+If we look at this example we see, that we need a mechanism to reuse
+rule sets in different runs. For example the upper/lowercase mappings
+appeear twice, in run 0 and 1, too. The question is, whether we need a
+mechanism to group rules without enabling them immediately, such as
+
+  (define-rule-set "upper-to-lowercase"
+	(sort-rule "A" "a")
+	(sort-rule "R" "r")
+	(sort-rule "M" "m")
+  )
+
+  (define-rule-set "ignore-accents"
+        (sort-rule "ô" "o")
+	(sort-rule "é" "e")
+  )
+
+that can be instantiated in different runs, e.g.,
+
+  (use-rule-set "upper-to-lowercase" :run 0)
+  (use-rule-set "ignore-accents"	       :run 0)
+
+  (use-rule-set "upper-to-lowercase" :run 1)
+   ...
+
+or something similar.
+
+This has several advantages:
+
+ 1. It is much less to write.
+
+ 2. We can offer many of these mappings that will appear in practice
+    prepared in style files, ready for application in many levels,
+    hence, we do not bother casual users with the burden of learning
+    all the details of a full specification.
+
+ 3. This would open the way for a nice frontend, where we can ask
+    users, how to sort their stuff based on the predefined rule sets.
+    From my experience this would cover most of the typical users
+    needs.
+
+Coming back to the isolatin mappings discussed earlier, the isolatin
+style files should actually simply define these rule sets (at least
+the sort-rules), and allow their application later at any phase
+desired. Currently, they are only applicable at run 0, which is not
+sufficient, to my eyes.
+
+What do you think?
+
+
+Cheers,
+--Roger
+
+--
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00075" HREF="msg00075.html">Re: Announce: Alpha versions available</A></STRONG>
+<UL><LI><EM>From:</EM> Francois Pottier &lt;Francois.Pottier@inria.fr&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00072" HREF="msg00072.html">Re: Announce: Alpha versions available</A></STRONG>
+<UL><LI><EM>From:</EM> Francois Pottier &lt;Francois.Pottier@inria.fr&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00072.html">Re: Announce: Alpha versions available</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00075.html">Re: Announce: Alpha versions available</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00072.html">Re: Announce: Alpha versions available</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00075.html">Re: Announce: Alpha versions available</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00074"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00074"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

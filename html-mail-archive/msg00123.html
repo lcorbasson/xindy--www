@@ -1,0 +1,278 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: problem with \ -->
+<!--X-From-R13: Xbret Rvrqrevpu <wbret_qvrqrevpuNylpbfznvy.pbz> -->
+<!--X-Date: Wed, 7 Apr 1999 09:22:55 +0200 -->
+<!--X-Message-Id: m3soaczyhu.fsf@herlab.ruhr.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199904062001.WAA21294@craffe.loria.fr -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: problem with \</TITLE>
+<LINK REV="made" HREF="mailto:joerg_diederich@lycosmail.com">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00122.html">Date Prev</A>][<A HREF="msg00124.html">Date Next</A>][<A HREF="msg00122.html">Thread Prev</A>][<A HREF="msg00124.html">Thread Next</A>][<A HREF="maillist.html#00123">Date Index</A>][<A HREF="threads.html#00123">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: problem with \</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: problem with \</LI>
+<LI><em>From</em>: Joerg Diederich &lt;<A HREF="mailto:joerg_diederich@lycosmail.com">joerg_diederich@lycosmail.com</A>&gt;</LI>
+<LI><em>Date</em>: 07 Apr 1999 09:22:05 +0200</LI>
+<LI><em>In-Reply-To</em>: "Denis B. Roegel"'s message of "Tue, 6 Apr 1999 22:01:20 +0200 (MET DST)"</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00122.html">199904062001.WAA21294@craffe.loria.fr</A>&gt;</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hi Denis,
+
+when you use latin1 characters like â instead of the more
+TeX-like notation \^a in your TeX source to produce diacritical signs
+there seems to be a problem with xindy.sty. The contents of your
+raw index (.idx) is not properly quoted c.
+
+You get
+
+(indexentry :tkey (("b\^ateau"))
+            :locref "1")
+
+instead of
+
+(indexentry :tkey (("b\\\^ateau"))
+            :locref "1")
+
+which would be correct.
+
+In my opinion there are three possible solutions to get out of that
+pitfall:
+
+1. Fix xindy.sty to get the correct quoting.
+
+   I must admit, that I do not really know how to do that. The
+   style xindy.sty contains to much low-level-TeX-voodoo. That's
+   far beyond my personal knowledge.
+
+2. Use the clumsy TeX-notation for your diacrites.
+
+3. Adjust the quoting in your raw index.
+
+   To do that, I wrote a little C program 'quote.c' a long time ago. 
+   I've appended the source. Usage:
+
+   - compile the source: cc -o quote quote.c
+
+   - start xindy with the command line:
+     xindy -f quote -o foo.ind fmakeidx.xdy foo.idx
+
+   Warning: There is a bug in the xindy Perl script. Please change
+            $rawindex to $Rawidx.
+
+
+bye,
+
+Joerg Diederich
+
+
+&lt;--- cut here ---&gt;
+
+/* Program quote.c to adjust quoting in raw indices */
+
+#include &lt;stdio.h&gt;
+#include &lt;fcntl.h&gt;
+
+main ()
+{ 
+  int c;
+  int doubleSlash;
+  doubleSlash = 0;
+  while (!((c = getchar()) == EOF))
+    { 
+      if( doubleSlash )
+        {
+	  switch( c ) {
+	  case '\\' : break;
+	  case '"'  : break;
+	  default   : putchar('\\');
+	  }
+        }
+      putchar(c);
+      if( c == '\\' &amp;&amp; !doubleSlash ) { doubleSlash = 1; } else { doubleSlash = 0; }
+    }
+  if (ferror(stdin) || ferror(stdout))
+    { exit(1); }
+  else
+    { exit(0); }
+}
+
+
+&lt;--- cut here ---&gt;   
+
+
+
+
+"Denis B. Roegel" &lt;Denis.Roegel@loria.fr&gt; writes:
+
+&gt; Hello,
+&gt; 
+&gt; I want to start using xindy and I am running into basic alphabet
+&gt; problems. I am using xindy with xindy.sty and the example style makeidx.sty
+&gt; where I added (require "tex/isolatin1m.xdy"). I have also set the variable
+&gt; XINDY_SEARCHPATH to .:/usr/local/tex/texmf/xindy.
+&gt;  
+&gt; Now, with the input file
+&gt;  
+&gt; \documentclass[12pt]{article}
+&gt; \usepackage[latin1]{inputenc}
+&gt; \usepackage{makeidx}
+&gt; \usepackage{xindy}
+&gt;  
+&gt; \makeindex
+&gt;  
+&gt; \begin{document}
+&gt;  
+&gt; xx
+&gt;  
+&gt; \indexindy{avion}
+&gt; \indexindy{bâteau}
+&gt; \indexindy{barre}
+&gt; \indexindy{camelot}
+&gt; \indexindy{éthiopien}
+&gt; \indexindy{envie}
+&gt; \indexindy{exact}
+&gt; \indexindy{métrique}
+&gt;  
+&gt; \printindex
+&gt;  
+&gt; \end{document}
+&gt;  
+&gt; I get an .idx file looking like
+&gt;  
+&gt; (indexentry :tkey (("avion"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("b\^ateau"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("barre"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("camelot"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("\'ethiopien"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("envie"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("exact"))
+&gt;             :locref "1")
+&gt; (indexentry :tkey (("m\'etrique"))
+&gt;             :locref "1")
+&gt;  
+&gt;  
+&gt; which when processed with fmakeidx.xdy (makeidx.xdy + (require "tex/isolatin1m.xd
+&gt; y"))
+&gt; gives
+&gt;  
+&gt;  
+&gt; \begin{theindex}
+&gt;  
+&gt;   \item 'ethiopien, 1
+&gt;  
+&gt;   \indexspace
+&gt;  
+&gt;   \item avion, 1
+&gt;  
+&gt;   \indexspace
+&gt;  
+&gt;   \item b^ateau, 1
+&gt;   \item barre, 1
+&gt;  
+&gt;   \indexspace
+&gt;  
+&gt;   \item camelot, 1
+&gt;  
+&gt;   \indexspace
+&gt;  
+&gt;   \item envie, 1
+&gt;   \item exact, 1
+&gt;  
+&gt;   \indexspace
+&gt;  
+&gt;   \item m'etrique, 1
+&gt;  
+&gt; \end{theindex}
+&gt;  
+&gt;  
+&gt; and this is not good, since I want at least to have \'ethiopien, b\^ateau, etc.,
+&gt; not to speak about the sorting order which I have not yet included.
+&gt;  
+&gt; There are no errors when processing the file with xindy.
+&gt;  
+&gt; What did I do wrong or forget?
+&gt;  
+&gt; Thanks,
+&gt;  
+&gt; Denis Roegel
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00122" HREF="msg00122.html">problem with \</A></STRONG>
+<UL><LI><EM>From:</EM> "Denis B. Roegel" &lt;Denis.Roegel@loria.fr&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00122.html">problem with \</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00124.html">Re: problem with \</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00122.html">problem with \</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00124.html">Re: problem with \</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00123"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00123"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

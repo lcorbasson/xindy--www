@@ -1,0 +1,106 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Problems while building xindy -->
+<!--X-From-R13: "Egrcuna S. Epuyvres" <fgrcuna.fpuyvresNpfr.qr> -->
+<!--X-Date: Thu, 18 Feb 1999 10:27:13 +0100 -->
+<!--X-Message-Id: Pine.LNX.4.05.9902181017240.2390&#45;100000@twilightzone.cse.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Problems while building xindy</TITLE>
+<LINK REV="made" HREF="mailto:stephan.schlierf@cse.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00117.html">Date Prev</A>][<A HREF="msg00120.html">Date Next</A>][<A HREF="msg00121.html">Thread Prev</A>][<A HREF="msg00120.html">Thread Next</A>][<A HREF="maillist.html#00119">Date Index</A>][<A HREF="threads.html#00119">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Problems while building xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Problems while building xindy</LI>
+<LI><em>From</em>: "Stephan E. Schlierf" &lt;<A HREF="mailto:stephan.schlierf@cse.de">stephan.schlierf@cse.de</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 18 Feb 1999 10:26:44 +0100 (MET)</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+Hello there,
+
+while trying to build xindy 2.0b (I
+downloaded xindy-2.0b-i386-linux-elf.tar.gz and
+xindy-2.0b.tar.gz from the Dante ftp server) on a SuSE Linux 6.0 I get the
+following error after a "make all":
+ 
+cc -O2 tex2xindy.c -o tex2xindy -lfl
+/usr/lib/libfl.a(libmain.o): In function `main':
+libmain.o(.text+0x1): undefined reference to `yylex'
+collect2: ld returned 1 exit status
+make: *** [tex2xindy] Error 1
+
+What am I doing wrong?
+TIA
+Stephan
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00120" HREF="msg00120.html">Re: Problems while building xindy</A></STRONG>
+<UL><LI><EM>From:</EM> Joerg Diederich &lt;joerg_diederich@lycosmail.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00117.html">Re: merge rule question</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00120.html">Re: Problems while building xindy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00121.html">bug in tex2xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00120.html">Re: Problems while building xindy</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00119"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00119"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

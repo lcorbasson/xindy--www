@@ -1,0 +1,136 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy, omega and Unicode -->
+<!--X-From-R13: Knaavf Vnenynzobhf <lnaavfNsyhkhf&#45;ivehf.pbz> -->
+<!--X-Date: Sun, 9 May 1999 17:16:41 +0200 -->
+<!--X-Message-Id: 199905091516.RAA02174@smtp.nordnet.fr -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy, omega and Unicode</TITLE>
+<LINK REV="made" HREF="mailto:yannis@fluxus-virus.com">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00126.html">Date Prev</A>][<A HREF="msg00128.html">Date Next</A>][<A HREF="msg00129.html">Thread Prev</A>][<A HREF="msg00128.html">Thread Next</A>][<A HREF="maillist.html#00127">Date Index</A>][<A HREF="threads.html#00127">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy, omega and Unicode</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: xindy, omega and Unicode</LI>
+<LI><em>From</em>: Yannis Haralambous &lt;<A HREF="mailto:yannis@fluxus-virus.com">yannis@fluxus-virus.com</A>&gt;</LI>
+<LI><em>Date</em>: Sun,  9 May 1999 17:21:26 +0200</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+you may have heard about the Omega extension of TeX. We are using 16-bit tables
+internally, so that in general our system is based on Unicode. We need an
+indexing utility compatible with this scheme. Would it be possible to upgrade
+xindy to be 16-bit compatible?
+
+Here is what we need:
+
+foo.idx files will contain characters in extended hexa notation:
+
+^^^^0123^^^^abcd^^^^0080 and so on
+
+It should be possible to write a merge/sort file of the type
+
+(merge-rule "^^^^41d8" "AØ") 
+
+where AØ is the 16-bit character of hexa value 41D8
+or to have a notation like in the newest perl (with utf8 module)
+
+(merge-rule "^^^^41d8" "\x{41d8}")
+
+This means that can (and will) be more than 256 letter groups, and that it also
+should be possible to define groups of groups (Latin entries, then Greek entries,
+then Cyrillic entries, and so on).
+
+Is this possible? If yes, in the short range? in the long range?
+
+Thanks in advance for any help you can provide
+
+Yannis Haralambous
+
++--------------------------------------------------------------------+
+| Yannis Haralambous, Ph.D.                  yannis@fluxus-virus.com |
+|                                 <A  HREF="http://www.fluxus-virus.com/yannis">http://www.fluxus-virus.com/yannis</A> |
++--------------------------------------------------------------------+
+| 187, rue Nationale                     fax :  +33 (0)3.20.40.28.64 |
+| 59800 Lille, France                    tél. : +33 (0)6.07.98.16.26 |
++--------------------------------------------------------------------+
+| Visit the Omega home page!!                <A  HREF="http://www.ens.fr/omega">http://www.ens.fr/omega</A> |
++--------------------------------------------------------------------+
+                         ...pour distinguer l'extérieur d'un aquarium, 
+                                        mieux vaut n'être pas poisson
+
+                        ...the ball I threw while playing in the park
+                                         has never reached the ground
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00128" HREF="msg00128.html">Re: xindy, omega and Unicode</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00126.html">Re: xindy and linux-libc6</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00128.html">Re: xindy, omega and Unicode</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00129.html">tex2xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00128.html">Re: xindy, omega and Unicode</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00127"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00127"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

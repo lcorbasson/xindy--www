@@ -1,0 +1,357 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Sorting marked&#45;up entries -->
+<!--X-From-R13: Quevf Dbjyrl <Q.O.DbjyrlNbcra.np.hx> -->
+<!--X-Date: Sun, 20 Apr 1997 13:55:27 +0200 -->
+<!--X-Message-Id: 199704201153.MAA00335@fell.open.ac.uk -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15329C0000@mmf.ruc.dk -->
+<!--X-Reference: 199704171458.QAA20096@spelunke.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Sorting marked-up entries</TITLE>
+<LINK REV="made" HREF="mailto:C.A.Rowley@open.ac.uk">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00036.html">Date Prev</A>][<A HREF="msg00038.html">Date Next</A>][<A HREF="msg00036.html">Thread Prev</A>][<A HREF="msg00040.html">Thread Next</A>][<A HREF="maillist.html#00037">Date Index</A>][<A HREF="threads.html#00037">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Sorting marked-up entries</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Sorting marked-up entries</LI>
+<LI><em>From</em>: Chris Rowley &lt;<A HREF="mailto:C.A.Rowley@open.ac.uk">C.A.Rowley@open.ac.uk</A>&gt;</LI>
+<LI><em>Date</em>: Sun, 20 Apr 1997 13:54:46 +0200</LI>
+<LI><em>Alternate-Recipient</em>: Allowed</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00036.html">199704171458.QAA20096@spelunke.iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00035.html">15329C0000@mmf.ruc.dk</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>X400-Content-Type</em>: P2-1988 (22)</LI>
+<LI><em>X400-MTS-Identifier</em>: [/PRMD=UK.AC/ADMD= /C=GB/;&lt;199704201153.MAA00335@fell.open]</LI>
+<LI><em>X400-Originator</em>: C.A.Rowley@open.ac.uk</LI>
+<LI><em>X400-Received</em>: by mta d400relay in /PRMD=dfnrelay/ADMD=d400/C=de/; Relayed; Sun, 20 Apr 1997 13:54:54 +0200</LI>
+<LI><em>X400-Received</em>: by mta venus.open.ac.uk in /PRMD=UK.AC/ADMD= /C=GB/; Relayed; Sun, 20 Apr 1997 13:54:41 +0200</LI>
+<LI><em>X400-Received</em>: by mta fell.open.ac.uk in /PRMD=UK.AC/ADMD= /C=GB/; Relayed; Sun, 20 Apr 1997 13:53:46 +0200</LI>
+<LI><em>X400-Received</em>: by mta UK.AC.MHS-RELAY.SUN2 in /PRMD=uk.ac/ADMD= /C=gb/; Relayed; Sun, 20 Apr 1997 13:54:46 +0200</LI>
+<LI><em>X400-Recipients</em>: non-disclosure:;</LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+This takes up something that Roger (I think) introduced some time ago.
+
+
+chris
+
+
+These ideas and questions have their origins in a discussion (non-net)
+I had with Roger and Joachim Schrod back in March.
+
+They explained to me that xindy needs to deal with mark-up within
+index entries that have the following properties:
+
+-- it affects the order in which entries should appear: eg in indexing
+a book about a programming language, it is likely that the same word
+appears both as reserved-word and in its normal-language use; thus it
+is necessary for a program such as xindy to be able to correctly order
+such entries;
+
+-- arbitrarily complex mark-up can appear (eg several levels and many
+types at each level);
+
+Now this is an area where there appear to be no standards and where
+little research has been done either into how current indexes and
+indexers (here I mean people not software:-) handle such cases or into
+the theoretical possibilities and good abstract models.
+
+So here are some ideas and suggestions to start this research.  Since
+these are somewhat theoretical (note the total lack of examples), it
+would be particularly useful to hear from anyone who has produced
+indexes which needed to distinguish different types of entry or mark-up
+in this way.
+
+I am thinking of "mark-up" as being "logical mark-up", whether or not it
+is linked in the formatting of the document to distinct typographical
+treatment.
+
+I have chosen to analyse this problem as follows:
+
+1.  Reducing multi-level mark-up to single-level (flat) mark-up (but not
+necessarily to just one type of mark-up for the whole entry).
+
+I think that it is essential that "no-mark-up" is itself a type of
+mark-up.
+
+However, this leads to some problems in interpreting multi-level
+mark-up: eg, if there is no explicit mark-up of some part of the text
+then the level of the mark-up present can be given the wrong value (I
+can give examples of this if people would like to see some).
+
+I see two ways around this:
+
+-- have a "no-mark-up" tag that must be used in cases where the
+built-in assumptions would get the level wrong;
+
+-- each type of mark-up must have a unique level --- then the lack of
+mark-up at other levels can be deduced.
+
+My some such method we can assign to each character a well-defined
+tower of mark-up (ie some mark-up at each possible level).
+
+Any reasonable ordering must be based on a total ordering of the set
+of all possible mark-up towers.  This is what I mean by "reducing
+to one-level of mark-up".
+
+
+2.  How much flexibility do we need to give in assigning an order to this
+set of towers?
+
+To take, as an example, the simple case of just one-level of mark-up:
+clearly then the user will have to define a total order on the types
+of mark-up that can occur.
+
+In practice (probably), it may only be necessary to point out to users
+that the more complex multi-level mark-ups can be flattened into a
+(possibly large) set of possible one-label mark-ups.  If this set does
+not get too large then it may be better to simply ask the user to
+specify and to order this flattened set.
+
+If this is not practical then it will be necessary to build an
+interface for specifying orders on the mark-up at each level and how
+to combine these to produce an oder on the set of towers.
+
+There are two obvious possibilities for this combining: inner- or
+outer-level most significant?  My intuition is that outer-level should
+be (since, in general, inner-levels are likely to be no-mark-up)
+
+3.  All that only gives an ordering on the mark-up, not on the actual
+index entries.
+
+It has been suggested that it may be necessary to allow the ordering
+to depend, for example, on the type of the longest "uniformly
+marked-up consecutive substring"
+
+I think that we should (at least for testing to see if it is
+sufficient) only allow to orderings based on forward or reverse
+character-comparisons, ie the same possibilities as for the
+lexicographic properties.
+
+
+4.  There is also the question of how ordering by mark-up relates to
+ordering by lexicographic properties of the characters.  We have been,
+I think, assuming that mark-up becomes significant for ordering only
+when two entries are otherwise identical but it is not so simple.
+
+An important special case is when one is, in effect, producing
+multiple indexes: one could model this as a case when a certain type
+of mark-up is the highest level of ordering, before anything based on
+the alphabet.  Of course it can also be modeled by simply completely
+separating the entries for the different indexes before applying xindy
+separately for each index.
+
+But suppose (not too unlikely, I think) that the specification asks
+for a separation of such types of index entry only "within
+first-letter" (eg all the identifiers beginning with A or a come
+first, then all other entries beginning with A or a; similarly for B
+or b, etc).
+
+
+It is possible that some of these ideas may also be useful for
+multi-lingual indexes, another area where there has been little
+research, either empirical or more theoretical.
+
+
+This takes up something that Roger (I think) introduced some time ago.
+
+
+chris
+
+======================================================================
+
+These ideas and questions have their origins in a discussion (non-net)
+I had with Roger and Joachim Schrod back in March.
+
+They explained to me that xindy needs to deal with mark-up within
+index entries that have the following properties:
+
+-- it affects the order in which entries should appear: eg in indexing
+a book about a programming language, it is likely that the same word
+appears both as reserved-word and in its normal-language use; thus it
+is necessary for a program such as xindy to be able to correctly order
+such entries;
+
+-- arbitrarily complex mark-up can appear (eg several levels and many
+types at each level);
+
+Now this is an area where there appear to be no standards and where
+little research has been done either into how current indexes and
+indexers (here I mean people not software:-) handle such cases or into
+the theoretical possibilities and good abstract models.
+
+So here are some ideas and suggestions to start this research.  Since
+these are somewhat theoretical (note the total lack of examples), it
+would be particularly useful to hear from anyone who has produced
+indexes which needed to distinguish different types of entry or mark-up
+in this way.
+
+I am thinking of "mark-up" as being "logical mark-up", whether or not it
+is linked in the formatting of the document to distinct typographical
+treatment.
+
+I have chosen to analyse this problem as follows:
+
+1.  Reducing multi-level mark-up to single-level (flat) mark-up (but not
+necessarily to just one type of mark-up for the whole entry).
+
+I think that it is essential that "no-mark-up" is itself a type of
+mark-up.
+
+However, this leads to some problems in interpreting multi-level
+mark-up: eg, if there is no explicit mark-up of some part of the text
+then the level of the mark-up present can be given the wrong value (I
+can give examples of this if people would like to see some).
+
+I see two ways around this:
+
+-- have a "no-mark-up" tag that must be used in cases where the
+built-in assumptions would get the level wrong;
+
+-- each type of mark-up must have a unique level --- then the lack of
+mark-up at other levels can be deduced.
+
+My some such method we can assign to each character a well-defined
+tower of mark-up (ie some mark-up at each possible level).
+
+Any reasonable ordering must be based on a total ordering of the set
+of all possible mark-up towers.  This is what I mean by "reducing
+to one-level of mark-up".
+
+
+2.  How much flexibility do we need to give in assigning an order to this
+set of towers?
+
+To take, as an example, the simple case of just one-level of mark-up:
+clearly then the user will have to define a total order on the types
+of mark-up that can occur.
+
+In practice (probably), it may only be necessary to point out to users
+that the more complex multi-level mark-ups can be flattened into a
+(possibly large) set of possible one-label mark-ups.  If this set does
+not get too large then it may be better to simply ask the user to
+specify and to order this flattened set.
+
+If this is not practical then it will be necessary to build an
+interface for specifying orders on the mark-up at each level and how
+to combine these to produce an oder on the set of towers.
+
+There are two obvious possibilities for this combining: inner- or
+outer-level most significant?  My intuition is that outer-level should
+be (since, in general, inner-levels are likely to be no-mark-up)
+
+3.  All that only gives an ordering on the mark-up, not on the actual
+index entries.
+
+It has been suggested that it may be necessary to allow the ordering
+to depend, for example, on the type of the longest "uniformly
+marked-up consecutive substring".
+
+I think that we should (at least for testing to see if it is
+sufficient) only allow orderings based on forward or reverse
+character-comparisons, ie the same possibilities as for the
+orderings by lexicographic properties.
+
+
+4.  There is also the question of how ordering by mark-up relates to
+ordering by lexicographic properties of the characters.  We have been,
+I think, assuming that mark-up becomes significant for ordering only
+when two entries are otherwise identical---but is it so simple?
+
+An important special case is when one is, in effect, producing
+multiple indexes, eg completely separating use as identifiers from
+normal language use of words.  One could model this as the case when a
+certain type of mark-up is the first level of ordering, before
+anything based on the alphabet.  Of course it can also be modeled by
+simply completely separating the entries for the different indexes
+before applying xindy separately for each index.
+
+But suppose (not too unlikely, I think) that the specification asks
+for a separation of such types of index entry only "within
+first-letter" (eg all the identifiers beginning with A or a come
+first, then all other entries beginning with A or a; similarly for B
+or b, etc).
+
+
+5.  It is possible that some of these ideas may also be useful for
+multi-lingual indexes, another area where there has been little
+research, either empirical or more theoretical.
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00040" HREF="msg00040.html">Re: Sorting marked-up entries</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00035" HREF="msg00035.html">xindy for DOS ?</A></STRONG>
+<UL><LI><EM>From:</EM> "Joergen Larsen" &lt;JL@mmf.ruc.dk&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00036" HREF="msg00036.html">Re: xindy for DOS ?</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00036.html">Re: xindy for DOS ?</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00038.html">Re: new version of xindy.sty</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00036.html">Re: xindy for DOS ?</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00040.html">Re: Sorting marked-up entries</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00037"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00037"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,158 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy 2.0 for MSDOS and Windows -->
+<!--X-From-R13: Xbret Rvrqrevpu <X_RvrqrevpuNureyno.ehue.qr> -->
+<!--X-Date: Tue, 3 Mar 1998 16:43:18 +0100 -->
+<!--X-Message-Id: m37m6bvl0c.fsf@herlab.ruhr.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy 2.0 for MSDOS and Windows</TITLE>
+<LINK REV="made" HREF="mailto:J_Diederich@herlab.ruhr.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00092.html">Date Prev</A>][<A HREF="msg00094.html">Date Next</A>][<A HREF="msg00096.html">Thread Prev</A>][<A HREF="msg00094.html">Thread Next</A>][<A HREF="maillist.html#00093">Date Index</A>][<A HREF="threads.html#00093">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy 2.0 for MSDOS and Windows</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: xindy 2.0 for MSDOS and Windows</LI>
+<LI><em>From</em>: Joerg Diederich &lt;<A HREF="mailto:J_Diederich@herlab.ruhr.de">J_Diederich@herlab.ruhr.de</A>&gt;</LI>
+<LI><em>Date</em>: 03 Mar 1998 16:42:27 +0100</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+   Hi,
+
+good news first:
+
+xindy 2.0 for OS/2 is running in 
+a DOS-Box of Windows NT 4.0. You
+need the EMXRSX package. With these
+tools the OS/2 binary can be started
+under MS-DOS, Windows 3.x and Windows NT 4.0.
+
+AFAIK Windows95 should make no difference. But
+I can't test it myself.
+
+I've written a little MSDOS procedure as 
+a wrapper to call xindy.exe with the proper
+parameters. Please excuse the poor functionality,
+but I'm no MSDOS expert and do not know how to
+map all the features to the restriced MSDOS
+command language. You'll find this procedure
+at the end of this email.
+
+
+Now the bad news:
+
+- The zip file xdyos220.zip containing the OS/2 version is in
+  IBM Software Installer format and, therefore, only installable under OS/2.
+  I'm on the way, making a pure MSDOS binary package without (de-)install
+  programs just containing the binaries and without any support (I'm no
+  Windows/MSDOS expert) !
+  You will soon find this package in the devel subdirectory at the usual
+  xindy ftp-site.
+ 
+- tex2xindy.exe is running under MS-DOS/WinXY/... (of course with
+  a different name ;) ), but I can't imagine how to port the
+  makeindex4 stuff to MSDOS platforms. I think, especially the part 
+  generating the xdy-file can't be expressed only using MSDOS 
+  command language (you have to sort the sta-file, eliminate duplicate
+  lines, and create xindy-statements based on the remaining lines in 
+  the file - any ideas?).
+
+- The xindy source distribution contains various files violating the
+  8.3 FAT filename restrictions. I think, it would be best to change the whole
+  file hierarchy to ISO9660 file and directory naming conventions.  
+
+I hope these information is of some value for anybody :)
+
+CU
+Joerg
+
+&lt;--- cut here ---&gt;
+
+@echo off
+
+REM test procedure for xindyOS2 under MSDOS
+REM usage: xindy.bat xdy-file raw-file ind-file
+
+REM Adjust all paths to your needs!!!!
+
+SET RSX=D:\TMP\XINDY\XINDYDOS\RSX.EXE
+SET EMX=D:\TMP\XINDY\XINDYDOS\EMX.EXE
+
+echo (progn                                                 &gt; tmp.lsp
+echo (searchpath ".;d:/tmp/xindy/xindydos/modules")        &gt;&gt; tmp.lsp
+echo (xindy:startup                                       &gt;&gt; tmp.lsp
+echo :idxstyle "%1"                                       &gt;&gt; tmp.lsp
+echo :rawindex "%2"                                     &gt;&gt; tmp.lsp
+echo :output "%3")                                       &gt;&gt; tmp.lsp
+echo (exit)))                                               &gt;&gt; tmp.lsp
+
+d:\tmp\xindy\xindydos\binaries\xindy.exe -q -M d:\tmp\xindy\xindydos\binaries\xindy.mem tmp.lsp
+
+SET RSX=
+SET EMX=
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00092.html">Re: Announce: xindy release 2.0 for OS/2 available</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00094.html">Re: xindy 2.0 for MSDOS and Windows</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00096.html">Vacation and bug with -f option of xindy.</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00094.html">Re: xindy 2.0 for MSDOS and Windows</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00093"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00093"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

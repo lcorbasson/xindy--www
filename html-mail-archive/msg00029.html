@@ -1,0 +1,170 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Xindy 1.2.1 and Allegro Common&#45;Lisp (was: Xindy and Allegro Common&#45;Lisp) -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Fri, 21 Mar 1997 16:59:32 +0100 -->
+<!--X-Message-Id: 199703211559.QAA20966@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703211049.LAA28180@isle.informatik.uni&#45;stuttgart.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-L</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00028.html">Date Prev</A>][<A HREF="msg00030.html">Date Next</A>][<A HREF="msg00028.html">Thread Prev</A>][<A HREF="msg00007.html">Thread Next</A>][<A HREF="maillist.html#00029">Date Index</A>][<A HREF="threads.html#00029">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 21 Mar 1997 16:59:20 +0100 (MEZ)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00028.html">199703211049.LAA28180@isle.informatik.uni-stuttgart.de</A>&gt; from "Bernd Raichle" at Mar 21, 97 11:49:52 am</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+&gt; 
+&gt; Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt; wrote:
+&gt; : Bernd Raichle wrote:
+&gt; [...]
+&gt; : &gt; Can you explain what the differences beetwen ``:input'' and
+&gt; : &gt; ``:input-immutable'' are?
+&gt; : 
+&gt; : I borrowed this from the implementation of function `load' int the
+&gt; : CLISP-source :) I never asked if it is standard.
+&gt; 
+&gt; Bad practice!  Better change the :direction option of `open' option to
+&gt; the standard `:input'.
+
+Already happend :)
+
+&gt; [...]
+&gt; : &gt; - "markup.lsp"
+&gt; : &gt;
+&gt; : &gt;   When opening the `logfile' in function `do-startup' add the
+&gt; : &gt;   keyword/value
+&gt; : &gt;         :if-exists :overwrite
+&gt; : &gt;   to the `open' function call.  The default for :if-exists is :error,
+&gt; : &gt;   i.e. signal an error if file to be written exists.
+&gt; : &gt;
+&gt; : &gt;   Same change needed when opening the `output' file in this function.
+&gt; : 
+&gt; : CLISP did never report an error :)
+&gt; 
+&gt; This is a bug in CLISP (or the Lisp standard has changed once more?).
+&gt; Allegro CL reports an error if the log file existed which is the
+&gt; standard behaviour.
+
+Yup. I see that CLISP seems to have many problems with the standard.
+My problems is that I almost the whole time had the CLtL2 book next
+to me, and I tried to program according to this "standard" and thus
+many problems were introduced this way.
+
+&gt; : What about the (system::getenv "XINDY_SEARCHPATH") call in
+&gt; : set-searchpath-by-environment? Does it work on Allegro?
+&gt; 
+&gt; Ugh, no.
+&gt; 
+&gt; Allegro has a `getenv' function in package `sys', i.e.
+&gt; (sys:getenv "XINDY_SEARCHPATH") will work.
+
+Is package `sys:' somehow aliased to `system'?
+
+&gt; No, it signals the following error (if done in the IDXSTYLE package):
+&gt; 
+&gt; 
+&gt; Error: keyword list (1 :LENGTH "}f." :CLOSE "folone{" :OPEN "follows" :CLASS)
+&gt;        should only contain keys (:LENGTH :CLASS :SEP :CLOSE :OPEN)
+&gt;   [condition type: PROGRAM-ERROR]
+
+Ugh, that's it! The elements of the returned list are *not* in the
+order of the original list. This is conforming to the standard saying
+that
+
+---
+There is no guarantee that the order of elements in the result will
+reflect the ordering of the arguments in any particular way. The
+result list may share cells with, or be eq to, either of list-1 or
+list-2, if appropriate. 
+---
+
+CLISP seems to have preserved this order and Gabors macro was
+inadvertently assuming this. I have to write a function that does not
+assume this behaviour, thus a set-difference preserving the order of
+list-1.
+
+
+Bye and have a nice weekend :)
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00028" HREF="msg00028.html">Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+<UL><LI><EM>From:</EM> Bernd Raichle &lt;raichle@Informatik.Uni-Stuttgart.DE&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00028.html">Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00030.html">xindy successfully runs with Allegro CL</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00028.html">Re: Xindy 1.2.1 and Allegro Common-Lisp (was: Xindy and Allegro Common-Lisp)</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00007.html">xindy styles in LaTeX documents</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00029"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00029"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,145 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: markup rules question -->
+<!--X-From-R13: Dbtre Yrue <xrueNvasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Fri, 24 Mar 2000 11:51:50 +0100 (MET) -->
+<!--X-Message-Id: 14555.9825.379037.146335@hawaii.dvs1.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 200003212320.CAA04928@vvv.vsu.ru -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: markup rules question</TITLE>
+<LINK REV="made" HREF="mailto:kehr@informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00175.html">Date Prev</A>][<A HREF="msg00176.html">Date Next</A>][<A HREF="msg00174.html">Thread Prev</A>][<A HREF="msg00176.html">Thread Next</A>][<A HREF="maillist.html#00171">Date Index</A>][<A HREF="threads.html#00171">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: markup rules question</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: markup rules question</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@informatik.tu-darmstadt.de">kehr@informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 24 Mar 2000 11:51:50 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00174.html">200003212320.CAA04928@vvv.vsu.ru</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00174.html">200003212320.CAA04928@vvv.vsu.ru</A>&gt;</LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Vladimir Volovich writes:
+ &gt; Hi,
+ &gt; 
+ &gt; First, a minor bug: xindy refuses to accept filenames starting
+ &gt; with a dot, as filenames with raw index. E.g.:
+ &gt; 
+ &gt; $ xindy -o .qq2 somefile.xdy .qq1
+ &gt; This is `xindy' version 2.0 (i386-linux-glibc2 binary version 2.0).
+ &gt; 
+ &gt; Reading indexstyle...
+ &gt; Loading module "somefile.xdy"...
+ &gt; ...
+ &gt; Finished reading indexstyle.
+ &gt; Finalizing indexstyle... (done)
+ &gt; 
+ &gt; Reading raw-index ".qq1"...
+ &gt; ERROR: no file name given: #P"/tmp/0/.qq1"
+
+Indeed there are some problems with the file I/O. In addition it seems 
+that xindy cannot handle AFS directories that contain something like
+"...".
+
+I have not yet figured out what might be the reason for that. I
+suppose that the whole approach for loading files and xindy modules
+need some revisit...
+
+ &gt; Second, could you please help with the following question.
+ &gt; Is it possible to set up markup rules in such a way that
+ &gt; the markup of an index entry of depth n will depend on
+ &gt; whether there are entries of depth n+1?
+
+Unfortunately, the implemented markup model does not support this,
+although it seems to be something that could be easily integrated but
+it might well be the case that there are some non-obvious
+difficulties.
+
+Needed is some additional keyword that can be used in the appropriate
+markup commands that distinguishes rules for this special case from
+ordinary rules. Almost everything related to markup can be found in
+the "markup.nw" source. It might need some time to get used to this
+code since it makes heavily use of LISP-macros and on-the-fly
+generation of CLOS-methods.
+
+Cheers, Roger
+
+-- 
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+Roger Kehr                   email: kehr@informatik.tu-darmstadt.de
+Department of Computer Science                pho: +49 6151 16-6233
+Darmstadt University of Technology            fax: +49 6151 16-6229
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00176" HREF="msg00176.html">Re: markup rules question</A></STRONG>
+<UL><LI><EM>From:</EM> Thomas Henlich &lt;henlich@mmers1.mw.tu-dresden.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00174" HREF="msg00174.html">markup rules question</A></STRONG>
+<UL><LI><EM>From:</EM> Vladimir Volovich &lt;vvv@vvv.vsu.ru&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00175.html">Re: some questions</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00176.html">Re: markup rules question</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00174.html">markup rules question</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00176.html">Re: markup rules question</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00171"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00171"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

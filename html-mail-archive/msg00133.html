@@ -1,0 +1,258 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Modules for spanish language under xindy -->
+<!--X-From-R13: =?vfb&#45;8859&#45;1?C?Othfg=SRa=20[neg=SRa?= <ntznegvaNnd.hcz.rf> -->
+<!--X-Date: Thu, 1 Jul 1999 19:59:51 +0200 -->
+<!--X-Message-Id: 377BBA21.AD0EA0F9@aq.upm.es -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Modules for spanish language under xindy</TITLE>
+<LINK REV="made" HREF="mailto:agmartin@aq.upm.es">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00132.html">Date Prev</A>][<A HREF="msg00134.html">Date Next</A>][<A HREF="msg00141.html">Thread Prev</A>][<A HREF="msg00134.html">Thread Next</A>][<A HREF="maillist.html#00133">Date Index</A>][<A HREF="threads.html#00133">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Modules for spanish language under xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Modules for spanish language under xindy</LI>
+<LI><em>From</em>: Agustín Martín &lt;<A HREF="mailto:agmartin@aq.upm.es">agmartin@aq.upm.es</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 01 Jul 1999 20:57:37 +0200</LI>
+<LI><em>Organization</em>: Depto Física, ETSAM-UPM</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi all,
+
+I have prepared a couple of modules for sorting indexes according to the
+spanish rules,
+
+es-moder.xdy 
+
+	follows the modern ordering, with the a-z alphabet plus ñ between n and
+o
+
+es-tradi.xdy
+
+	follows the traditional ordering, with the a-z alphabet, plus ñ between
+n and o, ch as a single letter between c and d, and ll as a single
+letter between l and m.
+
+This files seem to work in my examples. I am not an expert in xindy, so
+any suggestion is highly welcome.
+
+Congratulations to the xindy team, I am finding it very useful. I intend
+to speak a bit about it in a spanish TeX workshop to be held in
+september, with a general overview and its application to spanish. I am
+sure people will like it.
+
+Regards,
+
+
+-- 
+=====================================================================
+Agustín Martín Domingo, Dpto. de Física, ETS Arquitectura Madrid, 
+(U. Politécnica de Madrid)  tel: +34 91-336-6536, Fax: +34 91-336-6554, 
+email:agmartin@aq.upm.es, <A  HREF="http://corbu.aq.upm.es/~agmartin/welcome.html">http://corbu.aq.upm.es/~agmartin/welcome.html</A></PRE>
+<PRE>
+;; $Id$
+;;
+
+;;
+;; Cargamos el makeidx.xdy original para partir de él
+;;
+;; First we will load original makeidx.xdy to use it
+
+(require "tex/makeidx.xdy")
+
+;;
+;; definimos el alfabeto castellano moderno con la letra , y 
+;; ch y ll compuestas de dos letras
+;;
+;; We define modern spanish alphabet with ñ and ch and ll 
+;; as composed of two charecters
+
+(define-letter-groups
+    ("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m"
+     "n" "ñ" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+
+;;
+;;
+;;
+
+(require "tex/isolatin1m.xdy")
+(require "tex/isolatin1s.xdy")
+(require "rules/isolatin1-tolower.xdy")
+
+;; These lines are to deal with a problem related to the different ways
+;; tex can write an accented i to the .idx file
+;; Presumably will go soon into isolatin1s-tex.xdy 
+
+(merge-rule "{\'\i}" "í" :string :again)
+(merge-rule "{\'\i }" "í" :string :again)
+(merge-rule "\'{\i}" "í" :string :again)
+(merge-rule "{\`\i}" "ì" :string :again)
+(merge-rule "{\`\i }" "ì" :string :again)
+(merge-rule "\`{\i}" "ì" :string :again)
+(merge-rule "{\~"\i}" "ï" :string :again)
+(merge-rule "{\~"\i }" "ï" :string :again)
+(merge-rule "\~"{\i}" "ï" :string :again)
+(merge-rule "{\^\i}" "î" :string :again)
+(merge-rule "{\^\i }" "î" :string :again)
+(merge-rule "\^{\i}" "î" :string :again)
+(merge-rule "\IeC " "" :string :again)
+
+;;
+;; Añadimos las sort-rules para caracteres acentuados en castellano
+;; con algunas letras acentuadas y caracteres que no existen por si 
+;; acaso aparecen en nombres
+;;
+;; Adding sort-rules for spanish accented characters as well as for 
+;; other accented characters that are not present in spanish,
+;; but can be present in names 
+
+(sort-rule "á" "a")
+(sort-rule "à" "a")
+(sort-rule "ä" "a")
+(sort-rule "â" "a")
+(sort-rule "é" "e")
+(sort-rule "è" "e")
+(sort-rule "ë" "e")
+(sort-rule "ê" "e")
+(sort-rule "í" "i")
+(sort-rule "ì" "i")
+(sort-rule "ï" "i")
+(sort-rule "î" "i")
+(sort-rule "ó" "o")
+(sort-rule "ò" "o")
+(sort-rule "ö" "o")
+(sort-rule "ô" "o")
+(sort-rule "ú" "u")
+(sort-rule "ù" "u")
+(sort-rule "ü" "u")
+(sort-rule "û" "u")
+
+;;
+;;  and for some special characters
+;;
+
+(sort-rule "ß" "ss")
+
+
+;; That's all ;-)
+
+;; Local Variables:
+;; mode: lisp
+;; End:
+
+
+
+
+
+</PRE>
+<PRE>
+;; $Id$
+;;
+
+;; Cargamos lang/spanish/es-moder.xdy para tenerlo de base
+;;
+;; First we will load es-modern.xdy and make modifications to it
+
+(require "lang/spanish/es-moder.xdy")
+
+;; Definimos el albabeto castellano con las letras ch, ll y ñ
+;; (con ch y ll consideradas como letras con entidad propia)
+;; We define spanish alphabet with ch, ll y ñ.
+
+(define-letter-groups
+    ("a" "b" "c" "ch" "d" "e" "f" "g" "h" "i" "j" "k" "l" "ll" "m"
+     "n" "ñ" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+
+;;
+;;  y para algunas combinaciones de ch y ll
+;;
+;;  and for some combinations of ch and ll
+;;
+
+(sort-rule "CH" "ch")
+(sort-rule "Ch" "ch")
+(sort-rule "LL" "ll")
+(sort-rule "Ll" "ll")
+
+;; That's all ;-)
+
+;; Local Variables:
+;; mode: lisp
+;; End:
+
+
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00147" HREF="msg00147.html">New version: Modules for spanish language under xindy</A></STRONG>
+<UL><LI><EM>From:</EM> Agustín Martín &lt;agmartin@aq.upm.es&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00134" HREF="msg00134.html">Re: Modules for spanish language under xindy</A></STRONG>
+<UL><LI><EM>From:</EM> Yannis Haralambous &lt;yannis@fluxus-virus.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00132.html">Re: xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00134.html">Re: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00141.html">Has anyone tried Xindy with MBCS languages?</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00134.html">Re: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00133"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00133"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

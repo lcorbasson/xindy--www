@@ -1,0 +1,145 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: \indexindy and sorting rules -->
+<!--X-From-R13: vanfNzvo.unem.qr -->
+<!--X-Date: Mon, 17 Mar 1997 16:48:17 +0100 -->
+<!--X-Message-Id: 199703171537.QAA26461@mexico.mib.harz.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703171501.QAA21024@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: \indexindy and sorting rules</TITLE>
+<LINK REV="made" HREF="mailto:inas@mib.harz.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00015.html">Date Prev</A>][<A HREF="msg00019.html">Date Next</A>][<A HREF="msg00015.html">Thread Prev</A>][<A HREF="msg00019.html">Thread Next</A>][<A HREF="maillist.html#00018">Date Index</A>][<A HREF="threads.html#00018">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: \indexindy and sorting rules</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: \indexindy and sorting rules</LI>
+<LI><em>From</em>: <A HREF="mailto:inas@mib.harz.de">inas@mib.harz.de</A></LI>
+<LI><em>Date</em>: Mon, 17 Mar 1997 16:37:22 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00015.html">199703171501.QAA21024@spock.iti.informatik.th-darmstadt.de</A>&gt; from Roger Kehr at "Mar 17, 97 04:01:27 pm"</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi,
+
+&gt; 1. A mapping is based on string or regexp-transformations (such as the
+&gt;    current sort-rules) but extended with mapping rules.
+
+&gt;    Informally we could say that "\index" must be written as
+&gt;    "\cmd{index}" and there is a mapping rule that says
+
+Well, I think the user shouldn't have to write such special things.
+This may cause errors and confusion. Imagine, a user want's
+to index the sequence \cmd{text}. 
+
+&gt; 	(define-mapping "\cmd{(.*)}" "\1"
+&gt; 		:with-property (:markup cmd))
+
+So this will convert the obove example to &lt;text markup-cmd&gt; but he
+wanted &lt;\cmd{text&gt; markup-cmd&gt;.
+
+&gt; 2. We try to tackle the problem the other way around. This concerns
+&gt;    the discussion about \indexindy command. Something like
+
+&gt; 	\indexindy[markup=texttt,...]{foo}
+
+&gt;    instead of
+
+&gt; 	\indexindy[...]{\texttt{foo}}
+
+&gt;    could solve the problem.
+
+This one sounds much handier to me. The user hasn't to worry about
+nested \cmds AND the key is totally independant of the markup.
+
+&gt;    Markup is not embedded in the plain keyword. A scanner is not
+&gt;    necessary anymore. Markup can be done in the markup-backend with
+&gt;    something like
+
+&gt; 	(markup-keyword :markup "texttt" :open "\texttt{" :close "}")
+
+&gt;    This would effectively yield the same results. It suffers from the
+&gt;    fact that not more than one markup can be associated with a
+&gt;    keyword, which seems be the case rarely.
+
+Wouldn't this (not more than one markup) also last for the first version? 
+AND, is it really necessary to allow different markup for the SAME
+key?
+
+
+Bye, Andi
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00019" HREF="msg00019.html">Re: \indexindy and sorting rules</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00015" HREF="msg00015.html">\indexindy and sorting rules</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00015.html">\indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00019.html">Re: \indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00015.html">\indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00019.html">Re: \indexindy and sorting rules</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00018"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00018"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

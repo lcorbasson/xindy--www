@@ -1,0 +1,209 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Indexing bibleverses -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Mon, 21 Feb 2000 08:10:04 +0100 -->
+<!--X-Message-Id: 200002210709.IAA02085@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: iss.1897.38ad744c.1e5b7.1@max5.rrze.uni&#45;erlangen.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Indexing bibleverses</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00155.html">Date Prev</A>][<A HREF="msg00157.html">Date Next</A>][<A HREF="msg00158.html">Thread Prev</A>][<A HREF="msg00159.html">Thread Next</A>][<A HREF="maillist.html#00156">Date Index</A>][<A HREF="threads.html#00156">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Indexing bibleverses</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Indexing bibleverses</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 21 Feb 2000 08:09:59 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00154.html">iss.1897.38ad744c.1e5b7.1@max5.rrze.uni-erlangen.de</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00154.html">iss.1897.38ad744c.1e5b7.1@max5.rrze.uni-erlangen.de</A>&gt;</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Manfred Kirschhock writes:
+ &gt; Hello!
+ &gt; 
+ &gt; I'm trying XINDYDOS for indexing a biblevers index but it doesn´t 
+ &gt; run. Here a example of the idx-file created with LaTeX:
+ &gt; 
+ &gt; \indexentry{EH1.20|hyperpage}{3}
+ &gt; \indexentry{EH1.1|hyperpage}{3}
+ &gt; \indexentry{K1.2|hyperpage}{3}
+ &gt; \indexentry{EH1.4,11|hyperpage}{3}
+ &gt; \indexentry{EH1.1|hyperpage}{3}
+ &gt; \indexentry{EH1.20|hyperpage}{3}
+ &gt; \indexentry{EH10.7|hyperpage}{3}
+ &gt; \indexentry{K2.2|hyperpage}{3}
+ &gt; \indexentry{EH17.7|hyperpage}{3}
+ &gt; \indexentry{EH1.1|hyperpage}{4}
+ &gt; \indexentry{EH1.19|hyperpage}{4}
+ &gt; \indexentry{EH1.19|hyperpage}{4}
+ &gt; \indexentry{EH1.19|hyperpage}{4}
+ &gt; \indexentry{JJ11.2|hyperpage}{4}
+ &gt; \indexentry{EH2.11|hyperpage}{4}
+ &gt; \indexentry{M13.1--23|hyperpage}{5}
+ &gt; \indexentry{M13.24--30|hyperpage}{5}
+ &gt; \indexentry{M13.31--32|hyperpage}{5}
+ &gt; \indexentry{M13.33|hyperpage}{5}
+ &gt; \indexentry{M13.44|hyperpage}{5}
+ &gt; \indexentry{M13.45--46|hyperpage}{5}
+ &gt; \indexentry{M13.47--50|hyperpage}{5}
+ &gt; 
+ &gt; I have a special biblevers abbreviation and sequence that I wrote in 
+ &gt; a xdy-file:
+ &gt; 
+ &gt; (define-alphabet "bible-chapters" ("1M" "2M" "3M" "4M" "5M" "JS" "RC" 
+ &gt; "1S" "2S" "1R" "2R" "JJ" "JR" "JC" "HO" "JL" "AM" "OB" "JN" "MH" "NA" 
+ &gt; "CB" "Z" "CG" "S" "MA" "LB" "VG" "IB" "LL" "RU" "EJ" "ST" "ÄT" "D" 
+ &gt; "ÄR" "N" "1W" "2W" "M" "MK" "L" "J" "R" "1K" "2K" "G" "E" "P" "K" 
+ &gt; "1TH" "2TH" "H" "1T" "2T" "T" "PM" "A" "JK" "1P" "2P" "1J" "2J" "3J" 
+ &gt; "JD" "EH"))
+ &gt; 
+ &gt; (define-location-class "bible-verses"
+ &gt; ("bible-chapters" :sep ""
+ &gt; "arabic-numbers" :sep "." "arabic-numbers"))
+ &gt; 
+ &gt; With this file I start Xindy but it reports only errors like this:
+ &gt; 
+ &gt; This is `xindy' version 2.0 (OS2  binary version 2.0).
+ &gt; Reading indexstyle...
+ &gt; Loading module "bs.xdy"...
+ &gt; Loading module "tex/makeidx4.xdy"...
+ &gt; Finished loading module "tex/makeidx4.xdy".
+ &gt; Finished loading module "bs.xdy".
+ &gt; Finished reading indexstyle.
+ &gt; Finalizing indexstyle... (done)
+ &gt; 
+ &gt; Reading raw-index "bs.raw"...
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "3" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "4" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "4" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "4" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "4" did not match any location-class! 
+ &gt; (ignored)
+ &gt; WARNING: location-reference "4" did not match any location-class! 
+ &gt; (ignored)
+ &gt; .
+ &gt; .
+ &gt; .
+ &gt; Can anyone help me to fix the error?
+
+Your basic approach looks promising though in the raw index you have
+mixed up location-references with index entry keys. The defintion of
+your location-class "bible-verses" above is ok but in the raw index
+your location-references are "3", "4", "5", etc., i.e. page numbers
+and not bible verses. 
+
+I don't exactly know what you have expected as the outcome of this
+index style in conjuction with this raw index. If you intended to have
+something like
+
+  keyword A,  K2.2, K3.1, 
+  keyword B,  K2.1, M13.11-13
+
+then the location references are "K2.2", etc. In order to be able to
+process this your raw index should look like 
+
+ \indexentry{keyword A}{K2.2}
+ \indexentry{keyword A}{K3.1}
+   
+which is not exactly what is given above. Maybe you should first
+clarify what kind of index you want.
+
+Cheers, Roger
+
+-- 
+======================================================================
+Roger Kehr			       kehr@informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00154" HREF="msg00154.html">Indexing bibleverses</A></STRONG>
+<UL><LI><EM>From:</EM> "Manfred Kirschhock" &lt;sz3335@stud.uni-erlangen.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00155.html">Re: Indexing bibleverses</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00157.html">new version of xindy binary for Linux</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00158.html">Re: Indexing bibleverses</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00159.html">Languages and encodings</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00156"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00156"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

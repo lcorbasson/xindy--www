@@ -1,0 +1,209 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Discussion about international sorting order -->
+<!--X-From-R13: Quevf Dbjyrl <Q.O.DbjyrlNbcra.np.hx> -->
+<!--X-Date: Wed, 19 Mar 1997 19:06:18 +0100 -->
+<!--X-Message-Id: 199703191803.SAA05071@fell.open.ac.uk -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199702221438.PAA10949@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Discussion about international sorting order</TITLE>
+<LINK REV="made" HREF="mailto:C.A.Rowley@open.ac.uk">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00022.html">Date Prev</A>][<A HREF="msg00024.html">Date Next</A>][<A HREF="msg00000.html">Thread Prev</A>][<A HREF="msg00024.html">Thread Next</A>][<A HREF="maillist.html#00023">Date Index</A>][<A HREF="threads.html#00023">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Discussion about international sorting order</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Discussion about international sorting order</LI>
+<LI><em>From</em>: Chris Rowley &lt;<A HREF="mailto:C.A.Rowley@open.ac.uk">C.A.Rowley@open.ac.uk</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 19 Mar 1997 19:04:44 +0100</LI>
+<LI><em>Alternate-Recipient</em>: Allowed</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00000.html">199702221438.PAA10949@spock.iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00000.html">199702221438.PAA10949@spock.iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>X400-Content-Type</em>: P2-1988 (22)</LI>
+<LI><em>X400-MTS-Identifier</em>: [/PRMD=UK.AC/ADMD= /C=GB/;&lt;199703191803.SAA05071@fell.open]</LI>
+<LI><em>X400-Originator</em>: C.A.Rowley@open.ac.uk</LI>
+<LI><em>X400-Received</em>: by mta d400relay in /PRMD=dfnrelay/ADMD=d400/C=de/; Relayed; Wed, 19 Mar 1997 19:05:03 +0100</LI>
+<LI><em>X400-Received</em>: by mta venus.open.ac.uk in /PRMD=UK.AC/ADMD= /C=GB/; Relayed; Wed, 19 Mar 1997 19:04:29 +0100</LI>
+<LI><em>X400-Received</em>: by mta fell.open.ac.uk in /PRMD=UK.AC/ADMD= /C=GB/; Relayed; Wed, 19 Mar 1997 19:03:43 +0100</LI>
+<LI><em>X400-Received</em>: by mta UK.AC.MHS-RELAY.SUN2 in /PRMD=uk.ac/ADMD= /C=gb/; Relayed; Wed, 19 Mar 1997 19:04:44 +0100</LI>
+<LI><em>X400-Recipients</em>: non-disclosure:;</LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Roger wrote --
+
+&gt; I have followed your discussion and I'd like to bring another topic
+&gt; into discussion once more.
+&gt; 
+&gt; As learned from several discussions and readings the sorting problem
+&gt; is still not very well solved. Specifying sorting rules can be an
+&gt; tedious task which is error-prone in many cases. Based on the
+&gt; evaluation of the ISO standard (see our Homepage) I have developed the
+&gt; following concept, which I have partially implemented this weekend.
+&gt; 
+
+1.  This concept of attaching properties to letters (or rather defining
+letters to be such objects) seems to me a good solution to the
+following common (in many senses) requirement of sorting real
+languages:
+
+  a multi-level sort in which levels are defined by such things as:
+
+    case; accents; other diacritics
+
+One small point about the name used: `partial-order' implies a
+different structure.  These orders are total orders on different sets,
+so I would call them sub-orders.
+
+One practical point about the example:  I think that the :accent
+property and "sub-ordering" needs to include the value `none'.
+
+One question:  you put this into your define-total-order example:
+
+   (:accent backwards)
+
+but you did not specify what values are allowed instead of backwards
+(or what it means, but I think I can work that out:-).
+
+2.  It is not clear to me that this approach will directly support
+other common requirements, such as the sub-orders required in sorting
+German, so that if  u-umlaut  and  ue  have been merged at the top-level,
+the order is defined for two words that are identical except that one
+has  u-umlaut  whereas the other has  ue .
+
+This could be done with yet another property of the letter class, called??
+
+  :umlaut-oder-e
+
+having values:
+
+  umlaut  e  none  irrelevant
+
+(the last being used for all letters that never take umlauts) but such
+an approach begins to get messy.
+
+
+3.  You probably expect me to come up with a general solution...well I
+guess the counter to that is some questions:
+
+  is there a special collection of merge-rules that come from
+  real-world multi-level sorting rules?
+
+  do these lead to a reasonable collection of letter-properties that
+  need to be added to support specification of these rules?
+
+
+4.
+&gt; Still missing is a appropriate mapping that transforms a string (a
+&gt; sequence of chars) into a sequence of letters (which have become real
+&gt; objects now).
+&gt; 
+&gt; This could look like:
+&gt; 
+&gt; 	(define-mapping "umlaut-u" ("\~"u" "ü"))
+&gt; 	(define-mapping "umlaut-A" ("\~"A" "Ä"))
+&gt; 
+&gt; [I hope you can see the ISO-Latin chars as well]
+Well, I can see \374 in my emacs, will that do?:-)
+
+But I do not understand the syntax you are using here.
+
+
+5.
+&gt; What I was just discussing with Gabor is the problem of markup (once
+&gt; more). Often indexes contain commands such as "\index" (see for
+&gt; example the LaTeX Companion) for with different index entries must be
+&gt; specified for the command "\index" and the word "index" sorted as
+&gt;
+
+This is a very ad hoc solution to what is probably an example of a
+more general class of sorting rules, in which words (ie the things to
+be indexed) have "types".
+
+This one could be done by a merge-rule that "ignores the \" and a
+sub-order that reinserts it (at the beginning or the end).
+
+Or it could be done by a letter property ":backslash-before"  
+with values:  yes  no
+
+
+I hope this helps, there are certainly still a lot of things to
+discover and to discuss here, I suspect that the ISO document does not
+cover all the sorting requirements of complex documents.
+
+
+chris
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00024" HREF="msg00024.html">Re: Discussion about international sorting order</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00000" HREF="msg00000.html">Discussion about international sorting order</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00022.html">Release of xindy-1.2.1 and xindy-dk</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00024.html">Re: Discussion about international sorting order</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00000.html">Discussion about international sorting order</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00024.html">Re: Discussion about international sorting order</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00023"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00023"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

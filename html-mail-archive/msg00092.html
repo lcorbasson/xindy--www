@@ -1,0 +1,150 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Announce: xindy release 2.0 for OS/2 available -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Fri, 27 Feb 1998 19:39:44 +0100 -->
+<!--X-Message-Id: 199802271839.TAA28683@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: m3yayxkkad.fsf@herlab.ruhr.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Announce: xindy release 2.0 for OS/2 available</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00091.html">Date Prev</A>][<A HREF="msg00093.html">Date Next</A>][<A HREF="msg00091.html">Thread Prev</A>][<A HREF="msg00089.html">Thread Next</A>][<A HREF="maillist.html#00092">Date Index</A>][<A HREF="threads.html#00092">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Announce: xindy release 2.0 for OS/2 available</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Announce: xindy release 2.0 for OS/2 available</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 27 Feb 1998 19:39:35 +0100 (MET)</LI>
+<LI><em>CC</em>: <A HREF="mailto:wuerthle@mail.uni-freiburg.de">wuerthle@mail.uni-freiburg.de</A>, <A HREF="mailto:pdebrun@celt.dias.ie">pdebrun@celt.dias.ie</A>, <A HREF="mailto:burnus@metronet.de">burnus@metronet.de</A>,       <A HREF="mailto:mats.frendahl@trumph.se">mats.frendahl@trumph.se</A>, <A HREF="mailto:thiele@jupiter.math.Uni-Magdeburg.DE">thiele@jupiter.math.Uni-Magdeburg.DE</A></LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00091.html">m3yayxkkad.fsf@herlab.ruhr.de</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00091.html">m3yayxkkad.fsf@herlab.ruhr.de</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Joerg Diederich writes:
+ &gt; 
+ &gt;   Hi,
+ &gt; 
+ &gt; xindy release 2.0 for IBM OS/2 is now available. You
+ &gt; can get it at
+ &gt; 
+ &gt;     <A  HREF="ftp://ftp.tu-darmstadt.de/pub/tex/src/xindy/xdyos220.zip">ftp://ftp.tu-darmstadt.de/pub/tex/src/xindy/xdyos220.zip</A>
+ &gt; 
+ &gt; Have fun!
+ &gt; 
+ &gt; Joerg
+ &gt; 
+ &gt; BTW:
+ &gt; The core binary xindy.exe is startable under MS-DOS 6.2 and
+ &gt; Windows 3.11 using the EMXRSX package (unfortunately, I can't
+ &gt; test it under Windows95 and Windows NT).
+
+This is worth a try. Maybe we should add this information to the
+homepage as well, if we are able to verify this. I know that some of
+the participants of the mailing list are waiting for such a version.
+
+Question: Are non-OS/2 users able to unpack the archive? I just had a
+look at the archive and I'm not sure whether the install.exe is
+runnable under WindowsXY as well. 
+
+I'd suggest that everybody who tries to run xindy on Windows platforms
+reports his/her experiences to the mailing list, such that we are able
+to document this and improve the distribution.
+
+ &gt; To get use of xindy for OS/2 in these environments, you have to
+ &gt; port the functionality of the REXX or PERL scripts calling
+ &gt; xindy.exe with the proper parameters (maybe, there are some further
+ &gt; problems caused by the MS-DOS 8.3 filename restrictions). 
+
+I have tried to keep most filenames in 8.3, though I forgot this
+actually in the newest modules in modules/tex and modules/rules. Hm,
+not too nice. If this really becomes a problem a new naming scheme
+must be introduced in the modules directory. Maybe we should introduce
+another subdirectory such as modules/rules/isolatin and similar
+modules/tex/isolatin to overcome these limitations. 
+
+ &gt; Perhaps, this can help DOS or Windows users until a native Windows
+ &gt; port is available.
+
+This is a problem for platforms like Windows that do not support a
+good batch language. Nontheless, it would be a great improvement to
+make it run on these platforms first. 
+
+Cheers, and a nice weekend
+Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00091" HREF="msg00091.html">Announce: xindy release 2.0 for OS/2 available</A></STRONG>
+<UL><LI><EM>From:</EM> Joerg Diederich &lt;J_Diederich@herlab.ruhr.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00091.html">Announce: xindy release 2.0 for OS/2 available</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00093.html">xindy 2.0 for MSDOS and Windows</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00091.html">Announce: xindy release 2.0 for OS/2 available</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00089.html">Xindy as BibTeX</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00092"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00092"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

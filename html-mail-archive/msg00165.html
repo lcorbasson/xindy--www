@@ -1,0 +1,146 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: xindy for linux compilation troubles -->
+<!--X-From-R13: Fubznf Vrayvpu <urayvpuNzzref1.zj.gh&#45;qerfqra.qr> -->
+<!--X-Date: Fri, 10 Mar 2000 19:08:39 +0100 -->
+<!--X-Message-Id: 20000310185518.A18384@mmepc14.mw.tu&#45;dresden.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 20000310173229.A6906@oberon.physik.fu&#45;berlin.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: xindy for linux compilation troubles</TITLE>
+<LINK REV="made" HREF="mailto:henlich@mmers1.mw.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00164.html">Date Prev</A>][<A HREF="msg00168.html">Date Next</A>][<A HREF="msg00164.html">Thread Prev</A>][<A HREF="msg00169.html">Thread Next</A>][<A HREF="maillist.html#00165">Date Index</A>][<A HREF="threads.html#00165">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: xindy for linux compilation troubles</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: xindy for linux compilation troubles</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:henlich@mmers1.mw.tu-dresden.de">henlich@mmers1.mw.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 10 Mar 2000 18:55:18 +0100</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00164.html">20000310173229.A6906@oberon.physik.fu-berlin.de</A>&gt;; from Axel.Thimm@physik.fu-berlin.de on Fri, Mar 10, 2000 at 05:32:29PM +0100</LI>
+<LI><em>Mail-Followup-To</em>: xindy@iti.informatik.tu-darmstadt.de</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00164.html">20000310173229.A6906@oberon.physik.fu-berlin.de</A>&gt;</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+I use the following steps to compile clisp for xindy (on Linux):
+
+1. Get the xindy extensions to the clisp source (I made them into a module):
+<A  HREF="http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/xindy-clisp-modules.tar.gz">http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/xindy-clisp-modules.tar.gz</A>
+
+2. Unpack them into the modules/ directory of clisp source distribution
+(clisp-*/modules)
+
+3. Now you have two choices:
+a)
+./configure --with-dynamic-ffi --with-noreadline
+--with-module=regexp-in-libc  --with-module=ordrules-regexp-in-libc
+
+b)
+./configure --with-dynamic-ffi --with-noreadline
+--with-module=regexp --with-module=ordrules
+
+I use a) for Linux.
+
+4. cd src
+
+5.
+a)
+./makemake --with-dynamic-ffi --with-noreadline
+--with-module=regexp-in-libc --with-module=ordrules-regexp-in-libc &gt; Makefile
+
+b)
+./makemake --with-dynamic-ffi --with-noreadline
+--with-module=regexp --with-module=ordrules &gt; Makefile
+
+6. make config.lsp
+
+7. make
+   Takes a couple of minutes (12 minutes on my Pentium 200 MHz).
+   Get some more coffee.
+   
+8. make check
+   (You can skip this step, if you want)
+
+Now you have lisp.run and lispinit.mem in the full/ directory.
+You can now copy them to the xindy binary dir, renaming them to xindy.run
+and base.mem, respectively.
+
+I got this working with clisp-1999-01-08 and (partially) clisp-1999-07-22. 
+
+Hope this helps.
+-- 
+Thomas Henlich
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00169" HREF="msg00169.html">Re: xindy for linux compilation troubles</A></STRONG>
+<UL><LI><EM>From:</EM> Axel Thimm &lt;Axel.Thimm@physik.fu-berlin.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00164" HREF="msg00164.html">xindy for linux compilation troubles</A></STRONG>
+<UL><LI><EM>From:</EM> Axel Thimm &lt;Axel.Thimm@physik.fu-berlin.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00164.html">xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00168.html">xindy homepage? Reversal of time flow?</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00164.html">xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00169.html">Re: xindy for linux compilation troubles</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00165"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00165"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,523 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: and again: xindy on alpha&#45;dec&#45;osf4.0 -->
+<!--X-From-R13: "Dnycu X. Vnatyrvgre" <unatyrvgNzngu.hav&#45;tbrggvatra.qr> -->
+<!--X-Date: Wed, 11 Feb 1998 21:48:25 +0100 -->
+<!--X-Message-Id: Pine.OSF.3.95.980211213956.22742A&#45;200000@namu24 -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Reference: 199802111604.RAA24689@spring.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>and again: xindy on alpha-dec-osf4.0</TITLE>
+<LINK REV="made" HREF="mailto:hangleit@math.uni-goettingen.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00086.html">Date Prev</A>][<A HREF="msg00088.html">Date Next</A>][<A HREF="msg00086.html">Thread Prev</A>][<A HREF="msg00088.html">Thread Next</A>][<A HREF="maillist.html#00087">Date Index</A>][<A HREF="threads.html#00087">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>and again: xindy on alpha-dec-osf4.0</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: and again: xindy on alpha-dec-osf4.0</LI>
+<LI><em>From</em>: "Ralph J. Hangleiter" &lt;<A HREF="mailto:hangleit@math.uni-goettingen.de">hangleit@math.uni-goettingen.de</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 11 Feb 1998 21:48:15 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00086.html">199802111604.RAA24689@spring.iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Nearly there?
+
+&gt;  Try to add the library -lintl. This should include the missing
+&gt;  functions.
+
+This didn't work. I had to copy libintl.a from $CLISP_SRC/src/gettext/intl
+to the clisp/arch/alpha-dec-osf4.0 directory.
+  
+Then it worked.
+I then got the binary package, did the changes to Makefile.platform
+(just changed from flex to lex). Then I did a make, which went fine.
+
+The problem now is when running the testsuite of  xindy-2.0b, I get
+
+Test "mappings" failed!
+
+although the output was something like
+
+------------------------------
+Running test "err1".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "err1.xlg" (done)
+Reading indexstyle...
+Loading module "err1.xdy"...
+
+Error in line 2:
+(broken-read-error
+
+ERROR: READ: input stream #&lt;ECHO-STREAM&gt; ends within an object
+
+------------------------------
+Running test "err2".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "err2.xlg" (done)
+Reading indexstyle...
+Loading module "err2.xdy"...
+
+Error in line 1:
+(this is an example of an eval error)
+ERROR: EVAL: undefined function THIS
+
+
+Any comments?
+
+Greetings
+ralph
+________________________________________________________________________
+ Ralph J. Hangleiter               PGP-key        Brueder-Grimm-Allee 57 
+ hangleit@math.uni-goettingen.de  available  D-37075 Goettingen, Germany
+ <A  HREF="http://www.math.uni-goettingen.de/hangleit/">http://www.math.uni-goettingen.de/hangleit/</A>      (+49) 551 54 16 09 
+</PRE>
+<PRE>
+
+Running tests on platform "alpha-dec-osf4.0"...
+/bin/rm -f *.ind *.log *.xlg *.ilg *.sta test.failed core
+/bin/rm -f inf2.raw inf2.xdy
+
+------------------------------
+Running test "attr1".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "attr1.xlg" (done)
+Reading indexstyle...
+Loading module "attr1.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "class/pagenums.xdy"...
+Finished loading module "class/pagenums.xdy".
+Finished loading module "attr1.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "attr1.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "attr1.ind".
+
+------------------------------
+Running test "attr2".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "attr2.xlg" (done)
+Reading indexstyle...
+Loading module "attr2.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "class/pagenums.xdy"...
+Finished loading module "class/pagenums.xdy".
+Finished loading module "attr2.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "attr2.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "attr2.ind".
+
+------------------------------
+Running test "attr3".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "attr3.xlg" (done)
+Reading indexstyle...
+Loading module "attr3.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "class/pagenums.xdy"...
+Finished loading module "class/pagenums.xdy".
+Finished loading module "attr3.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "attr3.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "attr3.ind".
+
+------------------------------
+Running test "startup".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "startup.xlg" (done)
+Reading indexstyle...
+Loading module "startup.xdy"...
+Finished loading module "startup.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "startup.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "startup.ind".
+
+------------------------------
+Running test "mappings".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "mappings.xlg" (done)
+Reading indexstyle...
+Loading module "mappings.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "lang/german/din5007.xdy"...
+Loading module "lang/latin/caseisrt.xdy"...
+Finished loading module "lang/latin/caseisrt.xdy".
+Finished loading module "lang/german/din5007.xdy".
+Loading module "class/pagenums.xdy"...
+Finished loading module "class/pagenums.xdy".
+Finished loading module "mappings.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "mappings.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "mappings.ind".
+
+------------------------------
+Running test "infII".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "infII.xlg" (done)
+Reading indexstyle...
+Loading module "infII.xdy"...
+Finished loading module "infII.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "infII.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "infII.ind".
+
+------------------------------
+Running test "xref-1".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "xref-1.xlg" (done)
+Reading indexstyle...
+Loading module "xref-1.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "class/pagenums.xdy"...
+Finished loading module "class/pagenums.xdy".
+Loading module "lang/latin/caseisrt.xdy"...
+Finished loading module "lang/latin/caseisrt.xdy".
+Finished loading module "xref-1.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "xref-1.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%]
+ERROR: Cross-reference-target ("index") does not exist! [90%]
+ERROR: Cross-reference-target ("index" "hierarchical") does not exist!
+ERROR: Cross-reference-target ("bar") does not exist! [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "xref-1.ind".
+
+------------------------------
+Running test "ex1".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "ex1.xlg" (done)
+Reading indexstyle...
+Loading module "ex1.xdy"...
+Finished loading module "ex1.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "ex1.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "ex1.ind".
+
+------------------------------
+Running test "ex2".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "ex2.xlg" (done)
+Reading indexstyle...
+Loading module "ex2.xdy"...
+Finished loading module "ex2.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "ex2.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "ex2.ind".
+
+------------------------------
+Running test "deep".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "deep.xlg" (done)
+Reading indexstyle...
+Loading module "deep.xdy"...
+Finished loading module "deep.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "deep.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "deep.ind".
+
+------------------------------
+Running test "err1".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "err1.xlg" (done)
+Reading indexstyle...
+Loading module "err1.xdy"...
+
+Error in line 2:
+(broken-read-error
+
+ERROR: READ: input stream #&lt;ECHO-STREAM&gt; ends within an object
+
+------------------------------
+Running test "err2".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "err2.xlg" (done)
+Reading indexstyle...
+Loading module "err2.xdy"...
+
+Error in line 1:
+(this is an example of an eval error)
+ERROR: EVAL: undefined function THIS
+
+------------------------------
+Running test "ranges1".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "ranges1.xlg" (done)
+Reading indexstyle...
+Loading module "ranges1.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "class/pagenums.xdy"...
+Finished loading module "class/pagenums.xdy".
+Finished loading module "ranges1.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "ranges1.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "ranges1.ind".
+
+------------------------------
+Running test "french".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "french.xlg" (done)
+Reading indexstyle...
+Loading module "french.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Finished loading module "french.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "french.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "french.ind".
+
+------------------------------
+Running test "deutsch".
+------------------------------
+
+This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+
+Opening logfile "deutsch.xlg" (done)
+Reading indexstyle...
+Loading module "deutsch.xdy"...
+Loading module "testbed.xdy"...
+Finished loading module "testbed.xdy".
+Loading module "lang/german/din5007m.xdy"...
+Loading module "rules/isolatin1-tolower.xdy"...
+Loading module "rules/latin-tolower.xdy"...
+Finished loading module "rules/latin-tolower.xdy".
+Finished loading module "rules/isolatin1-tolower.xdy".
+Loading module "lang/german/rules.xdy"...
+Finished loading module "lang/german/rules.xdy".
+Finished loading module "lang/german/din5007m.xdy".
+Finished loading module "deutsch.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "deutsch.raw"...
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "deutsch.ind".
+
+--------------
+Checking tests
+--------------
+
+Test "mappings" failed!
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00088" HREF="msg00088.html">Re: and again: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00086" HREF="msg00086.html">Re: Again: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00086.html">Re: Again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00088.html">Re: and again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00086.html">Re: Again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00088.html">Re: and again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00087"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00087"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

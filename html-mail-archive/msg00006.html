@@ -1,0 +1,164 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy 1.2 ... first tries with Allegro Common Lisp v4.3 -->
+<!--X-From-R13: Preaq Dnvpuyr <envpuyrNWasbezngvx.Gav&#45;Eghggtneg.RS> -->
+<!--X-Date: Tue, 11 Mar 1997 17:05:33 +0100 -->
+<!--X-Message-Id: 199703111603.RAA21216@isle.informatik.uni&#45;stuttgart.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy 1.2 ... first tries with Allegro Common Lisp v4.3</TITLE>
+<LINK REV="made" HREF="mailto:raichle@Informatik.Uni-Stuttgart.DE">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00005.html">Date Prev</A>][<A HREF="msg00007.html">Date Next</A>][<A HREF="msg00007.html">Thread Prev</A>][<A HREF="msg00005.html">Thread Next</A>][<A HREF="maillist.html#00006">Date Index</A>][<A HREF="threads.html#00006">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy 1.2 ... first tries with Allegro Common Lisp v4.3</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: xindy 1.2 ... first tries with Allegro Common Lisp v4.3</LI>
+<LI><em>From</em>: Bernd Raichle &lt;<A HREF="mailto:raichle@Informatik.Uni-Stuttgart.DE">raichle@Informatik.Uni-Stuttgart.DE</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 11 Mar 1997 17:03:53 +0100 (MET)</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+I have tried to load the source files of xindy using ACL 4.3, a
+commercial Common Lisp implementation made by Franz Inc.
+
+I didn't suceed because of the last bug mentioned in the following
+list which I will try to fix...
+
+
+Roger, here is the list of "bugs" I have found while trying to load
+(not compile) the code in the files "dump-xindy.xdy", "defaults.xdy"
+and all "*.lsp" files:
+
+- DEFMETHOD is in the LISP package (for Allegro CL 4.3)
+ 
+  ==&gt; Errors in "markup.lsp"
+ 
+ 
+- IN-PACKAGE, USE-PACKAGE, REQUIRE, and PROVIDE
+  should be better called with a string, not with a symbol
+ 
+  The string should match!  Case-sensitive!
+ 
+  ==&gt; Errors because the arguments of PROVIDE are given in uppercase
+      whereas the arguments of REQUIRE are in lowercase form.
+ 
+ 
+- All packages have to be created explicitly!
+ 
+  The old behaviour of IN-PACKAGE to create the given package if it
+  doesn't exist, was removed by X3J13.  IN-PACKAGE will...
+  ``An error is signalled if the package does not already exist.''
+ 
+ 
+- *LOAD-PATHS* from "defaults.xdy" is accessed within a DEFPARAMETER
+  form in "idxstyle.lsp"
+ 
+  Whereas the optional &lt;initial-form&gt; of DEFVAR is not evaluated
+  unless it is used, DEFPARAMETER always evaluates the mandatory
+  &lt;initial-form&gt;.
+ 
+  ==&gt; Error because *LOAD-PATHS* is unbound when loading
+      "idxstyle.lsp"
+ 
+- *LOAD-PATHS* is in the wrong package, it should be either in the
+  "IDXSTYLE" package or in the "USER" package (and imported to the
+  "IDXSTYLE" package).
+ 
+- "locref.lsp" GET-LAYERS is defined more than once
+- "index.lsp" TAKE-FIRST is defined more than once
+ 
+- Allegro CL 4.3 has problems with the &amp;WHOLE keywords in a DEFMACRO,
+  if it's not the first in the lambda-list.
+ 
+  For DEFINE-ENVIRONMENT-METHODS it chokes at the first use with
+ 
+        Error: Passed 1 too many arguments for arglist (&amp;WHOLE SIGNATURE)
+          [condition type: PROGRAM-ERROR]
+ 
+  after changing the lambda-list of DEFINE-ENVIRONMENT-METHODS to
+ 
+        (name
+         (&amp;whole signature usual-argument)
+         &amp;key open close declare body)
+ 
+  i.e., I add the usual parameter to the single &amp;WHOLE variable,
+  it will be ok but chokes at the next use of the other macros using
+  &amp;WHOLE.
+ 
+  Because I haven't made use of &amp;WHOLE yet, I'm not sure if the use of
+  &amp;WHOLE is ok or Allegro CL has a bug.  The ACL manual states in
+  appendix A that "Allegro CL conforms to the new specifications." and
+  from the description of CLtL2 it seems that Roger's code is
+  erroneous.  Can anyone give a _correct_ example how to use &amp;WHOLE
+  not appearing first in the lambda-list to test the behaviour of ACL
+  or any other Lisp implementation w.r.t. &amp;WHOLE?
+
+That's it so far.  xindy is running using Clisp on Solaris 2/Sun 4,
+but it isn't yet using ACL :-(  ...will continue tomorrow.
+
+Best wishes,
+  -bernd
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00005.html">Re: xindy for OS/2</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00007.html">xindy styles in LaTeX documents</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00007.html">xindy styles in LaTeX documents</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00005.html">Re: xindy for OS/2</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00006"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00006"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

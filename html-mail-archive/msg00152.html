@@ -1,0 +1,147 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: define location rule used for Xindy online manual -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Mon, 6 Dec 1999 11:10:48 +0100 -->
+<!--X-Message-Id: 199912061010.LAA10163@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: DB8AFFD38A30D311BA6D0090276DC8C00125EC11@merc09.us.sas.com -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: define location rule used for Xindy online manual</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00153.html">Date Prev</A>][<A HREF="msg00161.html">Date Next</A>][<A HREF="msg00153.html">Thread Prev</A>][<A HREF="msg00151.html">Thread Next</A>][<A HREF="maillist.html#00152">Date Index</A>][<A HREF="threads.html#00152">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: define location rule used for Xindy online manual</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: define location rule used for Xindy online manual</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 6 Dec 1999 11:10:42 +0100 (MET)</LI>
+<LI><em>CC</em>: Tim Arnold &lt;<A HREF="mailto:tiarno@wnt.sas.com">tiarno@wnt.sas.com</A>&gt;</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00153.html">DB8AFFD38A30D311BA6D0090276DC8C00125EC11@merc09.us.sas.com</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00153.html">DB8AFFD38A30D311BA6D0090276DC8C00125EC11@merc09.us.sas.com</A>&gt;</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hello Tim,
+
+sorry for my late response
+
+Tim Arnold writes:
+ &gt; Hi
+ &gt; I want to create an online doc index using Xindy,
+ &gt; and of course, I need to define a location class
+ &gt; that can accept a URL.
+ &gt; 
+ &gt; I understand how to do that for a standard format
+ &gt; of a URL, but I need to be able to handle urls of
+ &gt; arbitrary length.
+ &gt; 
+ &gt; My question for the group is:
+ &gt; Where are the *.xdy file(s) that were used to create
+ &gt; the index of the Xindy manual (e.g. manual-6.html, in the
+ &gt; most recent distibution)?
+
+This index is the result of hand-weaving the index and it has not been
+processed by xindy. Sorry for that. 
+
+Actually the problem you mention is not trivial to solve per se. I
+don't know how deep you have digged into xindy but one of its
+assumptions about the ordering of location references is that you can
+represent a location reference for ordering purposes as a pair of
+(type, vector of integer). The order of types is specified with the
+DEFINE-LOCATION-CLASS-ORDER primitive. The order of integer values is
+used to sort the references lexicographically, e.g. (1 2) &lt; (2) &lt; (3
+1) &lt; (3 2), etc. Unfortunately this is hard-wired into the internals
+of xindy and one should stick to that to avoid rewriting parts of it.
+
+Each of the numbers in this vector is derived from the so-called
+basetypes, e.g. basetype "Roman" gives you '1000' for a 'M'. The
+problem is that a basetype is only allowed to result in a single
+number whereas in the URL example one actually needs a whole vector of
+numbers as response.
+
+Ex. Sum.: Currently this does not work!
+
+I have some lines of code that could be used to circumvent this
+problem. Unfortunately this requires to re-dump xindy and I currently
+have not all the missing pieces together. If you are able to do that I
+can send you some information on how to apply these patches to do some
+tests.
+
+Cheers, Roger
+
+-- 
+======================================================================
+Roger Kehr			       kehr@informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00153" HREF="msg00153.html">define location rule used for Xindy online manual</A></STRONG>
+<UL><LI><EM>From:</EM> Tim Arnold &lt;tiarno@wnt.sas.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00153.html">define location rule used for Xindy online manual</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00161.html">Prposals for xindy documentation</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00153.html">define location rule used for Xindy online manual</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00151.html">New modules for Spanish available</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00152"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00152"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

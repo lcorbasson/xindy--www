@@ -1,0 +1,124 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: problem mit tex2xindy unter os/2 -->
+<!--X-From-R13: Xbret Rvrqrevpu <X_RvrqrevpuNureyno.ehue.qr> -->
+<!--X-Date: Tue, 12 Aug 1997 18:13:02 +0200 -->
+<!--X-Message-Id: 199708121611.SAA00275@herlab.ruhr.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: Pine.A32.3.91.970811155418.36266B&#45;100000@aixterm3.urz.uni&#45;heidelberg.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: problem mit tex2xindy unter os/2</TITLE>
+<LINK REV="made" HREF="mailto:J_Diederich@herlab.ruhr.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00053.html">Date Prev</A>][<A HREF="msg00055.html">Date Next</A>][<A HREF="msg00053.html">Thread Prev</A>][<A HREF="msg00049.html">Thread Next</A>][<A HREF="maillist.html#00054">Date Index</A>][<A HREF="threads.html#00054">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: problem mit tex2xindy unter os/2</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: problem mit tex2xindy unter os/2</LI>
+<LI><em>From</em>: Joerg Diederich &lt;<A HREF="mailto:J_Diederich@herlab.ruhr.de">J_Diederich@herlab.ruhr.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 12 Aug 1997 18:11:48 +0200</LI>
+<LI><em>In-reply-to</em>: &lt;<A HREF="msg00053.html">Pine.A32.3.91.970811155418.36266B-100000@aixterm3.urz.uni-heidelberg.de</A>&gt;(message from Andreas Dafferner on Mon, 11 Aug 1997 16:00:39 +0200(METDST))</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+&gt; 
+&gt; wenn ich unter os2 w3 oder w4 tex2xindy revision 1.6
+&gt; aufrufe, erhalte ich einen sys3175 oder 1808.
+&gt; 
+
+Hi, Andreas
+
+you get an error SYS3175 whenever you call tex2xindy without
+specifying a statistics (.sta) file. This file is used by tex2xindy to
+store some information about attributes and cross-references.
+The proper call of tex2xindy is therefore:
+
+     tex2xindy foo.sta &lt; foo.idx &gt; foo.raw
+
+Instead of calling tex2xindy directly, you normally use the
+wrapper makeindex4. This Perl script
+
+- generates a temporary xindy style
+- calls tex2xindy
+- eliminates duplicate lines in the resulting statistics file
+- parses the statistics file to create necessary attribute
+  definitions 
+- calls xindy.
+
+For new documents you should have a look at the xindy.sty by
+Andreas Schechte. This style provides commands to create
+index files which can be feeded directly into xindy making
+tex2xindy or makeindex4 obsolete.
+
+I hope, this solves your problems.
+
+cu
+Joerg Diederich
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00053" HREF="msg00053.html">problem mit tex2xindy unter os/2</A></STRONG>
+<UL><LI><EM>From:</EM> Andreas Dafferner &lt;Andreas.Dafferner@urz.uni-heidelberg.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00053.html">problem mit tex2xindy unter os/2</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00055.html">where does the raw-file come from ??</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00053.html">problem mit tex2xindy unter os/2</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00049.html">Xindy-version fuer sunOS-4.1.1</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00054"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00054"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

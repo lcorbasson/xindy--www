@@ -1,0 +1,162 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Problem mit xindy -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Mon, 13 Jul 1998 16:13:05 +0200 -->
+<!--X-Message-Id: 199807131412.QAA17947@spring.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 35951BF2.5D290A40@rcs.urz.tu&#45;dresden.de -->
+<!--X-Reference: 199807131403.QAA17934@spring.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Problem mit xindy</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00110.html">Date Prev</A>][<A HREF="msg00118.html">Date Next</A>][<A HREF="msg00108.html">Thread Prev</A>][<A HREF="msg00107.html">Thread Next</A>][<A HREF="maillist.html#00109">Date Index</A>][<A HREF="threads.html#00109">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Problem mit xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Problem mit xindy</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 13 Jul 1998 16:12:55 +0200 (MET DST)</LI>
+<LI><em>In-Reply-To</em>: &lt;199807131403.QAA17934@spring.iti.informatik.tu-darmstadt.de&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00108.html">35951BF2.5D290A40@rcs.urz.tu-dresden.de</A>&gt;&lt;199807131403.QAA17934@spring.iti.informatik.tu-darmstadt.de&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hello,
+
+sorry for my previous postings in German. I wasn't aware that Thomas
+has posted his mail to the mailing list.
+
+Thomas had a problem with an index style that didn't produce the
+expected results: 
+
+The raw index:
+
+(indexentry :tkey (("1998") ("Mai") ("27")) :locref "1")
+(indexentry :tkey (("1998") ("Mai") ("28")) :locref "1")
+
+The style file:
+
+(define-attributes ("default"))
+(define-location-class "arabic-page-numbers" ("arabic-numbers"))
+(markup-index :open  "" :close "~n" :flat)
+(markup-letter-group-list :sep "")
+(markup-indexentry :open "~n  " :depth 0)
+(markup-indexentry :open "-" :depth 1)
+(markup-indexentry :open "-" :depth 2)
+(markup-locclass-list :open " % " :sep ", ")
+
+The result:
+
+  1998Mai27 % 1
+  1998Mai28 % 1
+
+The expected result:
+ 
+  1998-Mai-27 % 1
+  1998-Mai-28 % 1
+
+can be obtained by the following style file:
+
+(define-attributes ("default"))
+(define-location-class "arabic-page-numbers" ("arabic-numbers"))
+(markup-index :open  "" :close "~n" :flat)
+(markup-letter-group-list :sep "")
+(markup-indexentry :open "~n  " :depth 0)
+(markup-keyword-list :sep "-")
+(markup-locclass-list :open " % " :sep ", ")
+ 
+which makes use of the MARKUP-KEYWORD-LIST command which probably
+nobody has ever used before ;-)
+
+Remarkably enough I myself first came to a wrong conclusion, but after
+thorough testing (should make this more earlier, me ...) I discovered
+the mistake. 
+
+Here we actually reach the limits of the mark-up scheme. Something
+like 
+
+  1998-Mai/27 % 1
+  1998-Mai/28 % 1
+
+i.e. different separator characters are not possible without new
+mark-up commands (which are easy to add if someone needs them).
+
+Cheers,
+Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00108" HREF="msg00108.html">Problem mit xindy</A></STRONG>
+<UL><LI><EM>From:</EM> Thomas Henlich &lt;thenlich@Rcs1.urz.tu-dresden.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00110.html">Fwd: Author/editor indexing package released</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00118.html">examples of input to and output from xindy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00108.html">Problem mit xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00107.html">HP-UX 10 port available</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00109"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00109"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

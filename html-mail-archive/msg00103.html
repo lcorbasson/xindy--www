@@ -1,0 +1,152 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy presentation at EuroTeX'98 -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Tue, 21 Apr 98 12:19:41 MET DST -->
+<!--X-Message-Id: 22445.966259394.8@NO&#45;ID&#45;FOUND.mhonarc.org -->
+<!--X-Content-Type: text/plain -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy presentation at EuroTeX'98</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00102.html">Date Prev</A>][<A HREF="msg00104.html">Date Next</A>][<A HREF="msg00104.html">Thread Prev</A>][<A HREF="msg00101.html">Thread Next</A>][<A HREF="maillist.html#00103">Date Index</A>][<A HREF="threads.html#00103">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy presentation at EuroTeX'98</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: xindy (Mailing List) &lt;<A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A>&gt;	</LI>
+<LI><em>Subject</em>: xindy presentation at EuroTeX'98</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 21 Apr 98 12:19:41 MET DST</LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hello out there,
+
+as some of you may have noticed, I gave a talk together with Joachim
+about xindy at the EuroTeX'98 conference in St. Malo, March, 30th.
+
+On March, 31st we had a BOF session about xindy where we discussed
+several issues how xindy can be further improved and extended. 
+
+The most important results from this session and some other issues are
+as follows:
+
+- Improvement of LaTeX support in the future. This mostly concerns a
+  LaTeX style file that writes the index entries into the .aux files.
+  Additionally, we think about LaTeX macros that write information
+  about the document itself (such as encodings and language) into the
+  .aux file as well. This enables one to add index style definitions
+  into the LaTeX source, instead of a completely separate index style
+  file, which seems to be one of the greatest hurdles for the
+  acceptance of xindy.
+   
+- Support for input filters. Many have asked for such a feature. This
+  allows to tag index entries from the raw index with an additional
+  atttribute, indicating the index class the index entry belongs to.
+  xindy will be extended to accept only those index entries that
+  belong to the selected classes.
+
+  My current suggestion is to add a new option :CLASS &lt;string&gt; to the
+  INDEXENTRY command to indicate the class of an index entry.
+  Additionally, we need another index style command such as
+  (INPUT-FILTER (&lt;list-of-class-names&gt;)) that defines the set of class
+  names to accept. This specification should be made available to the
+  command line options of xindy as well.
+
+- Hans Hagen asked for a way to pass data attachments through the
+  indexing process into the tagged index. This would enable xindy to
+  process glossaries (with the glossary text as a data attachment) and
+  sort the entries with xindy. 
+
+  Several small problems have to be solved to implement such a scheme.
+  My suggestion is to add data in the form of a dictionary of
+  keyword/value pairs in the raw index interface. The question is
+  whether data should be attached to location references or index
+  entries or both. Any ideas are welcome.
+
+  This dictionary asks how the mark-up of this data in the backend
+  should be implemented. I have some ideas how to realize this, but
+  this will need some time.
+
+- Add new hooks in the sorting process to allow sorting rules that can
+  be applied only once at the beginning of the rewriting procedure.
+
+- Further simplification of the installation procedure.
+
+- Re-structuring of the documentation.
+
+- many other things to do....
+
+
+Hope, that gives you an impression what is planned for the future.
+
+Cheers,
+Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00102.html">Re: Xindy newby intro.</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00104.html">Cyrillic language support available</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00104.html">Cyrillic language support available</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00101.html">Xindy newby intro.</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00103"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00103"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

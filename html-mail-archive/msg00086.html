@@ -1,0 +1,133 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Again: xindy on alpha&#45;dec&#45;osf4.0 -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Wed, 11 Feb 1998 17:04:54 +0100 -->
+<!--X-Message-Id: 199802111604.RAA24689@spring.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199802110959.KAA21015@spring.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Reference: Pine.OSF.3.95.980211150137.30633B&#45;100000@namu24 -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Again: xindy on alpha-dec-osf4.0</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00085.html">Date Prev</A>][<A HREF="msg00087.html">Date Next</A>][<A HREF="msg00085.html">Thread Prev</A>][<A HREF="msg00087.html">Thread Next</A>][<A HREF="maillist.html#00086">Date Index</A>][<A HREF="threads.html#00086">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Again: xindy on alpha-dec-osf4.0</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Again: xindy on alpha-dec-osf4.0</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Wed, 11 Feb 1998 17:04:42 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00085.html">Pine.OSF.3.95.980211150137.30633B-100000@namu24</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00084.html">199802110959.KAA21015@spring.iti.informatik.tu-darmstadt.de</A>&gt;&lt;<A HREF="msg00085.html">Pine.OSF.3.95.980211150137.30633B-100000@namu24</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Ralph J. Hangleiter writes:
+ &gt; We're advancing:
+
+Ah, good!
+
+ &gt; I have modified the Makefile.local  (deleted -lsocket and -lnsl, because
+ &gt; we don't have them).
+ &gt; 
+ &gt; Now I get the following linker problem:
+ &gt; 
+ &gt; gcc -o lisp.run modules.o lisp.a libavcall.a libvacall.a libtrampoline.a
+ &gt; libreadline.a libordrules.a librx.a libreadline.a -ltermcap 
+ &gt; collect2: ld returned 1 exit status
+ &gt; /usr/bin/ld:
+ &gt; Unresolved:
+ &gt; bindtextdomain
+ &gt; textdomain
+ &gt; gettext
+ &gt; gmake: *** [lisp.run] Error 1
+ &gt; 
+ &gt; Any ideas?
+
+Try to add the library -lintl. This should include the missing
+functions.
+
+Cheers,
+--Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00087" HREF="msg00087.html">and again: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> "Ralph J. Hangleiter" &lt;hangleit@math.uni-goettingen.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00084" HREF="msg00084.html">Re: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00085" HREF="msg00085.html">Again: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> "Ralph J. Hangleiter" &lt;hangleit@math.uni-goettingen.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00085.html">Again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00087.html">and again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00085.html">Again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00087.html">and again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00086"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00086"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

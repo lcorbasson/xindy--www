@@ -1,0 +1,174 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: A few comments -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Tue, 6 Jan 1998 13:46:28 +0100 -->
+<!--X-Message-Id: 199801061246.NAA04371@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 19980105183655.64234@pauillac.inria.fr -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: A few comments</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00064.html">Date Prev</A>][<A HREF="msg00067.html">Date Next</A>][<A HREF="msg00075.html">Thread Prev</A>][<A HREF="msg00073.html">Thread Next</A>][<A HREF="maillist.html#00066">Date Index</A>][<A HREF="threads.html#00066">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: A few comments</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: A few comments</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 6 Jan 1998 13:46:49 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;19980105183655.64234@pauillac.inria.fr&gt;</LI>
+<LI><em>References</em>: &lt;19980105183655.64234@pauillac.inria.fr&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Francois Pottier writes:
+ &gt; 
+ &gt; Hello,
+ &gt; 
+ &gt; I've switched from makeindex to xindy (version 1.2.3). I shall use it
+ &gt; to produce an index for my thesis, which is a TeX document written in
+ &gt; French.
+
+Good choice ;-)
+ 
+ &gt; I have read Roger Kehr's paper about sorting in several stages,
+ &gt; right-to-left, etc. It sounds interesting. When is the new version
+ &gt; expected to come out?
+
+Actually, it's just a matter of one or two weeks. At least the
+versions for Linux/AIX/SunOS/Solaris will be available soon. 
+
+Test versions are available at 
+
+  <A  HREF="http://www.iti.informatik.tu-darmstadt.de/xindy/alpha">http://www.iti.informatik.tu-darmstadt.de/xindy/alpha</A>
+
+Please gimme as much feedback as possible.
+
+ &gt; The system is nice and switching from makeindex is quite easy. I think
+ &gt; xindy would be more attractive to French users if a ready-made
+ &gt; configuration file and a makeindex-like script were available. (Of
+ &gt; course, the same comment should apply to other nationalities.)
+ &gt; Currently, using xindy with TeX in French requires:
+ &gt; 
+ &gt;  - writing a makeindex-like script which takes a .idx file and runs
+ &gt;    it through tex2xindy and xindy. This is fairly easy, except that
+ &gt;    tex2xindy doesn't seem to be documented at all.
+
+The Perl-script makeindex4 does exactly what you want. It should be
+part of the distribution.
+
+ &gt; Also, any European user of TeX is going to need a .xdy file with
+ &gt; the following:
+ &gt; 
+ &gt;   merging \'e into é
+ &gt;   merging ^^e9 into é
+ &gt; 
+ &gt; (plus, of course, similar merge rules for all of the ISO-Latin
+ &gt; alphabet). It would be nice if such a file was provided.
+
+Yup, that's right and somebody told me the same some days ago. For the
+moment I have generated four files that implement these mappings. They
+are available at 
+
+  <A  HREF="http://www.iti.informatik.tu-darmstadt.de/xindy/modules/tex">http://www.iti.informatik.tu-darmstadt.de/xindy/modules/tex</A>
+
+Currently the TeX mappings are generated from the inputenc-package
+definition files .def. Actually, I'm not sure if these mappings work
+as expected, consider them as alpha. Please inform me if there
+problems.
+
+The problem is that currently the sort-mappings are designed to
+operate only at level 0. We need a more flexible approach that allows
+us to declare sort rules on more than one level at once. I'll think
+about that.
+
+ &gt;  - writing a .xdy file, which contains pieces of makeindex.xdy plus
+ &gt;    French-specific commands. This requires reading the documentation
+ &gt;    and browsing through the 'modules' directory. Not easy for casual
+ &gt;    users.
+
+I absolutely agree! Wouldn't that be a good job for you?
+
+ &gt; Please understand that I'm not complaining - on the contrary, xindy is
+ &gt; a nice and useful tool - but I suggest that these enhancements would
+ &gt; help it become a lot more popular in the TeX world.
+
+Many thanks for your interest. Everybody is welcome to participate...
+
+
+Cheers
+--Roger
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00073" HREF="msg00073.html">Re: A few comments</A></STRONG>
+<UL><LI><EM>From:</EM> Francois Pottier &lt;Francois.Pottier@inria.fr&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00064.html">Looking for Style-files</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00067.html">Announce: Alpha versions available</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00075.html">Re: Announce: Alpha versions available</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00073.html">Re: A few comments</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00066"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00066"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,128 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: markup rules question -->
+<!--X-From-R13: Fubznf Vrayvpu <urayvpuNzzref1.zj.gh&#45;qerfqra.qr> -->
+<!--X-Date: Mon, 27 Mar 2000 07:57:00 +0200 (MEST) -->
+<!--X-Message-Id: 20000324125507.A20259@mmepc14.mw.tu&#45;dresden.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 200003212320.CAA04928@vvv.vsu.ru -->
+<!--X-Reference: 14555.9825.379037.146335@hawaii.dvs1.informatik.tu&#45;darmstadt.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: markup rules question</TITLE>
+<LINK REV="made" HREF="mailto:henlich@mmers1.mw.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00171.html">Date Prev</A>][<A HREF="msg00178.html">Date Next</A>][<A HREF="msg00171.html">Thread Prev</A>][<A HREF="msg00172.html">Thread Next</A>][<A HREF="maillist.html#00176">Date Index</A>][<A HREF="threads.html#00176">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: markup rules question</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: markup rules question</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:henlich@mmers1.mw.tu-dresden.de">henlich@mmers1.mw.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 24 Mar 2000 12:55:07 +0100</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00171.html">14555.9825.379037.146335@hawaii.dvs1.informatik.tu-darmstadt.de</A>&gt;; from kehr@informatik.tu-darmstadt.de on Fri, Mar 24, 2000 at 11:51:50AM +0100</LI>
+<LI><em>Mail-Followup-To</em>: xindy@iti.informatik.tu-darmstadt.de</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00174.html">200003212320.CAA04928@vvv.vsu.ru</A>&gt; &lt;<A HREF="msg00171.html">14555.9825.379037.146335@hawaii.dvs1.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+On Fri, Mar 24, 2000 at 11:51:50AM +0100, Roger Kehr wrote:
+&gt; Vladimir Volovich writes:
+&gt;  &gt; 
+&gt;  &gt; First, a minor bug: xindy refuses to accept filenames starting
+&gt;  &gt; with a dot, as filenames with raw index. E.g.:
+&gt;  &gt; 
+&gt; Indeed there are some problems with the file I/O. In addition it seems 
+&gt; that xindy cannot handle AFS directories that contain something like
+&gt; "...".
+&gt; 
+
+"It's not a bug, it's a feature."
+
+The CLISP Implementation Notes (<A  HREF="http://clisp.sourceforge.net/impnotes.html">http://clisp.sourceforge.net/impnotes.html</A>)
+Section 19.2.1: Pathname Components
+say:
+
+"...
+
+A UNIX filename is split into name and type according to the following rule: 
+ - if there is no '.' in the filename, then the name is everything,
+   type is nil;
+ - if there is a '.', then name is the part before and type the part
+   after the last dot.
+   
+..." 
+
+It's stupid, but the only solution seems to be to avoid filenames which have
+a dot at the beginning.
+
+-- 
+Thomas Henlich
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00174" HREF="msg00174.html">markup rules question</A></STRONG>
+<UL><LI><EM>From:</EM> Vladimir Volovich &lt;vvv@vvv.vsu.ru&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00171" HREF="msg00171.html">Re: markup rules question</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00171.html">Re: markup rules question</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00178.html">strange segfault in xindy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00171.html">Re: markup rules question</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00172.html">some questions</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00176"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00176"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,282 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Sorting marked&#45;up entries -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Mon, 28 Apr 1997 18:05:17 +0200 -->
+<!--X-Message-Id: 199704281604.SAA17432@spelunke.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 15329C0000@mmf.ruc.dk -->
+<!--X-Reference: 199704171458.QAA20096@spelunke.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Reference: 199704201153.MAA00335@fell.open.ac.uk -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Sorting marked-up entries</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00039.html">Date Prev</A>][<A HREF="msg00041.html">Date Next</A>][<A HREF="msg00037.html">Thread Prev</A>][<A HREF="msg00042.html">Thread Next</A>][<A HREF="maillist.html#00040">Date Index</A>][<A HREF="threads.html#00040">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Sorting marked-up entries</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Sorting marked-up entries</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 28 Apr 1997 18:04:44 +0200</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00037.html">199704201153.MAA00335@fell.open.ac.uk</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00035.html">15329C0000@mmf.ruc.dk</A>&gt;&lt;<A HREF="msg00036.html">199704171458.QAA20096@spelunke.iti.informatik.th-darmstadt.de</A>&gt;&lt;<A HREF="msg00037.html">199704201153.MAA00335@fell.open.ac.uk</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+	Hi Chris and all others,
+
+It took me quite a while to think about all what Chris wrote in his
+mail. I was still unsatisfied by discussing user interface issues
+before I had not understand the real sorting problem. For this reason
+I started *not* to think about the user interface at the first place
+and think about the theoretical foundations of our problem instead.
+
+The first questions I came across were "What does mark-up actually mean
+in our problem domain?", "What are possible mark-ups?" and "How do
+they influence the sorting process?". I'll give a rather complex,
+though real-live example of what I'm thinking of.
+
+We have to process an author index containing names of authors from
+all over the world. There may appear Chinese authors written in their
+native language as well as in the Latin-like pronounciation speech
+(don't know how to say in English). Imagine the Latin-like written
+names appear between the other authors and the Chinese written symbols
+appear at the end of the index in a separate list of Chinese authors
+(which may only of interest for all people capable of reading
+Chinese). The index processor must understand that an authors name is
+Chinese, a natural application of a mark-up named (lang=chinese).
+
+Chinese names are sometimes sorted based on the number of strokes that
+appear in the corresponding Chinese symbol. The number of strokes is
+then an additional structural mark-up. A Chinese name in our example
+index may then be represented as
+
+	(lang=chinese (strokes=15 "Liang"))
+
+This notation I use here represents mark-up as a named node in a tree
+with arbitrary many children. I'll come back to this issue later.
+
+Another problem that arises in this context are for example, Spanish
+authors. As we know from the discussion papers, the collating rules
+for Spanish are different than for other languages (ie. "Ch", "Ll").
+Hence, structural mark-up may also influence the collation rules of a
+keyword. This is a completely new aspect in our discussion since we
+have not yet considered mark-up influencing collation rules. In fact
+this is a problem that has to be solved in the parsing phase of the
+keyword in my opinion.
+
+I'd say that a keyword is a tree-based recursive data structure
+defined as follows:
+
+A keyword is
+ (a) a mark-up entity consisting of an identifier containing a
+     sequence of keywords as its childs, or
+ (b) a word, i.e. a sequence of letters.
+
+A letter is something that has been obtained by collation rules
+mapping a sequence of characters into a letter.
+
+A possible keyword is (denoted in a list-like style):
+
+  (no-mark-up
+	"This"
+	(emph "is an")
+	"example"
+	(bold "keyword")
+  )
+
+Here we could declare that "example" and (no-mark-up "example") are
+essentially the same.
+
+Coming back to out initial example we must sort the Chinese authors to
+the very end of the index. Thus, the first sort phase (I'll stay with
+this concept since it is intuitively clear from the users'
+perspective) separates Chinese from non-Chinese authors. Here we have
+an example for which there is a need to start sorting based on mark-up
+and not on letters.
+
+In a further sorting phase the Chinese authors must be sorted
+according to the number of strokes of their symbols. In fact this
+sorting is meaningless for non-Chinese keywords. Thus, the set of
+meaningful sorting rules may depend on the mark-up as well, introducing
+another new aspect.
+
+I think, that these introductory examples give some idea about what
+structural mark-up can be used for. It is essentially some kind of
+meta-information that can be used to sort keywords.
+
+If we agree on the view that a keyword can be represented as a tree
+with letters at its leaves we see several similarities with other
+application domains. Imagine the possible mark-up schemes are not
+arbitrarily (lang=chinese may also appear within a strokes=15
+element), we are directly lead to SGML and its DTDs and instances. My
+question is, if there is a grammar on how the mark-up must be used in a
+keyword, in what sense does a keyword differ from an instance of a
+SGLM DTD? In other terms, what is the difference between a keyword and
+a structured document? Currently, I don't see any difference. The
+question of sorting a keyword is essentially the same question as
+asking which one of two SGML instances is sorted before the other. I
+do not address the problem of character encodings or other SGML
+peculiarities, my intent is only to ask the question "How are
+structured documents sorted?". And this question seems to be the
+essence of all our problems.
+
+The problem has turned now into the question, how do we sort trees,
+according to the above outlined notion of tree. From the intuitive
+point of view, sorting is a process done in several phases. We compare
+according to some criteria and then obtain some elements that are
+equal in this sense. We continue to sort according to a new criteria
+until we finally obtain a total order on all elements.
+
+If we want to sort lexicographically according to only *one* sequence
+of something (i.e. numbers) we need to map a tree (in our sense) into
+a sequence. How can this be accomplished? A first observation shows
+that the sorting criteria for each sorting phase is something that can
+be obtained by extracting and filtering certain information from the
+tree and serializing this information. For example we can introduce
+some kind of tree manipulation operations that remove nodes from the
+tree and exchange subtrees. Exchanging subtrees could then be used to
+reverse sequences (needed for French sorting rules) and so on. Thus a
+tree-rewriting system can be used to transform a tree into a sequence
+(i.e a root-node with a sequence of atomic values). My notion of
+atomic value is not restricted to letters only--a node containing the
+name of a mark-up node suffices as well (I start to write more and more
+informal, since this is something I'm not yet sure about it). The idea
+is to map a tree to a sequence. And to map several successive sorting
+phases to several sequences that when concatenated (with some
+delimiting element) would obtain a total order on the trees.
+
+The current approach implemented in xindy is essentially that of a
+string-rewriting system, that to some extend can be used to rewrite a
+string, but which does not deal with structural information in a
+broader sense. Additionally it does not deal with an object-oriented
+view on letters as attributed objects (cf. define-letter from previous
+mails). What we need is a generalization of this principle in some
+form, I currently have no idea of. In fact, the attributes invented in
+the define-letter declaration can all be represented as mark-up nodes
+in the tree as well. There is no difference between these two views in
+my opinion.
+
+In fact, to me it seems to be hard to find semi-solutions to this
+problem that address only some of the problems but not all of them.
+
+Another aspect is that the sorting process may be structured
+differently. It can be described in terms of an acyclic graph having
+as is edges the specfication of the sorting process that has to be
+applied.
+
+	          lang=chinese
+	o--------------&gt;o-----+-----&gt;o strokes=1
+        !		      +-----&gt;o strokes=2
+        ! lang=others	      +...
+	+--------------&gt;o
+			....
+
+This is an idea that came into my mind just when I was typing. I'm not
+yet sure about this aspect. But it may be a natural way of defining
+sorting processes and reusing paths in the graph, which seems to be
+quite useful in practice. Here another problem occurs. Are categories or
+enumerations of attributes still useful as it was introduced in the
+define-letter declaration?
+
+
+I have not directly answered Chris' mail but I think that this mail
+addresses almost all of the problems described yet. My intent is to
+first open discussion for this view on sorting processes before we
+continue to think about possible user interfaces. From my personal
+point of view I have now better understood what the real problem and
+its complexity is (I hope so:). We find ourself now quite far away
+from where we initially started.
+
+
+Thanks for your patience reading this :)
+
+Bye Roger
+
+
+P.S.: I'd like to thank Gabor, whom I tried to convince that keywords
+      are structured documents and who did helpful comments on my ideas.
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00042" HREF="msg00042.html">Re: Sorting marked-up entries</A></STRONG>
+<UL><LI><EM>From:</EM> Chris Rowley &lt;C.A.Rowley@open.ac.uk&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00035" HREF="msg00035.html">xindy for DOS ?</A></STRONG>
+<UL><LI><EM>From:</EM> "Joergen Larsen" &lt;JL@mmf.ruc.dk&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00036" HREF="msg00036.html">Re: xindy for DOS ?</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.th-darmstadt.de&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00037" HREF="msg00037.html">Sorting marked-up entries</A></STRONG>
+<UL><LI><EM>From:</EM> Chris Rowley &lt;C.A.Rowley@open.ac.uk&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00039.html">Re: new version of xindy.sty</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00041.html">xindy for OS/2 is available</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00037.html">Sorting marked-up entries</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00042.html">Re: Sorting marked-up entries</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00040"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00040"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

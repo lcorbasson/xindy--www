@@ -1,0 +1,194 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Package for writing raw&#45;indices -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Sat, 15 Mar 1997 14:53:46 +0100 -->
+<!--X-Message-Id: 199703151353.OAA12853@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703141438.PAA09690@mexico.mib.harz.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Package for writing raw-indices</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00014.html">Date Prev</A>][<A HREF="msg00016.html">Date Next</A>][<A HREF="msg00011.html">Thread Prev</A>][<A HREF="msg00010.html">Thread Next</A>][<A HREF="maillist.html#00013">Date Index</A>][<A HREF="threads.html#00013">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Package for writing raw-indices</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Package for writing raw-indices</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Sat, 15 Mar 1997 14:53:37 +0100 (MEZ)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00011.html">199703141438.PAA09690@mexico.mib.harz.de</A>&gt; from "inas@mib.harz.de" at Mar 14, 97 03:38:43 pm</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+&gt; Hi,
+&gt;
+&gt; &gt; &gt; \newindexstyle{chapter}{\thechapter-\thepage}
+&gt;
+&gt; &gt; LaTeX crashes on this line, if \documentstyle is `article'. It seems
+&gt; &gt; that \thechapter is not known then (with `book' it works fine) and the
+&gt; &gt; above definition fails. Maybe this definition must be included
+&gt; &gt; depending on the current document style.
+&gt;
+&gt; Yes, indeed. I only tested with book.cls, so I didn't see this one :)
+&gt;
+&gt; &gt; Another problem I found is that the quoting of the backslash does not
+&gt; &gt; work as expected in the following case:
+&gt;
+&gt; &gt; \newcommand{\foo}[1]{\indexindy[attr=see]{\texttt{#1}}}
+&gt;
+&gt; &gt; \foo{fasel}
+&gt;
+&gt; &gt; which yields
+&gt;
+&gt; &gt; (indexentry :tkey ( ( "\texttt  {fasel}" ) ) :attr "see"  :locref "0-1")
+&gt; &gt; ---
+&gt;
+&gt; &gt; Here, the backslashes are *not* quoted. Missed I something?
+&gt;
+&gt; Well, this is a bit of pure TeX-knowledge :).
+&gt; It depends on the catcodes of TeX. In the normal way (\indexentry inside the
+&gt; document), a backslash is treated as a character of categorie code other.
+&gt; This is done, by redefining the catcode BEFORE reading the arguments. When
+&gt; you use \foo, the catcode of backslashs is 0 (introduce command).
+&gt; Since catcodes can never be changed, once they are applied (remeber
+&gt; Joachim tutorial at DANTE'97)
+
+I didn't really tried to understand the way your style works, I only
+tested it :) But if I have some more time, I'll have to learn TeX, it
+seems unavoidable :)
+
+&gt; , the redefinition of the catcodes inside
+&gt; \indexindy doesn't cover the arguments of foo. Thus, there is only one backslash.
+&gt; AND, you also must write \foo{\\textsc{A}}
+&gt;
+&gt; If you wish \foo to work right, you should define it like this:
+&gt;
+&gt;      \newcommand{\foo}[1]{\indexindy[attr=see]{\\texttt{#1}}}
+&gt;
+&gt; I don't know another way to do it work.
+
+Ok, I see. But my example did as well not escape the backslash in
+
+ \indexindy[open-range,attr=definition]{Euler,\textsc{Euler}}
+
+which results in
+
+	(indexentry :tkey ( ( "Euler" "\textsc {Euler}" ) )
+		    :attr "definition" :open-range :locref "1")
+
+This was my original question and it is in contrast to the examples you
+gave and I'm not sure if I did something wrong.
+
+I just had another close look and it seems that your version does
+*only* work in conjunction with \usepackage{german}.
+
+I tested it once more and *without* german.sty the quotes aren't
+doubled. This is maybe the reason for my problems.
+
+without german.sty:
+	(indexentry :tkey ( ( "Euler" "\textsc {Euler}" ) )
+		    :attr "definition" :open-range :locref "1")
+with german.sty:
+	(indexentry :tkey ( ( "Euler" "\\textsc{Euler}" ) )
+		    :attr "definition" :open-range :locref "1")
+
+[5 min later.]
+
+I just saw that you have already fixed this bug :) Ok. then forget
+about it.
+
+&gt; &gt; Next question: Why are the location references in the form &lt;x&gt;-&lt;y&gt;. In
+&gt; &gt; the style file there is explicitly set
+&gt; &gt; \indexstyle{page}
+&gt; &gt; ^^^^^^^^^^^^^^^^^
+&gt; &gt; though it doesn't produce page numbers as expected.
+&gt;
+&gt; Yes, indeed. I initialize &lt;page&gt;, since the style should produce standard-references.
+&gt; But have a sharp look at your input:
+&gt;
+&gt;    \indexindy{Layer 0;Layer 1,\textsc{Layer 1};Layer 2}
+&gt; =&gt; \indexstyle{chapter}
+&gt;    \indexindy{Index the comma{,} too}
+
+Aargh! It seems that this is a very confusing week. I have have
+overlooked so many things, this week. Stupid stuff this... :)
+
+
+Adeus Roger
+
+--
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00011" HREF="msg00011.html">Re: Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> inas@mib.harz.de</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00014.html">New Version of xindy.sty</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00016.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00011.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00010.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00013"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00013"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

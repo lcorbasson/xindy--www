@@ -1,0 +1,171 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: and again: xindy on alpha&#45;dec&#45;osf4.0 -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Thu, 12 Feb 1998 09:16:21 +0100 -->
+<!--X-Message-Id: 199802120816.JAA00453@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199802111604.RAA24689@spring.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Reference: Pine.OSF.3.95.980211213956.22742A&#45;200000@namu24 -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: and again: xindy on alpha-dec-osf4.0</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00087.html">Date Prev</A>][<A HREF="msg00089.html">Date Next</A>][<A HREF="msg00087.html">Thread Prev</A>][<A HREF="msg00082.html">Thread Next</A>][<A HREF="maillist.html#00088">Date Index</A>][<A HREF="threads.html#00088">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: and again: xindy on alpha-dec-osf4.0</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: and again: xindy on alpha-dec-osf4.0</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Thu, 12 Feb 1998 09:16:09 +0100 (MET)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00087.html">Pine.OSF.3.95.980211213956.22742A-200000@namu24</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00086.html">199802111604.RAA24689@spring.iti.informatik.tu-darmstadt.de</A>&gt;&lt;<A HREF="msg00087.html">Pine.OSF.3.95.980211213956.22742A-200000@namu24</A>&gt;</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Ralph J. Hangleiter writes:
+ &gt; Nearly there?
+ &gt; 
+ &gt; &gt;  Try to add the library -lintl. This should include the missing
+ &gt; &gt;  functions.
+ &gt; 
+ &gt; This didn't work. I had to copy libintl.a from $CLISP_SRC/src/gettext/intl
+ &gt; to the clisp/arch/alpha-dec-osf4.0 directory.
+ &gt;   
+ &gt; Then it worked.
+
+Ah, I see. I didn't know that.
+
+ &gt; The problem now is when running the testsuite of  xindy-2.0b, I get
+ &gt; 
+ &gt; Test "mappings" failed!
+ &gt; 
+ &gt; although the output was something like
+ &gt; 
+ &gt; ------------------------------
+ &gt; Running test "err1".
+ &gt; ------------------------------
+ &gt; 
+ &gt; This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+ &gt; 
+ &gt; Opening logfile "err1.xlg" (done)
+ &gt; Reading indexstyle...
+ &gt; Loading module "err1.xdy"...
+ &gt; 
+ &gt; Error in line 2:
+ &gt; (broken-read-error
+ &gt; 
+ &gt; ERROR: READ: input stream #&lt;ECHO-STREAM&gt; ends within an object
+ &gt; 
+ &gt; ------------------------------
+ &gt; Running test "err2".
+ &gt; ------------------------------
+ &gt; 
+ &gt; This is `xindy' version 2.0 (alpha-dec-osf4.0 binary version 2.0).
+ &gt; 
+ &gt; Opening logfile "err2.xlg" (done)
+ &gt; Reading indexstyle...
+ &gt; Loading module "err2.xdy"...
+ &gt; 
+ &gt; Error in line 1:
+ &gt; (this is an example of an eval error)
+ &gt; ERROR: EVAL: undefined function THIS
+ &gt; 
+ &gt; 
+ &gt; Any comments?
+
+This is an expected error. The testsuite just tests if the error
+system works correctly, which it did ;-) For this reason I wrote
+"(this is an example of an eval error)". 
+
+[.. stuff deleted .. ]
+
+
+ &gt; Test "mappings" failed!
+
+This is really funny, because "mappings" is one of the simplest
+mapping tests, whereas "deutsch" and "french" test the mapping systems
+very intensively.
+
+Could you please send me the files mappings.* from the tests
+subdirectory, to see what actually failed. Can't be a big problem,
+though.
+
+Cheers,
+--Roger
+
+-- 
+======================================================================
+Roger Kehr			   kehr@iti.informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00086" HREF="msg00086.html">Re: Again: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> Roger Kehr &lt;kehr@iti.informatik.tu-darmstadt.de&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00087" HREF="msg00087.html">and again: xindy on alpha-dec-osf4.0</A></STRONG>
+<UL><LI><EM>From:</EM> "Ralph J. Hangleiter" &lt;hangleit@math.uni-goettingen.de&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00087.html">and again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00089.html">Xindy as BibTeX</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00087.html">and again: xindy on alpha-dec-osf4.0</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00082.html">[xindy] Release of xindy version 2.0</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00088"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00088"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

@@ -1,0 +1,189 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Package for writing raw&#45;indices -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gu&#45;qnezfgnqg.qr> -->
+<!--X-Date: Fri, 14 Mar 1997 15:08:58 +0100 -->
+<!--X-Message-Id: 199703141408.PAA21538@spock.iti.informatik.th&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199703131925.UAA29644@mexico.mib.harz.de -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Package for writing raw-indices</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.th-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00008.html">Date Prev</A>][<A HREF="msg00010.html">Date Next</A>][<A HREF="msg00008.html">Thread Prev</A>][<A HREF="msg00011.html">Thread Next</A>][<A HREF="maillist.html#00009">Date Index</A>][<A HREF="threads.html#00009">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Package for writing raw-indices</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Package for writing raw-indices</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.th-darmstadt.de">kehr@iti.informatik.th-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Fri, 14 Mar 1997 15:08:41 +0100 (MEZ)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00008.html">199703131925.UAA29644@mexico.mib.harz.de</A>&gt; from "inas@mib.harz.de" at Mar 13, 97 08:25:46 pm</LI>
+<LI><em>Reply-To</em>: <A HREF="mailto:xindy@iti.informatik.th-darmstadt.de">xindy@iti.informatik.th-darmstadt.de</A></LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.th-darmstadt.de">owner-xindy@iti.informatik.th-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+
+I encountered the following problems:
+
+&gt; ----xindy.sty----
+&gt; \RequirePackage{keyval}
+&gt; %
+&gt; %%
+&gt; %% various Indexstyles
+&gt; %%
+&gt; %
+&gt; \def\newindexstyle#1#2{\expandafter\gdef\csname xindy@style@#1\endcsname{#2}}
+&gt; \newindexstyle{page}{\thepage}
+&gt; \newindexstyle{chapter}{\thechapter-\thepage}
+
+LaTeX crashes on this line, if \documentstyle is `article'. It seems
+that \thechapter is not known then (with `book' it works fine) and the
+above definition fails. Maybe this definition must be included
+depending on the current document style.
+
+Another problem I found is that the quoting of the backslash does not
+work as expected in the following case:
+
+---snip
+\documentclass{book}
+
+\makeindex
+
+\usepackage{xindy}
+
+\begin{document}
+
+some text
+
+\indexindy[attr=definition]{Euler}
+\indexindy[open-range,attr=definition]{Euler,\textsc{Euler}}
+\indexindy[attr=see,xref="Euler"]{Personen;Mathematiker}
+\indexindy[close-range,attr=definition]{Euler,\textsc{Euler}}
+\indexindy{Layer 0;Layer 1,\textsc{Layer 1};Layer 2}
+\indexstyle{chapter}
+\indexindy{Index the comma{,} too}
+
+\newcommand{\foo}[1]{\indexindy[attr=see]{\texttt{#1}}}
+
+\foo{blubber}
+\foo{bla}
+\foo{fasel}
+
+\end{document}
+--snap
+
+which yields
+
+---
+(indexentry :tkey ( ( "Euler" ) ) :attr "definition"  :locref "1")
+(indexentry :tkey ( ( "Euler" "\textsc  {Euler}" ) ) :attr "definition" :open-ra
+nge :locref "1")
+(indexentry :tkey ( ( "Personen" )  ( "Mathematiker" ) ) :attr "see"  :xref ("Eu
+ler"))
+(indexentry :tkey ( ( "Euler" "\textsc  {Euler}" ) ) :attr "definition" :close-r
+ange :locref "1")
+(indexentry :tkey ( ( "Layer 0" )  ( "Layer 1" "\textsc  {Layer 1}" )  ( "Layer
+2" ) )   :locref "1")
+(indexentry :tkey ( ( "Index the comma{,} too" ) )   :locref "0-1")
+(indexentry :tkey ( ( "\texttt  {blubber}" ) ) :attr "see"  :locref "0-1")
+(indexentry :tkey ( ( "\texttt  {bla}" ) ) :attr "see"  :locref "0-1")
+(indexentry :tkey ( ( "\texttt  {fasel}" ) ) :attr "see"  :locref "0-1")
+---
+
+Here, the backslashes are *not* quoted. Missed I something?
+
+Next question: Why are the location references in the form &lt;x&gt;-&lt;y&gt;. In
+the style file there is explicitly set
+
+%%
+%% select style
+%%
+%
+\def\indexstyle#1{\def\xindy@style{\csname xindy@style@#1\endcsname}}
+\indexstyle{page}
+^^^^^^^^^^^^^^^^^
+
+though it doesn't produce page numbers as expected.
+
+Seems very promising :)
+
+Bye
+
+--
+======================================================================
+Roger Kehr			   kehr@iti.informatik.th-darmstadt.de
+Computer Science Department          Technical University of Darmstadt
+
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00011" HREF="msg00011.html">Re: Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> inas@mib.harz.de</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00008" HREF="msg00008.html">Package for writing raw-indices</A></STRONG>
+<UL><LI><EM>From:</EM> inas@mib.harz.de</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00008.html">Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00010.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00008.html">Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00011.html">Re: Package for writing raw-indices</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00009"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00009"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

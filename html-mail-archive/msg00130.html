@@ -1,0 +1,161 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: xindy for linux&#45;glibc2 -->
+<!--X-From-R13: Fubznf Vrayvpu <urayvpuNzzref1.zj.gh&#45;qerfqra.qr> -->
+<!--X-Date: Mon, 14 Jun 1999 16:50:58 +0200 -->
+<!--X-Message-Id: 19990614164705.A16963@mmepc14.mw.tu&#45;dresden.de -->
+<!--X-Content-Type: multipart/mixed -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>xindy for linux-glibc2</TITLE>
+<LINK REV="made" HREF="mailto:henlich@mmers1.mw.tu-dresden.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00129.html">Date Prev</A>][<A HREF="msg00131.html">Date Next</A>][<A HREF="msg00131.html">Thread Prev</A>][<A HREF="msg00132.html">Thread Next</A>][<A HREF="maillist.html#00130">Date Index</A>][<A HREF="threads.html#00130">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>xindy for linux-glibc2</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: xindy for linux-glibc2</LI>
+<LI><em>From</em>: Thomas Henlich &lt;<A HREF="mailto:henlich@mmers1.mw.tu-dresden.de">henlich@mmers1.mw.tu-dresden.de</A>&gt;</LI>
+<LI><em>Date</em>: Mon, 14 Jun 1999 16:47:05 +0200</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Hi there,
+
+I built XINDY for Linux systems with the glibc2 (libc6) version of the C
+Library.
+You can download the test version under
+<A  HREF="http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/">http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/</A>
+
+The binaries are in 
+<A  HREF="http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/xindy-2.0d-i386-linux-glibc2.tar.gz">http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/xindy-2.0d-i386-linux-glibc2.tar.gz</A>
+I called this version 2.0d because I used the developers kit version 2.0d
+(seems logical!) This version also fixes a bug in the xindy Perl script,
+which caused the -f command line option to fail.
+
+If you intend to use the tex2xindy filter, you also need this:
+<A  HREF="http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/xindy-2.0c.tar.gz">http://rcswww.urz.tu-dresden.de/~thenlich/tex/xindy/xindy-2.0c.tar.gz</A>
+(Only the file tex2xindy.l changed)
+
+It fixes several bugs, one of which caused tex2xindy to fail to work at all
+under glibc2.
+
+WARNING: This version currently does not yet successfully process the examples
+ex1 and ex2 from the xindy testsuite! It also fails on the attached example
+with: xindy ex1.xdy ex1.raw, generating an empty file ex1.ind and the screen
+output ex1.log. (I don't know the reason yet.) However, everything else works.
+
+If you test this version, please tell me if it works (or not) on your
+system! Please don't forget to tell me which Linux distribution/version you
+use!
+
+Regards
+-- 
+Thomas Henlich
+</PRE>
+<PRE>
+(mapc #'(lambda (x)
+	  (pushnew x *features*))
+      '(STEP1 STEP2))
+
+#+STEP1
+(progn
+  (define-location-class "page-numbers" ("arabic-numbers"))
+  (define-attributes (("definition")))
+  )
+
+#+STEP2
+(progn
+  (markup-locref :class "page-numbers" :attr "definition"
+		 :open  "{\bf " :close "}")
+  )
+</PRE>
+<PRE>
+(indexentry :key ("sábado")  :locref "5" :attr "definition")
+</PRE>
+<PRE>
+This is `xindy' version 2.0 (i386-linux-glibc2 binary version 2.0).
+
+Reading indexstyle...
+Loading module "ex1.xdy"...
+Finished loading module "ex1.xdy".
+Finished reading indexstyle.
+Finalizing indexstyle... (done)
+
+Reading raw-index "ex1.raw"...
+WARNING: unknown attribute `definition'! (ignored)
+Finished reading raw-index.
+
+Processing index... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Finished processing index.
+
+Writing markup... [10%] [20%] [30%] [40%] [50%] [60%] [70%] [80%] [90%] [100%]
+Markup written into file "ex1.ind".
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<UL><LI><STRONG>Follow-Ups</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00137" HREF="msg00137.html">Re: xindy for linux-glibc2</A></STRONG>
+<UL><LI><EM>From:</EM> Thomas Henlich &lt;henlich@mmers1.mw.tu-dresden.de&gt;</LI></UL></LI>
+<LI><STRONG><A NAME="00132" HREF="msg00132.html">Re: xindy for linux-glibc2</A></STRONG>
+<UL><LI><EM>From:</EM> Agustín Martín &lt;agmartin@aq.upm.es&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00129.html">tex2xindy</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00131.html">Problems with isolatin1m-tex.xdy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00131.html">Problems with isolatin1m-tex.xdy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00132.html">Re: xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00130"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00130"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

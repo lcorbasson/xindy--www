@@ -1,0 +1,200 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: xindy, omega and Unicode -->
+<!--X-From-R13: Dbtre Yrue <xrueNvgv.vasbezngvx.gh&#45;qnezfgnqg.qr> -->
+<!--X-Date: Tue, 11 May 1999 13:32:18 +0200 -->
+<!--X-Message-Id: 199905111132.NAA23560@spirit.iti.informatik.tu&#45;darmstadt.de -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199905091516.RAA02174@smtp.nordnet.fr -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: xindy, omega and Unicode</TITLE>
+<LINK REV="made" HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00127.html">Date Prev</A>][<A HREF="msg00129.html">Date Next</A>][<A HREF="msg00127.html">Thread Prev</A>][<A HREF="msg00125.html">Thread Next</A>][<A HREF="maillist.html#00128">Date Index</A>][<A HREF="threads.html#00128">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: xindy, omega and Unicode</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: xindy, omega and Unicode</LI>
+<LI><em>From</em>: Roger Kehr &lt;<A HREF="mailto:kehr@iti.informatik.tu-darmstadt.de">kehr@iti.informatik.tu-darmstadt.de</A>&gt;</LI>
+<LI><em>Date</em>: Tue, 11 May 1999 13:32:14 +0200 (MET DST)</LI>
+<LI><em>In-Reply-To</em>: &lt;<A HREF="msg00127.html">199905091516.RAA02174@smtp.nordnet.fr</A>&gt;</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00127.html">199905091516.RAA02174@smtp.nordnet.fr</A>&gt;</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+Yannis Haralambous writes:
+
+ &gt; Hi,
+ &gt; 
+ &gt; you may have heard about the Omega extension of TeX. We are using
+ &gt; 16-bit tables internally, so that in general our system is based on
+ &gt; Unicode. We need an indexing utility compatible with this scheme.
+ &gt; Would it be possible to upgrade xindy to be 16-bit compatible?
+ &gt; 
+ &gt; Here is what we need:
+ &gt; 
+ &gt; foo.idx files will contain characters in extended hexa notation:
+ &gt; 
+ &gt; ^^^^0123^^^^abcd^^^^0080 and so on
+ &gt; 
+ &gt; It should be possible to write a merge/sort file of the type
+ &gt; 
+ &gt; (merge-rule "^^^^41d8" "Aÿ") 
+ &gt; 
+ &gt; where Aÿ is the 16-bit character of hexa value 41D8
+ &gt; or to have a notation like in the newest perl (with utf8 module)
+ &gt; 
+ &gt; (merge-rule "^^^^41d8" "\x{41d8}")
+ &gt; 
+ &gt; This means that can (and will) be more than 256 letter groups, and
+ &gt; that it also should be possible to define groups of groups (Latin
+ &gt; entries, then Greek entries, then Cyrillic entries, and so on).
+ &gt; 
+ &gt; Is this possible? If yes, in the short range? in the long range?
+
+xindy is based the CLISP implementation of Common Lisp. Additional
+libraries for managing regular expressions (namely the GNU Rx library)
+are used for the merge and sort rules. None of the listed components
+directly supports 16-bit Unicode characters.
+
+One could - at least to some extend - use the merge- ans sort-rules to
+achieve the results you need in an ad-hoc manner, though several
+problems might arise:
+
+- Strings are in all of the above systems null-terminates, i.e., any
+  unicode characters of the form \x{yy00} and \x{00yy} cannot be
+  properly handled.
+
+- Merge- and sort-rules need to be 16-bit aligned for proper
+  operation. Currently alignment occurs only on 8-bit (character)
+  boundaries. To give an example 
+
+    (merge-rule "Aÿ" "aÿ") 
+ 
+  (don't know if that makes any sense at all) applied to the character
+  stream 
+
+    "4Aÿ3"
+
+  will result in a substitution which you probably don't want to
+  happen.
+ 
+  One could circumvent this by applying "boundary characters", i.e.,
+  encode the above string differently such as 
+
+    "4A ÿ3 xy ..."
+
+  but obviously you will run into other troubles then.
+
+- Another problem is the amount of rules in the substitution database.
+  The current solution will probably not scale well if several
+  thousands of substitution rules happen to be in the database. I can
+  only expect that things will significantly slow down. There is an
+  internal hash-table for efficient encoding of substitutions, which
+  needed to be expand from 8 to 16 bit at first. Further optimization
+  might be needed.
+
+- As you already mentioned the letter groups must be expanded to 16
+  bit as well.
+
+
+To sum all of the above considerations I think that there is a
+substantial amount of work to do to extend xindy from 8 to 16 bit
+because it orthogonally touches the inner workings of xindy dealing
+with keywords at almost all levels.
+
+A better approach might be to reconsider the whole model of merge- and
+sort-rules into a more modular architecture that models letters as
+objects. We have discussed some of these aspects more than a year ago
+on this list. Your demands actually are further arguments to rethink
+the whole model of merging and sorting on a character basis without
+higher-level concepts, which I consider to be vital for future
+systems.
+
+I personally will not be able to change xindy in the way needed, but
+I'll provide any help to others to do so. I even think that there is a
+lot of potential for research work in this area (at least more than
+enough for a computer science diploma thesis) to think about more
+general frameworks for this kind of problems. 
+
+One thing I've learned from the xindy project is that indexing is far
+more complex than I ever thought and that it is hard to find good
+trade-offs for providing practical solutions to this problem.
+
+You are welcome to further discussions...
+
+Cheers, Roger
+ 
+-- 
+======================================================================
+Roger Kehr			       kehr@informatik.tu-darmstadt.de
+Computer Science Department         Darmstadt University of Technology
+
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00127" HREF="msg00127.html">xindy, omega and Unicode</A></STRONG>
+<UL><LI><EM>From:</EM> Yannis Haralambous &lt;yannis@fluxus-virus.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00127.html">xindy, omega and Unicode</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00129.html">tex2xindy</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00127.html">xindy, omega and Unicode</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00125.html">xindy and linux-libc6</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00128"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00128"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>

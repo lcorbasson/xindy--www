@@ -1,0 +1,122 @@
+<!-- MHonArc v2.4.4 -->
+<!--X-Subject: Re: Modules for spanish language under xindy -->
+<!--X-From-R13: Hynqvzve Hbybivpu <iiiNiii.ifh.eh> -->
+<!--X-Date: Fri, 2 Jul 1999 12:21:37 +0200 -->
+<!--X-Message-Id: m3u2rn9yl7.fsf@vvv.vsu.ru -->
+<!--X-Content-Type: text/plain -->
+<!--X-Reference: 199907011918.VAA02450@smtp.nordnet.fr -->
+<!--X-Head-End-->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML//EN">
+<HTML>
+<HEAD>
+<TITLE>Re: Modules for spanish language under xindy</TITLE>
+<LINK REV="made" HREF="mailto:vvv@vvv.vsu.ru">
+</HEAD>
+<BODY BGCOLOR="white">
+    <a href="../">
+    <img style="border-style: none" src="../images/xindy-image.gif" alt="Book logo">
+	    <img style="border-style: none" src="../images/xindy-logo-bw.gif" alt="xindy">
+    </a>
+    <p>
+    <img style="border-style: none" src="../images/xindy-subtitle-bw.gif" alt="A Flexible Indexing System"></p>
+<!--X-Body-Begin-->
+<!--X-User-Header-->
+<!--X-User-Header-End-->
+<!--X-TopPNI-->
+<HR>
+[<A HREF="msg00135.html">Date Prev</A>][<A HREF="msg00137.html">Date Next</A>][<A HREF="msg00135.html">Thread Prev</A>][<A HREF="msg00147.html">Thread Next</A>][<A HREF="maillist.html#00136">Date Index</A>][<A HREF="threads.html#00136">Thread Index</A>]
+<!--X-TopPNI-End-->
+<!--X-MsgBody-->
+<!--X-Subject-Header-Begin-->
+<H1>Re: Modules for spanish language under xindy</H1>
+<HR>
+<!--X-Subject-Header-End-->
+<!--X-Head-of-Message-->
+<UL>
+<LI><em>To</em>: <A HREF="mailto:xindy@iti.informatik.tu-darmstadt.de">xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>Subject</em>: Re: Modules for spanish language under xindy</LI>
+<LI><em>From</em>: Vladimir Volovich &lt;<A HREF="mailto:vvv@vvv.vsu.ru">vvv@vvv.vsu.ru</A>&gt;</LI>
+<LI><em>Date</em>: 02 Jul 1999 13:43:00 +0400</LI>
+<LI><em>Cc</em>: Yannis Haralambous &lt;<A HREF="mailto:yannis@fluxus-virus.com">yannis@fluxus-virus.com</A>&gt;</LI>
+<LI><em>In-Reply-To</em>: Yannis Haralambous's message of "Thu,  1 Jul 1999 21:18:58 +0200"</LI>
+<LI><em>References</em>: &lt;<A HREF="msg00134.html">199907011918.VAA02450@smtp.nordnet.fr</A>&gt;</LI>
+<LI><em>Reply-To</em>: xindy</LI>
+<LI><em>Sender</em>: <A HREF="mailto:owner-xindy@iti.informatik.tu-darmstadt.de">owner-xindy@iti.informatik.tu-darmstadt.de</A></LI>
+<LI><em>User-Agent</em>: Gnus/5.070089 (Pterodactyl Gnus v0.89) Emacs/20.3</LI>
+</UL>
+<!--X-Head-of-Message-End-->
+<!--X-Head-Body-Sep-Begin-->
+<HR>
+<!--X-Head-Body-Sep-End-->
+<!--X-Body-of-Message-->
+<PRE>
+"YH" == Yannis Haralambous writes:
+
+ YH&gt; I think xindy could do much better: consider the case where you
+ YH&gt; have Spanish and Greek, or French and Russian, or Italian and
+ YH&gt; Hebrew, or German and Polish...  there are so many of
+ YH&gt; combinations of two languages having different 8-bit codepages.
+ YH&gt; There is no way to say to xindy that we are switching codepages
+ YH&gt; and sorting must be different for each one. Fatally xindy will
+ YH&gt; identify the ^^e0 of one codepage with ^^e0 of the other codepage
+ YH&gt; and the result will be crazy.
+
+ YH&gt; The most natural solution to this is to work in 16-bits. Everyone
+ YH&gt; is switching to 16-bits today, even Microsoft (which I hate so
+ YH&gt; much) with Windows2000.
+
+Another natural solution is to use inputenc package (when using 8-bit
+codepages in "original" TeX; i like Omega's universal OTP concept). :-)
+
+For example, in case of cyrillic languages, when one uses 8-bit
+codepages wiht inputenc, the AUX files will not contain such things as
+^^e0 (for which it is impossible to guess the charset; thus AUX files
+must not contain raw 8-bit chars), but will contain commands like
+"\IeC {\CYRA }" for each cyrillic letter; and xindy will happily use
+this information to provide correctr ordering (the same is valid for
+all other 8-bit non-cyrillic codepages provided that inputenc is
+used).
+
+	Best regards, -- Vladimir.
+
+</PRE>
+
+<!--X-Body-of-Message-End-->
+<!--X-MsgBody-End-->
+<!--X-Follow-Ups-->
+<HR>
+<!--X-Follow-Ups-End-->
+<!--X-References-->
+<UL><LI><STRONG>References</STRONG>:
+<UL>
+<LI><STRONG><A NAME="00134" HREF="msg00134.html">Re: Modules for spanish language under xindy</A></STRONG>
+<UL><LI><EM>From:</EM> Yannis Haralambous &lt;yannis@fluxus-virus.com&gt;</LI></UL></LI>
+</UL></LI></UL>
+<!--X-References-End-->
+<!--X-BotPNI-->
+<UL>
+<LI>Prev by Date:
+<STRONG><A HREF="msg00135.html">Re: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Next by Date:
+<STRONG><A HREF="msg00137.html">Re: xindy for linux-glibc2</A></STRONG>
+</LI>
+<LI>Prev by thread:
+<STRONG><A HREF="msg00135.html">Re: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Next by thread:
+<STRONG><A HREF="msg00147.html">New version: Modules for spanish language under xindy</A></STRONG>
+</LI>
+<LI>Index(es):
+<UL>
+<LI><A HREF="maillist.html#00136"><STRONG>Date</STRONG></A></LI>
+<LI><A HREF="threads.html#00136"><STRONG>Thread</STRONG></A></LI>
+</UL>
+</LI>
+</UL>
+
+<!--X-BotPNI-End-->
+<!--X-User-Footer-->
+<!--X-User-Footer-End-->
+</BODY>
+</HTML>
