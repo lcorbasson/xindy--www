@@ -21,8 +21,8 @@
           </TD>
           <TD width="100%" class="headtop">&#160;</TD>
 	  <TD height="35" align="right" class="headtop">
-            <A href="http://sourceforge.net/"><img
-               src="images/sflogo-small.png" border="0"
+            <A href="http://sourceforge.net/"><img border="0"
+               src="http://sourceforge.net/sflogo.php?group_id=10646&amp;type=1"
 	       alt="Powered by sourceforge.net"/></A></TD>
         </TR>
      </TABLE>

@@ -27,5 +27,13 @@ $(HTML): %.html : %.xml xindy.xsl header.xsl sitemap.xml
 
 
 dist:: all
-	rsync -av --delete . www.xindy.org:/shared/www/xindy \
-	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l'
+	chmod -R g+w .
+	rsync -av --delete --exclude=Makefile \
+	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
+	    . sourceforge:/home/groups/x/xi/xindy/htdocs
+
+trydist:: all
+	chmod -R g+w .
+	rsync -n -av --delete --exclude=Makefile \
+	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
+	    . sourceforge:/home/groups/x/xi/xindy/htdocs
