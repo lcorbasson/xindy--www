@@ -1,0 +1,21 @@
+# $Id$
+#------------------------------------------------------------
+
+All other documents in that directory are commited in other areas.
+Only formatted versions of these documents are placed here.
+Automation of this process is wanted; please watch your step.
+
+Defined entry points are:
+
+faq.html
+make-rules-alphabets-doc.pdf
+manual.html
+new-sort-rules.ps
+new-sort-rules.ps.gz
+sort-rules.ps
+sort-rules.ps.gz
+tutorial.html
+xindy-eurotex98.pdf
+xindy-studienarbeit.pdf
+xindy-tr-cbm.pdf
+xindy-tr.pdf
