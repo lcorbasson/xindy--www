@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="download">
+<sitemap filename="sitemap.xml"/>
+<title>
+    Download Source
+</title>
+
+<text>
+  <div class="quotation">
+    You are in a maze of twisty little passages, all alike...
+    <address>-- Adventure</address>
+  </div>
+  <p>
+    If you are looking for a standard Source distribution with
+    <em>configure; make; make install</em> - this is not your project.
+    But if you are willing to plunge into a challenge, <b>xindy</b> is
+    something for you.
+  </p><p>
+    Full source for <b>xindy</b> is available, but currently it is
+    quite hard to build <b>xindy</b> from source. This page was
+    written by <a href="mailto:jschrod@acm.org">Joachim Schrod</a>. It
+    shall report what's available and shall provide information how to
+    create <b>xindy</b> from source.
+  </p><p>
+    <b>xindy</b> is written in Common Lisp. <a
+    href="http://clisp.cons.org/">CLISP</a> has been used for
+    development.
+  </p><p>
+  </p>
+</text>
+
+
+<coltext>
+<leftcol>
+  xindy Structure
+</leftcol>
+<rightcol>
+  <p>
+    <b>xindy</b> consists of (1) plugins for a Common Lisp system,
+    (2) Common Lisp code that makes up the <b>xindy</b> kernel, and
+    (3) <b>xindy</b> modules.
+  </p><p>
+    To create <b>xindy</b>, one needs to integrate the plugins into a
+    Common Lisp system. We did this for <a
+    href="http://clisp.cons.org/">CLISP</a>, the result are the
+    platform-specific archives on the <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566">software
+    distribution page</a>.
+  </p><p>
+    Then, the <b>xindy</b> kernel source code is compiled, and a final
+    executable is created. In the case of CLISP, the executable
+    consists of two files, a virtual machine and a memory image.
+  </p><p>
+    <b>xindy</b> module code is interpreted at run time.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Download
+</leftcol>
+<rightcol>
+  <p>
+    The <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646">Download
+    Area</a> is at SourceForge.
+  </p><p>
+    Fetch
+    <ol>
+      <li><a href="http://prdownloads.sourceforge.net/xindy/xindy-2.1.tar.gz?download"><tt>xindy-2.1.tar.gz</tt></a></li>
+      <li><a href="http://prdownloads.sourceforge.net/xindy/xindy-clisp-modules-2001-04-10.tar.bz2?download"><tt>xindy-clisp-modules-2001-04-10.tar.bz2</tt></a></li>
+    </ol>
+  </p><p>
+    You've got the complete source. If you want to work on
+    <b>xindy</b>, we recommend the CVS source.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  CVS: the real source
+</leftcol>
+<rightcol>
+  <p>
+    The real source is available by anonymous CVS, as explained on our
+    <a href="http://sourceforge.net/cvs/?group_id=10646">SourceForge
+    project CVS page</a>. We welcome new developers and will give out
+    commit rights quickly.
+  </p><p>
+    Three top-level CVS modules exist: <tt>xindy</tt> is the kernel
+    source code, <tt>make-rules</tt> is used to create <b>xindy</b>
+    language modules, and <tt>www</tt> is the XML source code for this
+    Web Site.
+  </p><p>
+    The CVS module <tt>xindy</tt> also has source code of the
+    documentation and the reports. The documentation is written in
+    SGML, with <i>linuxdoc</i>. It shall be migrated to DocBook. The
+    reports are written in LaTeX, of course.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Common Lisp plugins
+</leftcol>
+<rightcol>
+  <p>
+    There are two plugins: <i>ordrules</i> which implements string
+    ordering rules, and <i>regexp</i> which implements regular
+    expressions. The plugins have been introduced for reuse
+    (<i>ordrules</i> comes from a predecessor project,
+    <i>International MakeIndex</i>) and for performance reasons
+    (remember, <b>xindy</b> was written in 1995).
+  </p><p>
+    Frankly, today I consider the usage of plugins as a very big
+    error. They should be replaced by ``pure'' Lisp solutions as soon
+    as possible - currently, they are the big porting nightmare of
+    <b>xindy</b>.
+  </p><p>
+    We used <a href="http://clisp.cons.org/">CLISP</a> as the Common
+    Lisp system for development. But CLISP changed its plugin API some
+    time ago. Thus it is not possible to integrate the plugin modules
+    into current CLISP distributions. Nobody has adapted the plugins
+    to the new API yet. Of course, we would welcome such a
+    contribution. But if you're proficient enough in Common Lisp,
+    rewriting it in Lisp might be even easier and would be as welcome.
+  </p><p>
+    Roger Kehr reported a succesful <b>xindy</b> port to ACL. More
+    information on that port is unknown.
+  </p><p>
+    The plugin sources are also in the CVS module <tt>xindy/rx</tt>.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Source access, revisited
+</leftcol>
+<rightcol>
+  <p>
+    Ignore the CVS module <tt>xindy/src</tt>, that's a relict that is
+    explained below.
+  </p><p>
+    <b>xindy</b> was written with the help of <a
+    href="http://www.eecs.harvard.edu/~nr/noweb/"><i>noweb</i></a>, a
+    Literate Programming System. <a
+    href="http://www.kitebird.com/imake-book/"><i>Imake</i></a> was
+    used for abstract dependency descriptions. The test suite is
+    realized by <a
+    href="http://www.gnu.org/directory/dejagnu.html"><i>DejaGnu</i></a>.
+    You need to get these systems before you start. You need only the
+    <tt>imake</tt> executable, not the dreaded MIT X configuration
+    files. Use <tt>tools/imkmf</tt> as command line interface for
+    <i>Imake</i>.
+  </p><p>
+    <tt>xindy/xindy/intro.nw</tt> has an introduction into code
+    structure and conventions.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Ancient version
+</leftcol>
+<rightcol>
+  <p>
+    <b>xindy</b> was written first in 1995, as student project by
+    Roger Kehr, under supervision of <a
+    href="mailto:jschrod@acm.org">Joachim Schrod</a>. The source of
+    this student project is in the CVS module <tt>xindy/src</tt>. I
+    don't know if this code does still run at all.
+  </p><p>
+    Starting in 1996, Roger did a rewrite of the sorting rules, to add
+    support for sorting phases. You'll find more information on this
+    in the technical reports. At this time, he also restructured the
+    source and placed each module in its own directory. Furthermore,
+    he added the test suite.
+  </p><p>
+    The ancient version will be relegated to a CVS branch, and shall
+    be removed from the main trunk.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Build recipes
+</leftcol>
+<rightcol>
+  <p>
+    I have found two Web pages with information how to build
+    <b>xindy</b>. Due to the change in the CLISP plugin API, the
+    information from these pages is not literally valid any more; but
+    the basic process is described correctly.
+  </p>
+  <ul>
+    <li>
+      The platform-specific archives from the 2.1 distribution were
+      created by <a
+      href="mailto:thenlich@users.sourceforge.net">Thomas Henlich</a>
+      with <a href="source-build-thomas.html">this build process</a>.
+    </li>
+    <li>
+      Roger wrote up <a href="source-build-roger.html">this
+      description</a> in 1999.
+    </li>
+  </ul>
+</rightcol>
+</coltext>
+
+
+<prev url="download-binary.html">Binary Distributions</prev>
+<next
+url="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566">SourceForge
+Download Area</next>
+
+
+
+</page>

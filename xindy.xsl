@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+     ============================================================
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="iso-8859-1" indent="yes"/>
 
@@ -56,7 +59,7 @@
      <TABLE width="100%" cellpadding="0" cellspacing="0" border="0">
         <TR>
 <!-- left column -->
-        <TD width="140" valign="top" class="sidebasis">
+        <TD width="150" valign="top" class="sidebasis">
            <TABLE width="100%" cellpadding="2" cellspacing="0" border="0" class="sidebasis">
              <TR><TD height="25">&#160;</TD></TR>
 

@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="download">
+<sitemap filename="sitemap.xml"/>
+<title>
+    xindy Build Process<br/>by Roger Kehr
+</title>
+
+<text>
+
+  <h3>Overview</h3>
+
+  <p><b>xindy</b> is implemented in CLISP, a Common Lisp implementation
+  that is quite portable and runs on various platforms including
+  Windows32 (i.e. Win95, Win98 and Win NT).</p>
+
+  <p>The core Lisp system has been extended by the GNU Rx regular
+  expression library.</p>
+
+  <p>Additionally is has been extended with around 500 lines of C-code.
+  The additional parts are only necessary if one uses the
+  keyword-mapping features of <b>xindy</b>, which is one of the
+  central parts of the system. But it should be usable without these
+  features, too.</p>
+
+  <p><a href="http://clisp.cons.org/">CLISP</a> is available under
+  the GNU General Public License.
+  An additional requirement is that the CLISP version implements a
+  FFI (foreign function interface) for the target platform.</p>
+
+  <p>The <a href="http://www.gnu.org/directory/rx.html">GNU rx
+  library</a> is needed to implement the keyword mappings.</p>
+
+  <h3>Porting xindy to your system</h3>
+
+  <h4>Compiling CLISP</h4>
+
+  <ul>
+    <li>
+      Obtain the following files from the CLISP distribution:
+
+      <pre>
+  source/clispsrc.tar.gz
+  source/clispsrc-readline.tar.gz
+</pre></li>
+
+    <li>
+      As a first step the CLISP system must be compiled on the
+      target platform. To do this, you need about 48 MB of disk
+      space otherwise you will fail miserably (on a Sparc,
+      SunOS-4.1.1) [Sorry Walter, wasn't aware that this would be a
+      problem].
+      <p>
+	The CLISP distribution has improved in the last year and it
+	should be easy to run configure and make on it without any
+	problems. Nonetheless we should check on which platforms
+	CLISP will compile without any problems with the FFI
+	(foreign function interface).
+      </p>
+      <p>
+      Choose a directory, then cd to this directory and unpack the
+      two clisp-source archives there.
+      Change directory to the clisp-source directory.
+      </p>
+      <p>
+       If you are on a UNIX platform use the following switches for the
+	<tt>./configure</tt> script:</p>
+      <pre>  ./configure --with-dynamic-ffi --with-readline</pre>
+
+      <p>Consult the CLISP documentation to find out how to build CLISP
+      on operating systems other than UNIX.
+      Make sure you invoke <tt>makemake</tt>, which creates the CLISP
+      Makefile,
+      with the <tt>--with-dynamic-ffi</tt> option:</p>
+      <pre>
+  $CLISP_SRC/src $ ./makemake --with-dynamic-ffi --with-readline >Makefile
+</pre>
+      <p>
+	The best results on many platforms can be achieved with the GNU
+	gcc compiler. The documentation included with CLISP contains many
+	hints about compiling and getting CLISP up and running.</p>
+      <p>
+	The systems should be kept in a linkable form. If you do a
+	`make clean' you must rebuild the  CLISP-system from
+	scratch (takes only a few hours on a Sparc-1 ;-( ).</p>
+      <p>
+	There is a mailing list on  CLISP that also discusses
+	problems with CLISP ports. The address of this list found in
+	of the CLISP documentation. This mailing-list is archived
+	and sometimes problems have already been reported, thus
+	checking this archive is
+	always a good idea if you do encounter a problem.</p>
+      <p>
+	If CLISP complains that it can't find the X11 library, just
+	unset the variable <tt>X_LIBS = #</tt> in the CLISP
+	Makefile. This prevents to search for the X11 libs which are
+	not necessary to build clisp.</p>
+    </li>
+
+    <li>
+      <p>
+      After you have successfully made CLISP, run the
+      testsuite with the command <tt>make testsuite</tt>.</p>
+    </li>
+
+    <li>
+      <p>Do an additional
+      <pre>  make lisp.a</pre></p>
+    </li>
+
+    <li>
+      <p>
+      Then take the file <tt>modules.h</tt> from the source
+      and copy this file to the current directory after
+      saving the original <tt>modules.h</tt> to
+      <tt>modules.h.dist</tt>:</p>
+      <pre>
+  mv modules.h modules.h.dist
+  cp $TOP/clisp/arch/modules.h .
+  rm modules.o; make modules.o
+</pre>
+      <p>
+      Basically, this compiles the object file <tt>modules.o</tt>
+      that we need later to link the CLISP with the foreign
+      libraries.</p>
+    </li>
+
+    <li>
+      <p> The directory in which CLISP is unpacked (usually
+      something like <tt>clisp-YYYY-MM-DD</tt>) will be called
+      <tt>$CLISP_SRC.</tt></p>
+    </li>
+  </ul>
+
+
+  <h4>Compiling GNU Rx</h4>
+
+  <ul>
+    <li>
+      <p>
+      Just compile GNU Rx on the target platform and run the
+      testsuite:</p>
+      <pre>
+  configure
+  make
+</pre>
+    </li>
+    <li>
+      <p>
+      The directory where Rx is unpacked (usually something like
+      <tt>rx-x.y</tt>) will be called <tt>$RX_SRC</tt>.</p>
+    </li>
+  </ul>
+
+  <h4>Putting it all together</h4>
+
+  <ul>
+    <li><p>Get the current <b>xindy</b> source.</p>
+      <pre>  cd xindy/rx</pre>
+    </li>
+
+    <li>
+      <p>
+      Set the link to the Rx library (the directory where
+      <tt>librx.a</tt> is located) appropriately. Usually this will
+      be</p>
+      <pre>
+  rm -f rx
+  ln -s $RX_SRC/rx
+</pre>
+      <p>
+      On Windows and OS/2 which have no symbolic links we must move the
+      <tt>rx/</tt> directory over there instead.</p>
+    </li>
+
+    <li>
+      <p>
+      Create a symbolic link to the <tt>clisp.h</tt> file in the source
+      directory of the CLISP distribution:</p>
+      <pre>
+  rm -f clisp.h
+  ln -s $CLISP_SRC/src/clisp.h clisp.h
+</pre>
+    </li>
+
+    <li>
+      <p>
+      Type `make' and cross your fingers <tt>:)</tt> If you haven't
+      installed a CLISP just say</p>
+      <pre>
+ make CLISP="$CLISP_SRC/src/lisp.run -M $CLISP_SRC/src/lispinit.mem"
+</pre>
+      <p>
+      instead. This invokes CLISP directly.</p>
+      <p>
+	Now you have compiled the C extensions (keyword mapping
+	module) that will later be incorporated into the core CLISP.
+	Actually this is the hardest part, and probably the
+	<tt>clisp.h-files</tt> directory has to be adjusted for new
+	platforms.</p>
+    </li>
+
+    <li>
+      <p>Now enter the directory</p>
+      <pre>  cd $TOP/clisp/arch/ARCH</pre>
+      <p>
+	If you like you can rename <tt>ARCH</tt> to the name of the
+	platform that you are just about to port to. But it doesn't
+	matter much.</p>
+    </li>
+
+    <li>
+      <p>Just say</p>
+      <pre>  make</pre>
+      <p>This does now several things:</p>
+      <ul>
+	<li><p>It sets up several symbolic links.</p>
+	</li>
+	<li><p>It copies various
+	  files from the CLISP distribution such as libraries and
+	  other files to that directory. Other files such as
+	  <tt>librx</tt> are also copied there. You can remove these
+	  files with <tt>make realclean</tt> if you need.
+	  <br/>
+	  Be sure that you have made the files <tt>lisp.a</tt> and
+	  <tt>modules.o</tt> as described above. The reason, why
+	  these files are copied is just that you can keep these
+	  files locally and remove the CLISP distribution if you
+	  want. To do this, you must remove the entry <tt>setup</tt>
+	  in the file <tt>Makefile.local</tt>.</p>
+	</li>
+	<li>
+	  <p>
+	  Afterwards it links clisp (<tt>lisp.run</tt>), now with
+	  all the foreign libraries added.</p>
+	</li>
+	<li>
+	  <p>
+	  Finally the Lisp system is dumped into the file
+	  <tt>clisp.mem</tt>.</p>
+	</li>
+      </ul>
+      <p>
+      It may happen that you need to adjust <tt>Makefile.local</tt>
+      to the needs of you platform.</p>
+    </li>
+
+    <li>
+      <p>Basically, you're done.</p>
+    </li>
+
+    <li>
+      <p>
+      Now take one of the binary distributions (doesn't matter which
+      one) and unpack it.</p>
+    </li>
+
+    <li>
+      <p>
+      Choose a platform name for your distribution. Then do the
+      following:</p>
+      <pre>
+  cd ./binaries
+  mv &lt;old-platform> &lt;platform>
+  cd &lt;platform>
+  echo "&lt;platform>" > PLATFORM
+  cp $TOP/clisp/arch/ARCH/lisp.run  xindy.run
+  cp $TOP/clisp/arch/ARCH/clisp.mem base.mem
+</pre>
+    </li>
+
+    <li>
+      <p>
+      Adjust the <tt>Makefile.platform</tt> appropriately. Please
+      keep the entries for <tt>PERL</tt> unchanged.</p>
+    </li>
+
+    <li>
+      <p>
+      Take a xindy source distribution and check if you newly built
+      binary stuff works as expected. If so, do a <tt>make
+      clean</tt> and create a new archive with</p>
+      <pre>
+  gtar -czvf xindy-<i>version</i>-<i>platform</i>.tar.gz ./binaries
+</pre>
+      <p>and you're done! Congratulations!</p>
+    </li>
+
+  </ul>
+
+</text>
+
+<prev url="download-source.html">Download Source</prev>
+
+</page>

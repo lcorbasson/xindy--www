@@ -17,6 +17,12 @@ Make to use it.
     sub-project and will be updated in due course.
 
 
+All files in the doc/ subdirectory are generated. Their reference
+versions are found in other CVS modules, refer to doc/README for more
+information. All files in the top-level directory are part of the www
+CVS module of the xindy project.
+
+
 The markup used in the XML files is quite simplistic:
 
  -- sitemap.xml holds a list of all pages of this Web Site and
@@ -32,19 +38,14 @@ The markup used in the XML files is quite simplistic:
 	  <sitemap filename="sitemap.xml"/>
 	  <title>XHTML TEXT</title>
 
-	  <text>
+	  <text>	      <!-- optional -->
 	      XHTML TEXT
 	  </text>
 
-	</page>
-
-    or
-
-	<page category="GROUP">
-	  <sitemap filename="sitemap.xml"/>
-	  <title>XHTML TEXT</title>
-
-	  <coltext>
+	  <coltext>           <!-- optional, repeatable -->
+	    <leftcol-title>     <!-- optional -->
+	      XHTML TEXT
+	    </leftcol-title>
 	    <leftcol>
 	      XHTML TEXT
 	    </leftcol>
@@ -52,6 +53,9 @@ The markup used in the XML files is quite simplistic:
 	      XHTML TEXT
 	    </rightcol>
 	  </coltext>
+
+	  <next url="URL">TEXT</next>   <!-- optional, repeatable -->
+	  <prev url="URL">TEXT</prev>   <!-- optional, repeatable -->
 
 	</page>
 

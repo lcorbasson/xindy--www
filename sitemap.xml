@@ -27,12 +27,13 @@
    <url>features.html</url>
 </entry>
 
+<!--
 <entry>
    <group>LaTeX</group>
    <grouptitle>xindy and LaTeX</grouptitle>
    <url>latex.html</url>
 </entry>
-
+-->
 
 
 <entry>
@@ -42,6 +43,7 @@
    <url>documentation.html</url>
 </entry>
 
+<!--
 <entry>
    <group>documentation</group>
    <pagetitle>HOWTO for Document Authors</pagetitle>
@@ -53,42 +55,62 @@
    <pagetitle>HOWTO for Style Writers</pagetitle>
    <url>howto-style-writers.html</url>
 </entry>
+-->
 
 <entry>
    <group>documentation</group>
-   <pagetitle>Reference Documentation xindy</pagetitle>
-   <url>reference-xindy.html</url>
+   <pagetitle>xindy Tutorial</pagetitle>
+   <url>doc/tutorial.html</url>
 </entry>
 
 <entry>
    <group>documentation</group>
-   <pagetitle>Reference Documentation make-rules</pagetitle>
-   <url>reference-make-rules.html</url>
+   <pagetitle>xindy Reference Manual</pagetitle>
+   <url>doc/manual.html</url>
 </entry>
 
 <entry>
    <group>documentation</group>
-   <pagetitle>Reports and Presentations</pagetitle>
-   <url>reports.html</url>
+   <pagetitle>make-rules Documentation</pagetitle>
+   <url>make-rules.html</url>
 </entry>
 
 
 <entry>
    <group>FAQ</group>
    <grouptitle>FAQ</grouptitle>
-   <url>faq.html</url>
+   <url>doc/faq.html</url>
 </entry>
 
 <entry>
    <group>tickets</group>
-   <pagetitle>Open Issues</pagetitle>
+   <grouptitle>Open Issues</grouptitle>
    <url>http://sourceforge.net/tracker/?group_id=10646</url>
 </entry>
 
 <entry>
    <group>download</group>
    <grouptitle>Download</grouptitle>
+   <pagetitle>Binary Distribution</pagetitle>
+   <url>download-binary.html</url>
+</entry>
+
+<entry>
+   <group>download</group>
+   <pagetitle>Sources</pagetitle>
+   <url>download-source.html</url>
+</entry>
+
+<entry>
+   <group>download</group>
+   <pagetitle>Download Area</pagetitle>
    <url>http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566</url>
+</entry>
+
+<entry>
+   <group>download</group>
+   <pagetitle>CVS</pagetitle>
+   <url>http://sourceforge.net/cvs/?group_id=10646</url>
 </entry>
 
 <entry>

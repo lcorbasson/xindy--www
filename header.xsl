@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+     ============================================================
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
   <xsl:output method="html" encoding="iso-8859-1" indent="yes"/>
 
@@ -32,7 +35,7 @@
           <TD height="30" class="headsep">
             <A href="./"> About </A> |
             <A href="documentation.html"> Documentation </A> |
-            <A href="http://sourceforge.net/project/showfiles.php?group_id=10646"> Download </A> |
+            <A href="download-binary.html"> Download </A> |
             <A href="mailing-list.html"> Community </A>
           </TD>
 	  <TD width="100" class="headsep">&#160;</TD>

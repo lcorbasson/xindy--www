@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="documentation">
+<sitemap filename="sitemap.xml"/>
+<title>
+    Documentation Roadmap
+</title>
+
+<text>
+  <p>
+    Documentation is one of our big problems in this project. If you
+    are willing to give us a hand here, you're more than welcome.
+  </p><p>
+    The available documentation is mostly about index styles and
+    <b>xindy</b> concepts. In fact, this was a university research
+    project - we have quite some research papers.
+  </p><p>
+    The upcoming new 2nd edition of the <em>LaTeX Companion</em> will
+    describe usage of <b>xindy</b> the easy way, for those who just
+    want to have a MakeIndex replacement for usual LaTeX documents.
+  </p><p>
+  </p>
+</text>
+
+
+
+<coltext>
+<leftcol>
+    For Document Authors
+</leftcol>
+<rightcol>
+  <p>
+    A simple HOWTO document is not (yet) available. If you use LaTeX,
+    your best bet is the 2nd edition of the <em>LaTeX Companion</em>,
+    there <b>xindy</b> usage is described in detail. In the future, we
+    hope to get permission to use some of this material here as well.
+  </p><p>
+    The <a href="doc/faq.html">FAQ</a> has also some questions and
+    answers about <b>xindy</b>'s command line interface, that might be
+    of interest for you.
+  </p><p>
+    If your index is more complex than references to some page
+    numbers, you might want to read the <a
+    href="doc/tutorial.html"><b>xindy</b> Tutorial</a>, since you will
+    need to write your own index style.
+  </p>
+</rightcol>
+</coltext>
+
+
+<coltext>
+<leftcol>
+    For Style Writers
+</leftcol>
+<rightcol>
+  <p>
+    As an introduction, you should start with the <a
+    href="doc/tutorial.html"><b>xindy</b> Tutorial</a> to learn about
+    basic <b>xindy</b> concepts.
+  </p><p>
+    The <a href="doc/faq.html">FAQ</a> is
+    especially useful for the TeX community answering many common
+    questions.
+  </p><p>
+    Eventually, you will have to look into the <a
+    href="doc/manual.html"><b>xindy</b> Reference Manual</a>, though.
+    However, study some of the examples first.
+  </p>
+</rightcol>
+</coltext>
+
+
+<coltext>
+<leftcol>
+    Reference Docs
+</leftcol>
+<rightcol>
+  <dl>
+    <dt>
+      <a href="doc/manual.html"><b>xindy</b> Reference Manual</a>
+    </dt>
+    <dd>
+      is the definitive description of all xindy declarations, used to
+      specify sorting, character classes, locations, markup, etc. Our
+      feedback is that the used reference language uses too much Lisp
+      jargon, without that knowledge you will have to spend a few
+      additional hours to get aquainted to.
+      <p>
+	Before you read it, have a look at the <a
+	href="doc/tutorial.html"><b>xindy</b> Tutorial</a>. The <a
+	href="doc/xindy-tr.pdf"><b>xindy</b> Technical Report</a> (in
+	Postscript) is also a good preparation to learn about the
+	models behind <b>xindy</b>.
+      </p>
+    </dd>
+    <dt>
+      <a href="make-rules.html"><b>make-rules</b> Documentation</a>
+    </dt>
+    <dd>
+      details which languages are supported.
+    </dd>
+  </dl>
+</rightcol>
+</coltext>
+
+
+<coltext>
+<leftcol>
+    Technical Reports
+</leftcol>
+<rightcol>
+  <p>
+    Please note that some of the reports contain outdated contact, Web
+    Site, and download information.
+  </p>
+  <dl>
+    <dt>
+      <a href="doc/xindy-eurotex98.pdf"><b>xindy</b> - A Flexible
+      Indexing System</a> (PDF)
+    </dt>
+    <dd>
+      Presented at EuroTeX 98, St. Malo, France; awarded best
+      conference paper. Cahiers GUTenberg Vol. 28-29, March 1998, p.
+      223-230.
+    </dd>
+    <dt>
+      <a href="doc/xindy-tr.pdf"><b>xindy</b>: Definition of an
+      Indexing Model and its Implementation</a> (PDF)
+    </dt>
+    <dd>
+      Technical Report TI-11/1997, Technical University of Darmstadt
+    </dd>
+    <dt>
+      <a href="doc/xindy-tr-cbm.pdf">A Simple Context-Based Markup
+      Algorithm and its Efficient Implementation in CLOS</a> (PDF)
+    </dt>
+    <dd>
+      Technical Report TI-12/1997, Technical University of Darmstadt
+    </dd>
+    <dt>
+      <a href="doc/new-sort-rules.ps">Sorting Index Entries with
+      <b>xindy</b> revisited</a> (in Postscript, also as <a
+      href="doc/new-sort-rules.ps.gz">.ps.gz</a>)
+    </dt>
+    <dd>
+      Describes the current implementation scheme with examples from
+      German and French sorting.
+    </dd>
+    <dt>
+      <a href="doc/sort-rules.html">Draft discussion paper on
+      International Sorting</a> (also in <a
+      href="doc/sort-rules.ps">Postscript</a> and in <a
+      href="doc/sort-rules.ps.gz">.ps.gz</a>)
+    </dt>
+    <dd>
+      Musings that lead to the revisited index sorting scheme, as
+      described in the previous report. Since these musings have some
+      interesting guidelines and report about pitfalls, we have kept
+      them online.
+    </dd>
+    <dt>
+      <a href="doc/xindy-studienarbeit.pdf"><b>xindy</b> - Ein
+      Flexibles Indexierungssystem</a>, Studienarbeit FB Informatik,
+      TH-Darmstadt, November 1995 (PDF, in German).
+    </dt>
+    <dd>
+      Roger's original report on his student project.
+    </dd>
+    <dt>
+      <a href="http://std.dkuug.dk/JTC1/SC22/WG20/">ISO/IEC 14651
+      International String Ordering</a> (external link)
+    </dt>
+    <dd>
+      This ISO Standard was used in creation of the <b>xindy</b> sort
+      mechanism. The Web site referred above still has the final draft
+      online, in Wordperfect format. It also has some sorting rules
+      online, in the documents section.
+    </dd>
+  </dl>
+</rightcol>
+</coltext>
+
+
+</page>

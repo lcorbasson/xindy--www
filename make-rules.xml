@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="documentation">
+<sitemap filename="sitemap.xml"/>
+<title>
+    MAKE-RULES
+</title>
+
+<text>
+
+<p>The <b>make-rules</b> package contains:</p>
+
+<ol>
+
+  <li>
+    <p>
+      A Perl script to transform a description of a
+      (language-specific) alphabet into a set of sorting rules for
+      xindy. <a href="doc/make-rules-alphabets-doc.pdf">Alphabets for
+      some languages</a> are already provided (PDF, 209 KB):
+    </p>
+    <ul>
+      <li> Albanian </li>
+      <li> Belarusian </li>
+      <li> Bulgarian  </li>
+      <li> Croatian </li>
+      <li> Czech </li>
+      <li> Danish </li>
+      <li> English  </li>
+      <li> Esperanto </li>
+      <li> Finnish </li>
+      <li> French </li>
+      <li> Georgian </li>
+      <li> German (also Braille alphabet) </li>
+      <li> Greek (also ISO transliteration) </li>
+      <li> Gypsy (North-Russian dialect) </li>
+      <li> Hausa </li>
+      <li> Hungarian </li>
+      <li> Icelandic </li>
+      <li> Italian </li>
+      <li> Klingon (yes, we can handle fictional languages too ;-) </li>
+      <li> Kurdish (two variants which write the '<tt>i</tt>' differently) </li>
+      <li> Latin </li>
+      <li> Latvian </li>
+      <li> Lithuanian </li>
+      <li> Lower Sorbian </li>
+      <li> Macedonian </li>
+      <li> Mongolian </li>
+      <li> Norwegian </li>
+      <li> Polish </li>
+      <li> Portuguese </li>
+      <li> Romanian </li>
+      <li> Russian (also ISO 9 transliteration) </li>
+      <li> Serbian </li>
+      <li> Slovak </li>
+      <li> Slovenian </li>
+      <li> Spanish </li>
+      <li> Swedish </li>
+      <li> Turkish </li>
+      <li> Ukrainian </li>
+      <li> Upper Sorbian </li>
+      <li> Vietnamese </li>
+    </ul>
+  </li>
+
+  <li>
+    <p>A Perl script to generate sets of rules which are needed in
+    combination with the LaTeX <i>inputenc</i> package.</p>
+  </li>
+
+  <li>
+    <p>Xorty: a package (raw filter + style file) to turn xindy into a
+    simple sort program for text files with one entry on each line,
+    i.e. provide the functionality of the Unix command sequence
+    <tt>sort | uniq</tt>.</p>
+  </li>
+
+</ol>
+
+<p><b>Requirements:</b></p>
+<ul>
+  <li> TeX and LaTeX </li>
+  <li> Perl 5 or higher </li>
+  <li> GNU make or an equivalent <i>make</i> program </li>
+  <li> If your favourite character set is not yet supported: iconv </li>
+  <li> xindy 2.0 or higher </li>
+</ul>
+
+<!--
+<p><a href="../download/make-rules.tar.gz">Download it.</a>
+(Version 2001-04-25).</p>
+<p>There is also a version with <a href=
+"ftp://xindy.sourceforge.net/pub/xindy/ready-made-rules.tar.gz">ready-to-install
+xdy files</a> (if e.g. GNU make or iconv are not easily available.)
+Version 2001-04-02.</p>
+-->
+<address>
+  <a href="mailto:thenlich@users.sourceforge.net">Thomas Henlich</a>
+</address>
+
+</text>
+</page>

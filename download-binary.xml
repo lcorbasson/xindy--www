@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="download">
+<sitemap filename="sitemap.xml"/>
+<title>
+    Download &amp; Installation
+</title>
+
+<text>
+  <p>
+    The section name <em>Binary Distribution</em> in the navigation
+    bar is actually a misnomer - you will compile <b>xindy</b> kernel
+    source code during installation. But you will download and use a
+    binary distribution of the compiler to do that.
+  </p><p>
+    So, let's start...
+  </p><p>
+  </p>
+</text>
+
+
+<coltext>
+<leftcol>
+  Download
+</leftcol>
+<rightcol>
+  <p>
+    The <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566">Download
+    Area</a> is at SourceForge.
+  </p><p>
+    Fetch
+    <ol>
+      <li><tt>xindy-2.1.tar.gz</tt></li>
+      <li>
+	<tt>xindy-2.1-<i>platform</i>.tar.gz</tt>, where
+	<i>platform</i> is appropriate for your system.
+      </li>
+      <li><tt>xindy-make-rules-0.2.tar.gz</tt></li>
+    </ol>
+  </p><p>
+    If you want to use <b>xindy</b> on HP-UX or SunOS 4, you'll have
+    to fetch the <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=57988">2.0
+    release</a>. Current binary distributions don't exist for these
+    platforms.
+  </p><p>
+    If you want to use <b>xindy</b> on Windows or OS/2, you'll have to
+    fetch the <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=57988">2.0
+    release</a>, too. The rest of this installation instructions won't
+    work under these operating systems, though. Your best bet is
+    getting GNU make (e.g., from <a
+    href="http://www.cygwin.com/">Cygwin</a>) and adapting the
+    Makefiles. Your help to improve that miserable situation would be
+    really welcome.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Unpack
+</leftcol>
+<rightcol>
+  <ol>
+    <li>
+      Unpack <tt>xindy-2.1.tar.gz</tt>. The directory <tt>xindy</tt>
+      is created.
+    </li>
+    <li> Change current directory to <tt>xindy</tt>. </li>
+    <li> Unpack <tt>xindy-2.1-<i>platform</i>.tar.gz</tt>. </li>
+    <li> Unpack <tt>xindy-make-rules-0.2.tar.gz</tt>. </li>
+  </ol>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Create xindy format
+</leftcol>
+<rightcol>
+  <ol>
+    <li>
+      Create a symlink <tt>current</tt>:
+      <pre>  ln -s xindy-2.1 current</pre>
+    </li>
+    <li> Change current directory to <tt>binaries/<i>platform</i></tt>. </li>
+    <li>
+      <b>xindy</b> will be installed in <tt>/usr/local</tt>. If you
+      don't like this, change it in <tt>Makefile.install</tt>.
+    </li>
+    <li>
+      Create the format:
+      <pre>
+  make all
+  make gzipped
+</pre>
+      During <tt>make all</tt>, there will be warnings about an
+      unspecified installation directory. Ignore them.
+    </li>
+    <li>
+      (Optional) Run tests:
+      <pre>  make testsuite</pre>
+      This will end with the message that tests <em>ex1</em> and
+      <em>ex2</em> have failed. That is a known problem with the
+      tests, not with <b>xindy</b>.
+    </li>
+  </ol>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Install xindy
+</leftcol>
+<rightcol>
+  <ol>
+    <li>
+      By default, the <b>xindy</b> command will be installed in
+      <tt>/usr/local/bin</tt> and auxiliary files in
+      <tt>/usr/local/lib/xindy</tt>. You might have changed these
+      directories, as explained above.
+      <pre>  make install</pre>
+      Most probably, you can only do this as <em>root</em>.
+    </li>
+    <li>
+      (Optional) You might want to copy the man pages to appropriate
+      directories, e.g.,
+    <pre>
+  cd /usr/local
+  cp lib/xindy/doc/*.1 man/man1
+  cd -
+</pre>
+    </li>
+  </ol>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Install language modules
+</leftcol>
+<rightcol>
+  <ol>
+    <li>
+      Change your current directory to <tt>../../xindy-make-rules-0.2</tt>.
+    </li>
+    <li>
+      If you don't have GNU make, get it and install it. (Linux
+      users have it by default, the others should know.)
+    </li>
+    <li>
+      If you have changed the installation directory of <b>xindy</b>,
+      you need to adapt the settings in <tt>Makefile</tt>.
+    </li>
+    <li> Install with <pre>  make install</pre> </li>
+  </ol>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Usage
+</leftcol>
+<rightcol>
+  <p>
+    Three user commands have been installed, <tt>makeindex4</tt>,
+    <tt>makeindex.sh</tt> and <tt>xindy</tt>.
+  </p><p>
+    <tt>makeindex4</tt> comes with an associated man page,
+    <tt>makeindex.sh</tt> has a good usage message, and <a
+    href="documentation.html">tutorial and reference documentation</a>
+    exist for <tt>xindy</tt>.
+  </p><p>
+    Currently the best way to learn about <b>xindy</b> usage is
+    copying an example index style, and changing it. A good one is in
+    <tt>xindy-make-rules-0.2</tt>.
+  </p>
+</rightcol>
+</coltext>
+
+
+<next url="download-source.html">Sources</next>
+<next
+url="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566">SourceForge
+Download Area</next>
+
+
+
+</page>

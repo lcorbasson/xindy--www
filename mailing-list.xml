@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="mailing">
+<sitemap filename="sitemap.xml"/>
+<title>
+Mailing List
+</title>
+
+<coltext>
+<leftcol>
+   Subscription
+</leftcol>
+<rightcol>
+   <p>
+   There is a mailing list for discussions about <b>xindy</b>,
+   proposals, and other interesting stuff. Tell us your
+   experiences and bring your ideas into this project! Simply
+   send a mail to
+   </p><p>
+   <center>
+     <a href="mailto:xindy-request@iti.informatik.tu-darmstadt.de">
+     <tt>xindy-request@iti.informatik.tu-darmstadt.de</tt></a>
+   </center>
+   </p><p>
+   containing the word <tt>subscribe</tt> in its body and you'll be
+   with us! You will receive an email that asks for confirmation of
+   your subscription, to combat spam.
+   </p><p>
+   Address of the mailing list itself, for contributions, is
+   </p><p>
+   <center>
+      <a href="mailto:xindy@iti.informatik.tu-darmstadt.de">
+      <tt>xindy@iti.informatik.tu-darmstadt.de</tt></a>
+   </center>
+   </p><p>
+   You need to be subscribed to send email; the spam problem forces us
+   to use this configuration.
+   </p><p>
+   It is planned to move the mailing list to Sourceforge, as the mail
+   domain <tt>iti.informatik.tu-darmstadt.de</tt> will be shut down.
+   </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+   Archive
+</leftcol>
+<rightcol>
+   <p>
+   Mails from 1997 to 2000 are available as
+   <a href="html-mail-archive/threads.html"><b>mail archive</b></a>.
+   We hope to reestablish an archive after moving the mailing list to
+   Sourceforge.
+   </p>
+</rightcol>
+
+</coltext>
+
+<text>
+</text>
+
+
+
+</page>

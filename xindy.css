@@ -1,9 +1,14 @@
-       body  {
+/* $Id$
+   ------------------------------------------------------------
+*/
+
+    body  {
         color:            #000000;
         background-color: ivory;
         margin:		  0px;
-        }
-      .headtop  {
+        font-family:      Verdana, Helvetica, Arial, sans-serif ;
+    }
+   .headtop  {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #EFEFEF;
         background-color: lightblue;
@@ -13,60 +18,57 @@
         padding-right:    1ex;
         padding-top:      3pt;
         padding-bottom:   3pt;
-       }
-      .headsep  {
+    }
+    .headsep  {
         background-color: #000066;
-        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #EFEFEF;
         font-size:        9pt;
         white-space:	  nowrap;
 	padding-right:	  3ex;
-       }
+    }
 
-      .title {
+    .title {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #FFFFFF;
         background-color: #066699;
         font-size:        12pt;
         font-weight:      bold;
         padding:	  6px;
-       }
-     .mainbasis  {
+    }
+    .mainbasis  {
         background-color: ivory;
-       }
-     .leftcol {
+    }
+    .leftcol {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #000000;
         font-size:        10pt;
         font-weight:      bold;
         vertical-align:   text-top;
 	text-align:	  right;
-      }
-     .leftcol-title {
+    }
+    .leftcol-title {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #000000;
         font-size:        11pt;
         font-weight:      bold;
         vertical-align:   text-top;
 	text-align:	  right;
-      }
-     .rightcol {
-        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+    }
+    .rightcol {
         color:            #000000;
         font-size:        10pt;
         vertical-align:   text-top;
 	padding-left:	  20px;
-      }
-      .text {
-        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+    }
+    .text {
         color:            #000000;
         font-size:        10pt;
         vertical-align:   text-top;
-      }
-     .sidebasis  {
+    }
+    .sidebasis  {
         background-color: #000066;
-       }
-     .sidelabel  {
+    }
+    .sidelabel  {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #EFEFEF;
         font-size:        9pt;
@@ -74,8 +76,8 @@
         horizontal-align: right;
         vertical-align:   middle;
         background-color: #000066;
-       }
-     .sidelabelselected  {
+    }
+    .sidelabelselected  {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
         color:            #000066;
         font-size:        9pt;
@@ -83,53 +85,67 @@
         horizontal-align: right;
         vertical-align:   middle;
         background-color: lightblue;
-       }
-     .sidelabelsub  {
+    }
+    .followup  {
         font-family:      Tahoma, Helvetica, Arial, sans-serif ;
-        color:            #000066;
-        font-size:        9pt;
-        vertical-align:   middle;
-        background-color: ivory;
-       }
-     .followup  {
-        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
-        color:            #000066;
+        color:            #4F94CD;
         font-size:        10pt;
         background-color: ivory;
-       }
-     A:link {
-       color:		  #000066;
-       text-decoration:	  none;
-       }
-     A:hover {
-       color:		  turquoise;
-       text-decoration:	  none;
-       }
-     .headsep A:link {
-       color:		  #EFEFEF;
-       text-decoration:	  none;
-       }
-     .sidelabel A:link {
-       color:		  #EFEFEF;
-       text-decoration:	  none;
-       }
-     A:visited {
-       color:		  #000066;
-       text-decoration:	  none;
-       }
-     .headsep A:visited {
-       color:		  #EFEFEF;
-       text-decoration:	  none;
-       }
-     .sidelabel A:visited {
-       color:		  #EFEFEF;
-       text-decoration:	  none;
-       }
-     UL {
-       list-style-type: square;
-       }
+    }
+    A:link {
+        color:		  #4F94CD;
+        text-decoration:  none;
+	border-style:	  none;
+    }
+    .headsep A:link {
+	color:		  #EFEFEF;
+	text-decoration:  none;
+    }
+    .sidelabel A:link {
+	color:		  #EFEFEF;
+	text-decoration:  none;
+    }
+    .sidelabelselected A:link {
+	color:		  #000066;
+	text-decoration:  none;
+    }
+    A:hover {
+	color:		  turquoise;
+	text-decoration:  none;
+    }
+    .headsep A:hover {
+	color:		  #EFEFEF;
+	text-decoration:  none;
+    }
+    .sidelabel A:hover {
+	color:		  #EFEFEF;
+	text-decoration:  none;
+    }
+    .sidelabelselected A:hover {
+	color:		  #000066;
+	text-decoration:  none;
+    }
+    A:visited {
+	color:		  #4A708B;
+	text-decoration:  none;
+    }
+    .headsep A:visited {
+	color:		  #EFEFEF;
+	text-decoration:  none;
+    }
+    .sidelabel A:visited {
+	color:		  #EFEFEF;
+	text-decoration:  none;
+    }
+    .sidelabelselected A:visited {
+	color:		  #000066;
+	text-decoration:  none;
+    }
+    UL {
+	list-style-type:  square;
+    }
 
-
-
-
-
+    .quotation {
+	text-align:       right;
+	color:		  #999999;
+    }

@@ -8,11 +8,15 @@
 
 XALAN = xalan
 
-HTML = index.html
+HTML = index.html \
+	features.html \
+	documentation.html make-rules.html \
+	download-binary.html download-source.html \
+	source-build-thomas.html source-build-roger.html \
+	mailing-list.html
 #	features.html latex.html
-#	documentation.html howto-authors.html howto-style-writers.html
-#	reference-xindy.html reference-make-rules.html reports.html
-#	faq.html mailing-list.html demo.html
+#	howto-authors.html howto-style-writers.html reference-xindy.html
+#	faq.html demo.html
 
 
 all:: $(HTML)

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="features">
+<sitemap filename="sitemap.xml"/>
+<title>
+XINDY Features
+</title>
+
+
+<text>
+  <p>
+    Here is a brief description of the most important features of
+    <B>xindy</B>:
+  </p>
+  <p></p>
+</text>
+
+<coltext>
+<leftcol>
+    Internationalization
+</leftcol>
+<rightcol>
+   <p><b>xindy</b> can be configured
+     to process indexes for many languages with different
+     letter sets and different sorting rules. This captures
+     also different orders (collating sequences such as <em>Ly,
+     Ny</em> in Hungarian, or <em>Ch, Ll</em> in Spanish), even
+     within one language. For example, many roman languages
+     such as Italian, French, Portuguese or Spanish contain
+     accented letters such as À, Â, ñ;.
+     Other languages from northern Europe have additional
+     letters like Ä, Ø, æ or ß; which
+     often can't be processed by many index processors, let
+     alone sorting them correctly into an index.
+   </p><p>
+     The <B>xindy</B>-system can be configured to process these
+     alphabets with language-specific rules. One very basic
+     example of such a rule would be <CODE>(sort-rule
+       "ä" "ae")</CODE> defining that a word
+     containing the umlaut-a will be sorted as if it contained
+     the letters <CODE>ae</CODE> instead. This is one of the two
+     forms of how the umlaut-a is sorted into german indexes.
+     With an appropriate set of rules one can express the
+     complete rules of a specific language.
+   </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+    Mark-up Normalization
+</leftcol>
+<rightcol>
+    <p>
+     Formatters usually add mark-up to the raw index data.
+     Often different encodings are used for the representation
+     of an otherwise equal thing (e.g., in the context of TeX,
+     umlaut-a may be represented as
+     <code>ä</code>, as <code>^^e4</code>, or as
+     <code>\"a</code>). <b>xindy</b> offers means to normalize
+     these different encodings into one internal encoding, which
+     is especially useful if the raw index stems from several
+     different sources.
+    </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+    Manage Non-Standard Locations
+</leftcol>
+<rightcol>
+    <p>
+      Index entries refer to locations, commonly used locations
+      are <EM>page numbers</EM>, <EM>section numbers</EM>, etc.
+      <B>xindy</B> allows new types of locations to be
+      defined. An example structure is represented by the
+      following locations: <em>Exodus 7:4</em>,
+      <EM>Psalm 46:1-8</EM>, and <EM>Genesis 1:31</EM>. The
+      structure of bible verses can be described in
+      <B>xindy</B>, allowing to correctly sort and process indexes for
+      documents with such a strucure. Here the Psalms would be
+      sorted before the Genesis verses in contrast to the usual
+      order based on the lexicographic order of the chapter names.
+    </p>
+</rightcol>
+</coltext>
+
+
+
+<coltext>
+<leftcol>
+    Module Support
+</leftcol>
+<rightcol>
+    <p>
+      All definitions concening the processing and tagging of an
+      index are specified in a so-called <em>index style</em>.
+      To support maximum reuse of building blocks <b>xindy</b>
+      implements support for <em>index style modules</em> that
+      allow end-users to profit from already existing styles.
+      Just thing of modules as of LaTeX-packages that are used
+      to load new features and definitions into the core system.
+    </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+    Highly Configurable Mark-Up
+</leftcol>
+<rightcol>
+    <p>
+      Since an index processor is only one component in a
+      document preparation system it ought to fit smoothly into
+      the rest of the environment. Many document preparation
+      systems use the concept of <EM>hierarchical
+      environments</EM> that can be used to describe the mark-up
+      of the text entities. Our approach is based on this
+      concept which has proven to be expressive enough for
+      almost any applications. Systems such as SGML (and its
+      instance HTML), XML, GNU Info use environments a the
+      underlying mark-up concept. The mark-up of an index can be
+      defined for all of these and various other systems such as
+      TeX/LaTeX, nroff, etc. in a very comfortable though
+      extremly powerful way <B>xindy</B> comes with a
+      context-based mark-up strategy that uses a form of event
+      dispatching mechanism (sounds cool, eh? It is!)
+    </p>
+</rightcol>
+</coltext>
+
+
+</page>

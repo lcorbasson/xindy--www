@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<page category="download">
+<sitemap filename="sitemap.xml"/>
+<title>
+    xindy Build Process<br/>by Thomas Henlich
+</title>
+
+<text>
+
+<h1>How to build xindy from sources</h1>
+
+<ol>
+
+<li>
+<p>Get CLISP and the xindy clisp modules; as well as a xindy
+distribution: platform-independent package and one of the binary
+packages <tt>xindy-2.1-&lt;<i>platform</i>&gt;.tar.gz</tt> (it doesn't
+matter which one you get).</p>
+</li>
+
+<li>
+<p>Create a development directory, e.g.</p>
+<pre>  mkdir ~/xindy-dev</pre>
+</li>
+
+<li>
+<p>Unpack CLISP and the modules:</p>
+<pre>
+  cd ~/xindy-dev
+  gtar -xjf clisp-&lt;<i>version</i>&gt;.tar.bz2
+  cd clisp&lt;<i>version</i>&gt;
+  gtar -xjf xindy-clisp-modules-&lt;<i>version</i>&gt;.tar.bz2
+</pre>
+</li>
+
+<li>
+<p>Configure CLISP (for Linux):</p>
+<pre>
+  ./configure --without-unicode --with-dynamic-ffi --with-noreadline \
+      --with-module=regexp-in-libc  --with-module=ordrules-regexp-in-libc
+  cd src
+  ./makemake --without-unicode --with-dynamic-ffi --with-noreadline \
+      --with-module=regexp-in-libc --with-module=ordrules-regexp-in-libc \
+      > Makefile
+</pre>
+</li>
+
+<li>
+<p>Configure  CLISP (for systems other than Linux):</p>
+<pre>
+  ./configure --without-unicode --with-dynamic-ffi --with-noreadline \
+      --with-module=regexp --with-module=ordrules
+  cd src
+  ./makemake --without-unicode --with-dynamic-ffi --with-noreadline \
+      --with-module=regexp --with-module=ordrules > Makefile
+</pre>
+</li>
+
+<li>
+<p>Build and check CLISP:</p>
+<pre>
+  make config.lisp
+  make
+  make check
+</pre>
+</li>
+
+<li>
+<p>If all goes well, you end up with the two files we need:
+<tt>~/xindy-dev/clisp/src/full/lisp.run</tt> and
+<tt>~/xindy-dev/clisp/src/full/lispinit.mem</tt>.</p>
+</li>
+
+<li>
+<p>Unpack the platform-independent and the binary distribution you
+downloaded earlier:</p>
+<pre>
+  cd ~/xindy-dev
+  gtar -xzvf ~/xindy-2.1.tar.gz
+  cd xindy
+  ln -s xindy-2.1 current
+  gtar -xzvf ~/xindy-2.1-&lt;<i>platform</i>&gt;.tar.gz
+</pre>
+</li>
+
+<li>
+<p>Rename the binary directory to the name of your hardware architecture, OS,
+vendor, version etc.:</p>
+<pre>
+  cd ~/xindy-dev/xindy/binaries
+  mv &lt;<i>oldplatform</i>&gt; &lt;<i>platform</i>&gt;
+  cd &lt;<i>platform</i>&gt;
+  echo '&lt;<i>platform</i>&gt;' > PLATFORM
+</pre>
+</li>
+
+<li>
+<p>Copy the CLISP files here:</p>
+<pre>
+  cp ~/xindy-dev/clisp/src/full/lisp.run xindy.run
+  cp ~/xindy-dev/clisp/src/full/lispinit.mem base.mem
+</pre>
+</li>
+
+<li>
+<p>Modify the Makefiles according to your needs and make a new binary
+package:</p>
+<pre>
+  cd ~/xindy-dev/xindy
+  gtar -czf ~/xindy-2.1-&lt;<i>platform</i>&gt;.tar.gz ./binaries/&lt;<i>platform</i>&gt;
+</pre>
+</li>
+
+<li>
+<p>Now it's time to actually test xindy, isn't it? Installation instructions,
+once you got to this point, are included in
+<tt>~/xindy-dev/xindy/current/INSTALL</tt>.</p>
+<pre>
+  cd ~/xindy-dev/xindy/binaries/&lt;<i>platform</i>&gt;
+  make all
+</pre>
+<p>If something fails here, go back to the previous step.</p>
+</li>
+
+</ol>
+
+</text>
+
+<prev url="download-source.html">Download Source</prev>
+
+</page>
