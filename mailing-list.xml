@@ -17,30 +17,24 @@ Mailing List
    <p>
    There is a mailing list for discussions about <b>xindy</b>,
    proposals, and other interesting stuff. Tell us your
-   experiences and bring your ideas into this project! Simply
-   send a mail to
+   experiences and bring your ideas into this project!
    </p><p>
-   <center>
-     <a href="mailto:xindy-request@iti.informatik.tu-darmstadt.de">
-     <tt>xindy-request@iti.informatik.tu-darmstadt.de</tt></a>
-   </center>
+   Subscription is possible on
+   <a href="http://lists.sourceforge.net/lists/listinfo/xindy-discuss">
+   this Web page</a>.
    </p><p>
-   containing the word <tt>subscribe</tt> in its body and you'll be
-   with us! You will receive an email that asks for confirmation of
+   You will receive an email that asks for confirmation of
    your subscription, to combat spam.
    </p><p>
    Address of the mailing list itself, for contributions, is
    </p><p>
    <center>
-      <a href="mailto:xindy@iti.informatik.tu-darmstadt.de">
-      <tt>xindy@iti.informatik.tu-darmstadt.de</tt></a>
+      <a href="mailto:xindy-discuss@lists.sourceforge.net">
+      <tt>xindy-discuss@lists.sourceforge.net</tt></a>
    </center>
    </p><p>
    You need to be subscribed to send email; the spam problem forces us
    to use this configuration.
-   </p><p>
-   It is planned to move the mailing list to Sourceforge, as the mail
-   domain <tt>iti.informatik.tu-darmstadt.de</tt> will be shut down.
    </p>
 </rightcol>
 </coltext>
@@ -51,10 +45,13 @@ Mailing List
 </leftcol>
 <rightcol>
    <p>
-   Mails from 1997 to 2000 are available as
-   <a href="html-mail-archive/threads.html"><b>mail archive</b></a>.
-   We hope to reestablish an archive after moving the mailing list to
-   Sourceforge.
+   Starting in August 2004, a
+   <a href="http://sourceforge.net/mailarchive/forum.php?forum=xindy-discuss">
+   mailing list archive</a> is available.
+   </p><p>
+   Emails from 1997 to 2000 are available in a
+   <a href="html-mail-archive/threads.html">historic mail archive</a>.
+   No archive exists for emails from August 2000 to August 2004.
    </p>
 </rightcol>
 
