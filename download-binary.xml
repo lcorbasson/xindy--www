@@ -11,18 +11,81 @@
 
 <text>
   <p>
-    The section name <em>Binary Distribution</em> in the navigation
-    bar is actually a misnomer - you will compile <b>xindy</b> kernel
-    source code during installation. But you will download and use a
-    binary distribution of the compiler to do that.
+    There is neither a <b>xindy</b> distribution for Windows nor for
+    Mac OS X. We would like to have one, but nobody has done the port
+    yet.
+  </p><p>
+    For Linux, there is the new <em>LaTeX Companion Release</em> that
+    has both an easy installation and is easy to use.
+  </p><p>
+    For other Unix systems, there is a source-based distribution that
+    is described below, beneath the horizontal rule.
+  </p><p>
+  </p>
+</text>
+
+<coltext>
+<leftcol>
+  On Linux
+</leftcol>
+<rightcol>
+  <p>
+    The <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=241671">Download
+    Area</a> is at SourceForge.
+  </p><p>
+    Unpack the archive in <tt>/opt</tt> or any other directory. Add
+    <tt>/opt/xindy-2.2/bin</tt> to your <tt>$PATH</tt>, and
+    <tt>/opt/xindy-2.2/man</tt> to your <tt>$MANPATH</tt>.
+  </p>
+</rightcol>
+</coltext>
+
+<coltext>
+<leftcol>
+  Usage
+</leftcol>
+<rightcol>
+  <p>
+    Three user commands have been installed, <tt>texindy</tt>,
+    <tt>xindy</tt>, and <tt>makeindex4</tt>.
+  </p><p>
+    <tt>texindy</tt> and <tt>xindy</tt> are described in the LaTeX
+    Companion, 2nd ed. They have man pages as well. <tt>texindy</tt>
+    processes LaTeX indices and uses standard modules. <tt>xindy</tt>
+    is for those who need or want to write their own <b>xindy</b>
+    style files. For them, <a
+    href="documentation.html">tutorial and reference documentation</a>
+    is available.
+  </p><p>
+    <tt>makeindex4</tt> comes with an associated man page. It is
+    superseded by <tt>texindy</tt>. If you think you need to use it
+    because it does something that you cannot realize with
+    <tt>texindy</tt> - please address that issue in the mailing list.
+    <tt>makeindex4</tt> is good at emulating standard MakeIndex
+    behaviour, but has no module or language support. Therefore its
+    usage is depreciated.
+  </p>
+</rightcol>
+</coltext>
+
+
+
+<coltext>
+<text>
+  <hr />
+  <p>
+    <b>Installation on Other Unix systems</b>
+  </p><p>
+    You will compile <b>xindy</b> kernel source code during
+    installation. But you will download and use a binary distribution
+    of the compiler to do that.
   </p><p>
     So, let's start...
   </p><p>
   </p>
 </text>
 
-
-<coltext>
 <leftcol>
   Download
 </leftcol>
@@ -45,7 +108,7 @@
     If you want to use <b>xindy</b> on HP-UX or SunOS 4, you'll have
     to fetch the <a
     href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=57988">2.0
-    release</a>. Current binary distributions don't exist for these
+    release</a>. Current compiler distributions don't exist for these
     platforms.
   </p><p>
     If you want to use <b>xindy</b> on Windows or OS/2, you'll have to
@@ -176,9 +239,9 @@
     href="documentation.html">tutorial and reference documentation</a>
     exist for <tt>xindy</tt>.
   </p><p>
-    Currently the best way to learn about <b>xindy</b> usage is
-    copying an example index style, and changing it. A good one is in
-    <tt>xindy-make-rules-0.2</tt>.
+    The best way to learn about <b>xindy</b> usage before the LaTeX
+    Companion Release is to copy an example index style, and change
+    it. A good one is in <tt>xindy-make-rules-0.2</tt>.
   </p>
 </rightcol>
 </coltext>

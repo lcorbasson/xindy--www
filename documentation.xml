@@ -18,9 +18,10 @@
     <b>xindy</b> concepts. In fact, this was a university research
     project - we have quite some research papers.
   </p><p>
-    The upcoming new 2nd edition of the <em>LaTeX Companion</em> will
-    describe usage of <b>xindy</b> the easy way, for those who just
-    want to have a MakeIndex replacement for usual LaTeX documents.
+    The 2nd edition of the <em>LaTeX Companion</em>
+    describes usage of <b>xindy</b> the easy way, for those who just
+    want to have a MakeIndex replacement for usual LaTeX documents,
+    but with correct sorting.
   </p><p>
   </p>
 </text>
@@ -38,12 +39,18 @@
     there <b>xindy</b> usage is described in detail. In the future, we
     hope to get permission to use some of this material here as well.
   </p><p>
+    Commands are documented in man pages, both for <a
+    href="doc/texindy-man.pdf"><tt>texindy</tt></a> and for <a
+    href="doc/xindy-man.pdf"><tt>xindy</tt></a>.
+<!--
+  </p><p>
     The <a href="doc/faq.html">FAQ</a> has also some questions and
     answers about <b>xindy</b>'s command line interface, that might be
     of interest for you.
+-->
   </p><p>
-    If your index is more complex than references to some page
-    numbers, you might want to read the <a
+    If your index is more complex, either with many markup tags in it
+    or with unusual references, you might want to read the <a
     href="doc/tutorial.html"><b>xindy</b> Tutorial</a>, since you will
     need to write your own index style.
   </p>
@@ -164,7 +171,7 @@
     <dt>
       <a href="doc/xindy-studienarbeit.pdf"><b>xindy</b> - Ein
       Flexibles Indexierungssystem</a>, Studienarbeit FB Informatik,
-      TH-Darmstadt, November 1995 (PDF, in German).
+      TH Darmstadt, November 1995 (PDF, in German).
     </dt>
     <dd>
       Roger's original report on his student project.

@@ -40,16 +40,17 @@
 </leftcol>
 <rightcol>
   <p>
-    <b>xindy</b> consists of (1) plugins for a Common Lisp system,
+    <b>xindy</b> consists of (1) a run time engine, made up of a
+    Common Lisp system with <b>xindy</b>-specific plugins,
     (2) Common Lisp code that makes up the <b>xindy</b> kernel, and
     (3) <b>xindy</b> modules.
   </p><p>
-    To create <b>xindy</b>, one needs to integrate the plugins into a
-    Common Lisp system. We did this for <a
-    href="http://clisp.cons.org/">CLISP</a>, the result are the
-    platform-specific archives on the <a
-    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566">software
-    distribution page</a>.
+    To create the <b>xindy</b> run time engine, one needs to integrate
+    the plugins into a Common Lisp system. We did this for <a
+    href="http://clisp.cons.org/">CLISP</a>, the result is in the
+    binary distributions or in the platform-specific archives of <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566">older
+    releases</a>.
   </p><p>
     Then, the <b>xindy</b> kernel source code is compiled, and a final
     executable is created. In the case of CLISP, the executable
@@ -76,8 +77,14 @@
       <li><a href="http://prdownloads.sourceforge.net/xindy/xindy-clisp-modules-2001-04-10.tar.bz2?download"><tt>xindy-clisp-modules-2001-04-10.tar.bz2</tt></a></li>
     </ol>
   </p><p>
-    You've got the complete source. If you want to work on
-    <b>xindy</b>, we recommend the CVS source.
+    That is the kernel source and <b>xindy</b> plugins.
+  </p><p>
+    Module sources are in the <a
+    href="http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=241671">binary
+    distribution</a>, in the <tt>modules</tt> subdirectory.
+  </p><p>
+    If you want to work on <b>xindy</b>, we recommend the CVS source,
+    though.
   </p>
 </rightcol>
 </coltext>
@@ -93,10 +100,11 @@
     project CVS page</a>. We welcome new developers and will give out
     commit rights quickly.
   </p><p>
-    Three top-level CVS modules exist: <tt>xindy</tt> is the kernel
+    Four top-level CVS modules exist: <tt>xindy</tt> is the kernel
     source code, <tt>make-rules</tt> is used to create <b>xindy</b>
-    language modules, and <tt>www</tt> is the XML source code for this
-    Web Site.
+    language modules, <tt>modules</tt> are the <b>xindy</b> standard
+    modules, and <tt>www</tt> is the XML source code for this Web
+    Site.
   </p><p>
     The CVS module <tt>xindy</tt> also has source code of the
     documentation and the reports. The documentation is written in
@@ -119,23 +127,28 @@
     <i>International MakeIndex</i>) and for performance reasons
     (remember, <b>xindy</b> was written in 1995).
   </p><p>
+    The plugin sources are in the CVS module <tt>xindy/rx</tt>.
+  </p><p>
     Frankly, today I consider the usage of plugins as a very big
     error. They should be replaced by ``pure'' Lisp solutions as soon
     as possible - currently, they are the big porting nightmare of
     <b>xindy</b>.
   </p><p>
-    We used <a href="http://clisp.cons.org/">CLISP</a> as the Common
-    Lisp system for development. But CLISP changed its plugin API some
-    time ago. Thus it is not possible to integrate the plugin modules
-    into current CLISP distributions. Nobody has adapted the plugins
-    to the new API yet. Of course, we would welcome such a
-    contribution. But if you're proficient enough in Common Lisp,
-    rewriting it in Lisp might be even easier and would be as welcome.
+    We use <a href="http://clisp.cons.org/">CLISP</a> as the Common
+    Lisp system for development. It is reported that it is not
+    possible any more to build a current CLISP including those
+    plugins. (The current builds use CLISP 2.24, as of March 2000.)
+    Once, I suspected that it's due to a change in the CLISP foreign
+    function interface; but now I assume that it's more a problem of
+    Lisp package definitions. Of course, we would welcome a
+    contribution that improves this situation.
   </p><p>
-    Roger Kehr reported a succesful <b>xindy</b> port to ACL. More
-    information on that port is unknown.
+    If you're proficient enough in Common Lisp, rewriting the plugins
+    in Lisp might not be difficult, and would be very welcome.
   </p><p>
-    The plugin sources are also in the CVS module <tt>xindy/rx</tt>.
+    Roger Kehr reported a succesful <b>xindy</b> port to Allegro
+    Common Lisp (ACL) and to CMU Common Lisp. More information on
+    these ports are unknown.
   </p>
 </rightcol>
 </coltext>
@@ -198,8 +211,8 @@
 <rightcol>
   <p>
     I have found two Web pages with information how to build
-    <b>xindy</b>. Due to the change in the CLISP plugin API, the
-    information from these pages is not literally valid any more; but
+    <b>xindy</b>. Due to the changes in CLISP, the
+    information from these pages does not work any more; but
     the basic process is described correctly.
   </p>
   <ul>

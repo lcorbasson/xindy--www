@@ -188,8 +188,18 @@
     </TR>
   </xsl:template>
 
+  <xsl:template match="announcement">
+    <TR>
+      <TD  colspan="2" class="announcement">
+        <xsl:copy-of select="node()"/>
+      </TD>
+    </TR>
+  </xsl:template>
+
 
   <xsl:template match="coltext">
+    <xsl:apply-templates select="announcement"/>
+    <xsl:apply-templates select="text"/>
     <TR>
       <xsl:apply-templates select="leftcol-title"/>
       <xsl:apply-templates select="leftcol"/>

@@ -149,3 +149,12 @@
 	text-align:       right;
 	color:		  #999999;
     }
+
+    .announcement {
+	background-color: lightblue;
+	padding:	  2ex;
+    }
+    .announcement A:link, .announcement A:visited {
+	color:		  #066699;
+	text-decoration:  none;
+    }
