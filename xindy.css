@@ -1,0 +1,135 @@
+       body  {
+        color:            #000000;
+        background-color: ivory;
+        margin:		  0px;
+        }
+      .headtop  {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #EFEFEF;
+        background-color: lightblue;
+        font-size:        14pt;
+        font-weight:      bold;
+        padding-left:     2ex;
+        padding-right:    1ex;
+        padding-top:      3pt;
+        padding-bottom:   3pt;
+       }
+      .headsep  {
+        background-color: #000066;
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #EFEFEF;
+        font-size:        9pt;
+        white-space:	  nowrap;
+	padding-right:	  3ex;
+       }
+
+      .title {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #FFFFFF;
+        background-color: #066699;
+        font-size:        12pt;
+        font-weight:      bold;
+        padding:	  6px;
+       }
+     .mainbasis  {
+        background-color: ivory;
+       }
+     .leftcol {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000000;
+        font-size:        10pt;
+        font-weight:      bold;
+        vertical-align:   text-top;
+	text-align:	  right;
+      }
+     .leftcol-title {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000000;
+        font-size:        11pt;
+        font-weight:      bold;
+        vertical-align:   text-top;
+	text-align:	  right;
+      }
+     .rightcol {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000000;
+        font-size:        10pt;
+        vertical-align:   text-top;
+	padding-left:	  20px;
+      }
+      .text {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000000;
+        font-size:        10pt;
+        vertical-align:   text-top;
+      }
+     .sidebasis  {
+        background-color: #000066;
+       }
+     .sidelabel  {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #EFEFEF;
+        font-size:        9pt;
+        font-weight:      bold;
+        horizontal-align: right;
+        vertical-align:   middle;
+        background-color: #000066;
+       }
+     .sidelabelselected  {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000066;
+        font-size:        9pt;
+        font-weight:      bold;
+        horizontal-align: right;
+        vertical-align:   middle;
+        background-color: lightblue;
+       }
+     .sidelabelsub  {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000066;
+        font-size:        9pt;
+        vertical-align:   middle;
+        background-color: ivory;
+       }
+     .followup  {
+        font-family:      Tahoma, Helvetica, Arial, sans-serif ;
+        color:            #000066;
+        font-size:        10pt;
+        background-color: ivory;
+       }
+     A:link {
+       color:		  #000066;
+       text-decoration:	  none;
+       }
+     A:hover {
+       color:		  turquoise;
+       text-decoration:	  none;
+       }
+     .headsep A:link {
+       color:		  #EFEFEF;
+       text-decoration:	  none;
+       }
+     .sidelabel A:link {
+       color:		  #EFEFEF;
+       text-decoration:	  none;
+       }
+     A:visited {
+       color:		  #000066;
+       text-decoration:	  none;
+       }
+     .headsep A:visited {
+       color:		  #EFEFEF;
+       text-decoration:	  none;
+       }
+     .sidelabel A:visited {
+       color:		  #EFEFEF;
+       text-decoration:	  none;
+       }
+     UL {
+       list-style-type: square;
+       }
+
+
+
+
+

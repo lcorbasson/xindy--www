@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- $Id$
+  ======================================================================
+-->
+
+<!-- Sitemap:
+      - group is the attribute page@category in the page
+      - grouptitle is the name that is shown in navigation bar
+	when a page group is not selected. A grouptitle is only
+	defined for the first page of a group. If a group has only
+	one page, this page has no pagetitle, just a grouptitle.
+      - Yes, we know that this is not good XML, but what the heck, it
+        works.
+ -->
+
+<site>
+
+<entry>
+   <group>about</group>
+   <grouptitle>About xindy</grouptitle>
+   <url>./</url>
+</entry>
+
+<entry>
+   <group>features</group>
+   <grouptitle>Features</grouptitle>
+   <url>features.html</url>
+</entry>
+
+<entry>
+   <group>LaTeX</group>
+   <grouptitle>xindy and LaTeX</grouptitle>
+   <url>latex.html</url>
+</entry>
+
+
+
+<entry>
+   <group>documentation</group>
+   <grouptitle>Documentation</grouptitle>
+   <pagetitle>Roadmap</pagetitle>
+   <url>documentation.html</url>
+</entry>
+
+<entry>
+   <group>documentation</group>
+   <pagetitle>HOWTO for Document Authors</pagetitle>
+   <url>howto-authors.html</url>
+</entry>
+
+<entry>
+   <group>documentation</group>
+   <pagetitle>HOWTO for Style Writers</pagetitle>
+   <url>howto-style-writers.html</url>
+</entry>
+
+<entry>
+   <group>documentation</group>
+   <pagetitle>Reference Documentation xindy</pagetitle>
+   <url>reference-xindy.html</url>
+</entry>
+
+<entry>
+   <group>documentation</group>
+   <pagetitle>Reference Documentation make-rules</pagetitle>
+   <url>reference-make-rules.html</url>
+</entry>
+
+<entry>
+   <group>documentation</group>
+   <pagetitle>Reports and Presentations</pagetitle>
+   <url>reports.html</url>
+</entry>
+
+
+<entry>
+   <group>FAQ</group>
+   <grouptitle>FAQ</grouptitle>
+   <url>faq.html</url>
+</entry>
+
+<entry>
+   <group>tickets</group>
+   <pagetitle>Open Issues</pagetitle>
+   <url>http://sourceforge.net/tracker/?group_id=10646</url>
+</entry>
+
+<entry>
+   <group>download</group>
+   <grouptitle>Download</grouptitle>
+   <url>http://sourceforge.net/project/showfiles.php?group_id=10646&amp;release_id=52566</url>
+</entry>
+
+<entry>
+   <group>mailing</group>
+   <grouptitle>Mailing List</grouptitle>
+   <url>mailing-list.html</url>
+</entry>
+
+<entry>
+   <group>sourceforge</group>
+   <grouptitle>SourceForge Project</grouptitle>
+   <url>http://sourceforge.net/projects/xindy/</url>
+</entry>
+
+<!--
+<entry>
+   <group>demo</group>
+   <grouptitle>Demo</grouptitle>
+   <url>demo.html</url>
+</entry>
+-->
+
+
+</site>
+
+

@@ -1,0 +1,61 @@
+# $Id$
+#------------------------------------------------------------
+
+This is the content of the Web Site http://www.xindy.org/.
+
+You need an XSLT processor to create the HTML pages. We used
+Xalan-Java2, from xml.apache.org. The testXSLT command from Xalan-C++
+seems to have the same command line interface, so it might be possible
+to use it as well -- we haven't that tested, though.
+
+There is a Makefile supplied for your convenience, you'll need GNU
+Make to use it.
+ -- make  or  make all  will create the Web Site
+ -- make dist  will update the Web Site with the new content, if you
+    have sufficient access rights on www.xindy.org. Very few people
+    have, btw; changes should be committed to the Sourceforge
+    sub-project and will be updated in due course.
+
+
+The markup used in the XML files is quite simplistic:
+
+ -- sitemap.xml holds a list of all pages of this Web Site and
+    associates them with titles and groups. This file is used to
+    create the navigation bar at the side.
+
+ -- The category menu in the headline is hardcoded in header.xsl and
+    must be changed there.
+
+ -- Other *.xml use the following simplistic markup:
+
+	<page category="GROUP">
+	  <sitemap filename="sitemap.xml"/>
+	  <title>XHTML TEXT</title>
+
+	  <text>
+	      XHTML TEXT
+	  </text>
+
+	</page>
+
+    or
+
+	<page category="GROUP">
+	  <sitemap filename="sitemap.xml"/>
+	  <title>XHTML TEXT</title>
+
+	  <coltext>
+	    <leftcol>
+	      XHTML TEXT
+	    </leftcol>
+	    <rightcol>
+	      XHTML TEXT
+	    </rightcol>
+	  </coltext>
+
+	</page>
+
+    where GROUP must match the <group> entry in sitemap.xml. The
+    <title> content is used within the page for a big major headline,
+    but not as an HTML title. (The HTML title is fixed, though this
+    should change ASAP.)
