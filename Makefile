@@ -19,6 +19,9 @@ HTML = index.html \
 #	faq.html demo.html
 
 
+SHELL = /bin/bash
+
+
 all:: $(HTML)
 
 $(HTML): %.html : %.xml xindy.xsl header.xsl sitemap.xml
@@ -37,3 +40,14 @@ trydist:: all
 	rsync -n -av --delete --exclude=Makefile \
 	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
 	    . sourceforge:/home/groups/x/xi/xindy/htdocs
+
+update::
+	cd .. ; \
+		if [ -d $$OLDPWD.backup ] ; \
+		   then	mvdel $$OLDPWD.backup ; \
+		   else /bin/true ; \
+		fi  && \
+		cpfs $$OLDPWD $$OLDPWD.backup
+	rsync -rltgv --delete --exclude=Makefile \
+	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
+	    sourceforge:/home/groups/x/xi/xindy/htdocs/ .
