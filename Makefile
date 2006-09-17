@@ -29,25 +29,23 @@ $(HTML): %.html : %.xml xindy.xsl header.xsl sitemap.xml
 
 
 
+RSYNC_EXCLUDE = --exclude=Makefile \
+	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l'
+
 dist:: all
 	chmod -R g+w .
-	rsync -av --delete --exclude=Makefile \
-	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
+	rsync $(RSYNC_OPT) -rlptOgv --delete $(RSYNC_EXCLUDE) \
 	    . sourceforge:/home/groups/x/xi/xindy/htdocs
 
 trydist:: all
-	chmod -R g+w .
-	rsync -n -av --delete --exclude=Makefile \
-	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
-	    . sourceforge:/home/groups/x/xi/xindy/htdocs
+	$(MAKE) dist RSYNC_OPT=-n
 
 update::
 	cd .. ; \
 		if [ -d $$OLDPWD.backup ] ; \
-		   then	mvdel $$OLDPWD.backup ; \
+		   then	/bin/rm -rf $$OLDPWD.backup ; \
 		   else /bin/true ; \
 		fi  && \
-		cpfs $$OLDPWD $$OLDPWD.backup
-	rsync -rltgv --delete --exclude=Makefile \
-	    --exclude=CVS --exclude=.cvsignore --exclude='*.x?l' \
+		cp -Rp $$OLDPWD $$OLDPWD.backup
+	rsync $(RSYNC_OPT) -rltgv --delete $(RSYNC_EXCLUDE) \
 	    sourceforge:/home/groups/x/xi/xindy/htdocs/ .
