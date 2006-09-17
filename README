@@ -15,6 +15,13 @@ Make to use it.
     have sufficient access rights on www.xindy.org. Very few people
     have, btw; changes should be committed to the Sourceforge
     sub-project and will be updated in due course.
+ -- make trydist  will show what would be updated
+
+ -- make update  will update the current workspace with the content of
+    the Web Site, and will save the workspace in $PWD.backup/. This is
+    used to get files from the Web Site that are not in CVS.
+    Currently, this is the wwwdemo by Thomas Henlich, and some
+    pre-release archives for testing future release aspects.
 
 
 All files in the doc/ subdirectory are generated. Their reference
